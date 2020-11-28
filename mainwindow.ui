@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>916</width>
+    <height>503</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout_4">
+    <item row="0" column="0">
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="currentIndex">
+       <number>2</number>
+      </property>
+      <widget class="QWidget" name="tab">
+       <attribute name="title">
+        <string>Wypożyczenia</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout">
+        <item row="1" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <item>
+           <widget class="QPushButton" name="addBorrowButton">
+            <property name="text">
+             <string>Dodaj wypożyczenie</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="delBorrowButton">
+            <property name="text">
+             <string>Zwrot wypożyczenia</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="editBorrowButton_2">
+            <property name="text">
+             <string>Edytuj wypożyczenie</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="showOverdueButton">
+            <property name="text">
+             <string>Pokaż zaległe</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="searchBorrowButton">
+            <property name="text">
+             <string>Wyszukaj</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="sortBorrowButton">
+            <property name="text">
+             <string>Sortuj</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="0" column="0">
+         <widget class="QTableWidget" name="tableWidget">
+          <row>
+           <property name="text">
+            <string>1</string>
+           </property>
+          </row>
+          <column>
+           <property name="text">
+            <string>Imie</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Nazwisko</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Tytuł</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Data wypożyczenia</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Data zwrotu</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Zaległość</string>
+           </property>
+          </column>
+          <item row="0" column="0">
+           <property name="text">
+            <string>Maciej</string>
+           </property>
+          </item>
+          <item row="0" column="1">
+           <property name="text">
+            <string>Umański</string>
+           </property>
+          </item>
+          <item row="0" column="2">
+           <property name="text">
+            <string>Hobbit</string>
+           </property>
+          </item>
+          <item row="0" column="3">
+           <property name="text">
+            <string>12/01/1999</string>
+           </property>
+          </item>
+          <item row="0" column="4">
+           <property name="text">
+            <string>12/02/2021</string>
+           </property>
+          </item>
+          <item row="0" column="5">
+           <property name="text">
+            <string>0zł</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_2">
+       <attribute name="title">
+        <string>Klienci</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_2">
+        <item row="1" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
+          <item>
+           <widget class="QPushButton" name="addClientButton">
+            <property name="text">
+             <string>Dodaj Klienta</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="delClientButton">
+            <property name="text">
+             <string>Usuń Klienta</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="0" column="0">
+         <widget class="QTableWidget" name="clientsTable">
+          <column>
+           <property name="text">
+            <string>Imie</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Nazwisko</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Pesel</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Telefon</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>E-Mail</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Posiadane Filmy</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_3">
+       <attribute name="title">
+        <string>Filmy</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_3">
+        <item row="0" column="0">
+         <widget class="QTableWidget" name="moviesTable">
+          <row>
+           <property name="text">
+            <string>1</string>
+           </property>
+          </row>
+          <column>
+           <property name="text">
+            <string>Tytuł</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Reżysek</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Gatunek</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Rok</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Wypożyczone</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Dostępne</string>
+           </property>
+          </column>
+          <item row="0" column="0">
+           <property name="text">
+            <string>Hobbit</string>
+           </property>
+          </item>
+          <item row="0" column="1">
+           <property name="text">
+            <string>JKROWLING</string>
+           </property>
+          </item>
+          <item row="0" column="2">
+           <property name="text">
+            <string>HORROR</string>
+           </property>
+          </item>
+          <item row="0" column="3">
+           <property name="text">
+            <string>1999</string>
+           </property>
+          </item>
+          <item row="0" column="4">
+           <property name="text">
+            <string>0</string>
+           </property>
+          </item>
+          <item row="0" column="5">
+           <property name="text">
+            <string>10</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
+           <widget class="QPushButton" name="addMovieButton">
+            <property name="text">
+             <string>Dodaj Film</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="delMovieButton">
+            <property name="text">
+             <string>Usuń Film</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>916</width>
+     <height>24</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
