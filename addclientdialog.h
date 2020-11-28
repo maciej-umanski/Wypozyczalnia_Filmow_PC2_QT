@@ -17,8 +17,8 @@ public:
 
     QString name() const;
     QString surname() const;
-    int pesel() const;
-    int phone() const;
+    QString pesel() const;
+    QString phone() const;
     QString email() const;
 
 private slots:

@@ -10,15 +10,18 @@ CONFIG += c++11
 
 SOURCES += \
     addclientdialog.cpp \
+    addmoviedialog.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
     addclientdialog.h \
+    addmoviedialog.h \
     mainwindow.h
 
 FORMS += \
     addclientdialog.ui \
+    addmoviedialog.ui \
     mainwindow.ui
 
 TRANSLATIONS += \

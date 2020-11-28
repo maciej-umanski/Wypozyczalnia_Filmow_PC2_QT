@@ -1,5 +1,5 @@
 #include "addclientdialog.h"
-#include "ui_addClientDialog.h"
+#include "ui_addclientdialog.h"
 #include "QMessageBox"
 
 AddClientDialog::AddClientDialog(QWidget *parent) :
@@ -7,6 +7,8 @@ AddClientDialog::AddClientDialog(QWidget *parent) :
     ui(new Ui::AddClientDialog)
 {
     ui->setupUi(this);
+    ui->peselClientEdit->setMaxLength(11);
+    ui->phoneClientEdit->setMaxLength(9);
 }
 
 AddClientDialog::~AddClientDialog()
@@ -18,20 +20,31 @@ void AddClientDialog::on_buttonBox_accepted()
 {
     QMessageBox msgBox;
     bool peselConversion, phoneConversion;
-    ui->peselClientEdit->text().toInt(&peselConversion);
-    ui->phoneClientEdit->text().toInt(&phoneConversion);
+    ui->peselClientEdit->text().toULongLong(&peselConversion);
+    ui->phoneClientEdit->text().toUInt(&phoneConversion);
 
-    if(peselConversion && phoneConversion)
-        accept();
-    if(!peselConversion){
-        msgBox.setText("Błąd!  Sprawdź poprawność numeru pesel!");
+    if(
+            ui->nameClientEdit->text().isEmpty() ||
+            ui->surnameClientEdit->text().isEmpty() ||
+            ui->peselClientEdit->text().isEmpty() ||
+            ui->phoneClientEdit->text().isEmpty() ||
+            ui->phoneClientEdit->text().isEmpty())
+    {
+        msgBox.setText("Wszystkie pola muszą być wypełnione!");
         msgBox.exec();
-    }
-    if(!phoneConversion){
-        msgBox.setText("Błąd!  Sprawdź poprawność numeru telefonu!");
-        msgBox.exec();
-    }
+    }else{
+        if(peselConversion && phoneConversion && ui->peselClientEdit->text().length() == 11 && ui->phoneClientEdit->text().length() == 9)
+            accept();
 
+        if(!peselConversion || ui->peselClientEdit->text().length() < 11){
+            msgBox.setText("Błąd!  Sprawdź poprawność numeru pesel!");
+            msgBox.exec();
+        }
+        if(!phoneConversion || ui->phoneClientEdit->text().length() < 9){
+            msgBox.setText("Błąd!  Sprawdź poprawność numeru telefonu!");
+            msgBox.exec();
+        }
+    }
 }
 
 void AddClientDialog::on_buttonBox_rejected()
@@ -47,22 +60,12 @@ QString AddClientDialog::surname() const{
     return ui->surnameClientEdit->text();
 }
 
-int AddClientDialog::pesel() const{
-    bool ok;
-    int ret = ui->peselClientEdit->text().toInt(&ok);
-    if(ok)
-        return ret;
-    else
-        return 0;
+QString AddClientDialog::pesel() const{
+    return ui->peselClientEdit->text();
 }
 
-int AddClientDialog::phone() const{
-    bool ok;
-    int ret = ui->phoneClientEdit->text().toInt(&ok);
-    if(ok)
-        return ret;
-    else
-        return 0;
+QString AddClientDialog::phone() const{
+    return ui->phoneClientEdit->text();
 }
 
 QString AddClientDialog::email() const{
