@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>addMovieDialog</class>
- <widget class="QDialog" name="addMovieDialog">
+ <class>editClientDialog</class>
+ <widget class="QDialog" name="editClientDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -19,12 +19,12 @@
      <item>
       <widget class="QLabel" name="label">
        <property name="text">
-        <string>Tytuł</string>
+        <string>Imię</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="titleMovieEdit">
+      <widget class="QLineEdit" name="nameClientEdit">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
          <horstretch>0</horstretch>
@@ -40,12 +40,12 @@
      <item>
       <widget class="QLabel" name="label_2">
        <property name="text">
-        <string>Reżyser</string>
+        <string>Nazwisko</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="directorMovieEdit">
+      <widget class="QLineEdit" name="surnameClientEdit">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
          <horstretch>0</horstretch>
@@ -61,12 +61,12 @@
      <item>
       <widget class="QLabel" name="label_3">
        <property name="text">
-        <string>Gatunek</string>
+        <string>Pesel</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="genreMovieEdit">
+      <widget class="QLineEdit" name="peselClientEdit">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
          <horstretch>0</horstretch>
@@ -82,12 +82,12 @@
      <item>
       <widget class="QLabel" name="label_4">
        <property name="text">
-        <string>Rok</string>
+        <string>Telefon</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="yearMovieEdit">
+      <widget class="QLineEdit" name="phoneClientEdit">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
          <horstretch>0</horstretch>
@@ -103,12 +103,12 @@
      <item>
       <widget class="QLabel" name="label_5">
        <property name="text">
-        <string>Ilość Sztuk</string>
+        <string>Email</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="availableMovieEdit">
+      <widget class="QLineEdit" name="emailClientEdit">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
          <horstretch>0</horstretch>

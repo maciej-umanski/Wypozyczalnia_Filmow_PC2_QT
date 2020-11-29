@@ -29,6 +29,10 @@ private slots:
 
     void on_addMovieButton_clicked();
 
+    void on_editClientButton_clicked();
+
+    void on_editMovieButton_clicked();
+
 private:
     Ui::MainWindow *ui;
 
@@ -37,7 +41,7 @@ private:
     };
 
     enum MOVIE_COLLUMNS{
-        TYTUL, REZYSER, GATUNEK, ROK, WYPOZYCZONE, DOSTEPNE
+        TYTUL, REZYSER, GATUNEK, ROK, DOSTEPNE, WYPOZYCZONE
     };
 };
 #endif // MAINWINDOW_H

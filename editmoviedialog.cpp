@@ -1,21 +1,31 @@
-#include "addmoviedialog.h"
-#include "ui_addmoviedialog.h"
-#include <QMessageBox>
+#include "editmoviedialog.h"
+#include "ui_editmoviedialog.h"
 #include <QDate>
+#include <QMessageBox>
 
-addMovieDialog::addMovieDialog(QWidget *parent) :
+editMovieDialog::editMovieDialog(QWidget *parent,
+                                 QString title,
+                                 QString director,
+                                 QString genre,
+                                 QString year,
+                                 QString available) :
     QDialog(parent),
-    ui(new Ui::addMovieDialog)
+    ui(new Ui::editMovieDialog)
 {
     ui->setupUi(this);
+    ui->titleMovieEdit->setText(title);
+    ui->directorMovieEdit->setText(director);
+    ui->genreMovieEdit->setText(genre);
+    ui->yearMovieEdit->setText(year);
+    ui->availableMovieEdit->setText(available);
 }
 
-addMovieDialog::~addMovieDialog()
+editMovieDialog::~editMovieDialog()
 {
     delete ui;
 }
 
-void addMovieDialog::on_buttonBox_accepted()
+void editMovieDialog::on_buttonBox_accepted()
 {
     QDate date;
     QMessageBox msgBox;
@@ -37,43 +47,41 @@ void addMovieDialog::on_buttonBox_accepted()
                 && availableConversion
                 && ui->yearMovieEdit->text().toInt() <= date.currentDate().year()
                 && ui->yearMovieEdit->text().toInt() > 0
-                && ui->availableMovieEdit->text().toInt() >= 0)
+                && ui->availableMovieEdit->text().toInt() > 0)
             accept();
 
         if(!yearConversion || ui->yearMovieEdit->text().toInt() > date.currentDate().year() || ui->yearMovieEdit->text().toInt() <= 0){
             msgBox.setText("Błąd!  Sprawdź poprawność roku!");
             msgBox.exec();
         }
-        if(!availableConversion || ui->availableMovieEdit->text().toInt() < 0){
+        if(!availableConversion || ui->availableMovieEdit->text().toInt() <= 0){
             msgBox.setText("Błąd!  Sprawdź poprawność ilości!");
             msgBox.exec();
         }
     }
 }
 
-
-void addMovieDialog::on_buttonBox_rejected()
+void editMovieDialog::on_buttonBox_rejected()
 {
     reject();
 }
 
-
-QString addMovieDialog::title() const{
+QString editMovieDialog::title() const{
     return ui->titleMovieEdit->text();
 }
 
-QString addMovieDialog::director() const{
+QString editMovieDialog::director() const{
     return ui->directorMovieEdit->text();
 }
 
-QString addMovieDialog::genre() const{
+QString editMovieDialog::genre() const{
     return ui->genreMovieEdit->text();
 }
 
-QString addMovieDialog::year() const{
+QString editMovieDialog::year() const{
     return ui->yearMovieEdit->text();
 }
 
-QString addMovieDialog::available() const{
+QString editMovieDialog::available() const{
     return ui->availableMovieEdit->text();
 }

@@ -24,7 +24,7 @@
        </sizepolicy>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -36,42 +36,42 @@
           <item>
            <widget class="QPushButton" name="addBorrowButton">
             <property name="text">
-             <string>Dodaj wypożyczenie</string>
+             <string>--</string>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QPushButton" name="delBorrowButton">
             <property name="text">
-             <string>Zwrot wypożyczenia</string>
+             <string>--</string>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QPushButton" name="editBorrowButton_2">
             <property name="text">
-             <string>Edytuj wypożyczenie</string>
+             <string>--</string>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QPushButton" name="showOverdueButton">
             <property name="text">
-             <string>Pokaż zaległe</string>
+             <string>--</string>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QPushButton" name="searchBorrowButton">
             <property name="text">
-             <string>Wyszukaj</string>
+             <string>--</string>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QPushButton" name="sortBorrowButton">
             <property name="text">
-             <string>Sortuj</string>
+             <string>--</string>
             </property>
            </widget>
           </item>
@@ -79,11 +79,6 @@
         </item>
         <item row="0" column="0">
          <widget class="QTableWidget" name="tableWidget">
-          <row>
-           <property name="text">
-            <string>1</string>
-           </property>
-          </row>
           <column>
            <property name="text">
             <string>Imie</string>
@@ -114,36 +109,6 @@
             <string>Zaległość</string>
            </property>
           </column>
-          <item row="0" column="0">
-           <property name="text">
-            <string>Maciej</string>
-           </property>
-          </item>
-          <item row="0" column="1">
-           <property name="text">
-            <string>Umański</string>
-           </property>
-          </item>
-          <item row="0" column="2">
-           <property name="text">
-            <string>Hobbit</string>
-           </property>
-          </item>
-          <item row="0" column="3">
-           <property name="text">
-            <string>12/01/1999</string>
-           </property>
-          </item>
-          <item row="0" column="4">
-           <property name="text">
-            <string>12/02/2021</string>
-           </property>
-          </item>
-          <item row="0" column="5">
-           <property name="text">
-            <string>0zł</string>
-           </property>
-          </item>
          </widget>
         </item>
        </layout>
@@ -166,6 +131,13 @@
            <widget class="QPushButton" name="delClientButton">
             <property name="text">
              <string>Usuń Klienta</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="editClientButton">
+            <property name="text">
+             <string>Edytuj Klienta</string>
             </property>
            </widget>
           </item>
@@ -214,11 +186,6 @@
        <layout class="QGridLayout" name="gridLayout_3">
         <item row="0" column="0">
          <widget class="QTableWidget" name="moviesTable">
-          <row>
-           <property name="text">
-            <string>1</string>
-           </property>
-          </row>
           <column>
            <property name="text">
             <string>Tytuł</string>
@@ -241,44 +208,14 @@
           </column>
           <column>
            <property name="text">
-            <string>Wypożyczone</string>
+            <string>Dostępne</string>
            </property>
           </column>
           <column>
            <property name="text">
-            <string>Dostępne</string>
+            <string>Wypożyczone</string>
            </property>
           </column>
-          <item row="0" column="0">
-           <property name="text">
-            <string>Hobbit</string>
-           </property>
-          </item>
-          <item row="0" column="1">
-           <property name="text">
-            <string>JKROWLING</string>
-           </property>
-          </item>
-          <item row="0" column="2">
-           <property name="text">
-            <string>HORROR</string>
-           </property>
-          </item>
-          <item row="0" column="3">
-           <property name="text">
-            <string>1999</string>
-           </property>
-          </item>
-          <item row="0" column="4">
-           <property name="text">
-            <string>0</string>
-           </property>
-          </item>
-          <item row="0" column="5">
-           <property name="text">
-            <string>10</string>
-           </property>
-          </item>
          </widget>
         </item>
         <item row="1" column="0">
@@ -297,6 +234,13 @@
             </property>
            </widget>
           </item>
+          <item>
+           <widget class="QPushButton" name="editMovieButton">
+            <property name="text">
+             <string>Edytuj Film</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </item>
        </layout>
@@ -311,7 +255,7 @@
      <x>0</x>
      <y>0</y>
      <width>916</width>
-     <height>24</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>

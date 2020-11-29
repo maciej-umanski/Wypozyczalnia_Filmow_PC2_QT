@@ -19,7 +19,7 @@ public:
     QString director() const;
     QString genre() const;
     QString year() const;
-    QString count() const;
+    QString available() const;
 
 private slots:
     void on_buttonBox_accepted();
