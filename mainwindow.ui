@@ -71,14 +71,19 @@
           <item>
            <widget class="QPushButton" name="sortBorrowButton">
             <property name="text">
-             <string>--</string>
+             <string>Sortuj</string>
             </property>
            </widget>
           </item>
          </layout>
         </item>
         <item row="0" column="0">
-         <widget class="QTableWidget" name="tableWidget">
+         <widget class="QTableWidget" name="borrowsTable">
+          <column>
+           <property name="text">
+            <string>ID</string>
+           </property>
+          </column>
           <column>
            <property name="text">
             <string>Imie</string>
@@ -141,10 +146,22 @@
             </property>
            </widget>
           </item>
+          <item>
+           <widget class="QPushButton" name="sortClientButton">
+            <property name="text">
+             <string>Sortuj</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </item>
         <item row="0" column="0">
          <widget class="QTableWidget" name="clientsTable">
+          <column>
+           <property name="text">
+            <string>ID</string>
+           </property>
+          </column>
           <column>
            <property name="text">
             <string>Imie</string>
@@ -188,12 +205,17 @@
          <widget class="QTableWidget" name="moviesTable">
           <column>
            <property name="text">
+            <string>ID</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
             <string>Tytuł</string>
            </property>
           </column>
           <column>
            <property name="text">
-            <string>Reżysek</string>
+            <string>Reżyser</string>
            </property>
           </column>
           <column>
@@ -241,6 +263,13 @@
             </property>
            </widget>
           </item>
+          <item>
+           <widget class="QPushButton" name="sortMovieButton">
+            <property name="text">
+             <string>Sortuj</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </item>
        </layout>
@@ -258,8 +287,35 @@
      <height>21</height>
     </rect>
    </property>
+   <widget class="QMenu" name="debugSettingsMenu">
+    <property name="title">
+     <string>Debug</string>
+    </property>
+    <addaction name="showID"/>
+    <addaction name="addDefaultData"/>
+   </widget>
+   <addaction name="debugSettingsMenu"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="showID">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>false</bool>
+   </property>
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show ID</string>
+   </property>
+  </action>
+  <action name="addDefaultData">
+   <property name="text">
+    <string>Add Default Data</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>

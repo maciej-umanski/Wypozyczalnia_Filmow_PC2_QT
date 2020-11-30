@@ -14,21 +14,24 @@ SOURCES += \
     editclientdialog.cpp \
     editmoviedialog.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    sortdialog.cpp
 
 HEADERS += \
     addclientdialog.h \
     addmoviedialog.h \
     editclientdialog.h \
     editmoviedialog.h \
-    mainwindow.h
+    mainwindow.h \
+    sortdialog.h
 
 FORMS += \
     addclientdialog.ui \
     addmoviedialog.ui \
     editclientdialog.ui \
     editmoviedialog.ui \
-    mainwindow.ui
+    mainwindow.ui \
+    sortdialog.ui
 
 TRANSLATIONS += \
     Wypozyczalnia_Filmow_PC2_QT_pl_PL.ts

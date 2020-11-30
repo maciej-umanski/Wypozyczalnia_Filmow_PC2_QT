@@ -33,15 +33,25 @@ private slots:
 
     void on_editMovieButton_clicked();
 
+    void on_sortClientButton_clicked();
+
+    void on_sortMovieButton_clicked();
+
+    void on_sortBorrowButton_clicked();
+
+    void on_showID_toggled(bool arg1);
+
+    void on_addDefaultData_triggered();
+
 private:
     Ui::MainWindow *ui;
 
     enum CLIENT_COLLUMNS{
-        IMIE, NAZWISKO, PESEL, TELEFON, EMAIL, POSIADANE_FILMY
+        IMIE=1, NAZWISKO, PESEL, TELEFON, EMAIL, POSIADANE_FILMY
     };
 
     enum MOVIE_COLLUMNS{
-        TYTUL, REZYSER, GATUNEK, ROK, DOSTEPNE, WYPOZYCZONE
+        TYTUL=1, REZYSER, GATUNEK, ROK, DOSTEPNE, WYPOZYCZONE
     };
 };
 #endif // MAINWINDOW_H

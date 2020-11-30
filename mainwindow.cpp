@@ -5,12 +5,16 @@
 #include <addmoviedialog.h>
 #include <editclientdialog.h>
 #include <editmoviedialog.h>
+#include <sortdialog.h>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    ui->clientsTable->setColumnHidden(0,true);
+    ui->moviesTable->setColumnHidden(0,true);
+    ui->borrowsTable->setColumnHidden(0,true);
 }
 
 MainWindow::~MainWindow()
@@ -20,6 +24,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_addClientButton_clicked()
 {
+
     AddClientDialog addClientDialog;
     int ret = addClientDialog.exec();
     if(ret == QDialog::Rejected)
@@ -57,6 +62,10 @@ void MainWindow::on_addClientButton_clicked()
     phone_item->setFlags(phone_item->flags() ^ Qt::ItemIsEditable);
     count_item->setFlags(count_item->flags() ^ Qt::ItemIsEditable);
 
+    QTableWidgetItem *temp_id_item = new QTableWidgetItem("TempID"); // DOZ MIANY
+    temp_id_item->setFlags(temp_id_item->flags() ^ Qt::ItemIsEditable); // DO ZMIANY
+    ui->clientsTable->setItem(currentRow, 0, temp_id_item); //DO ZMIANY TEMP DODAWANIE ID
+
     ui->clientsTable->setItem(currentRow, IMIE, name_item);
     ui->clientsTable->setItem(currentRow, NAZWISKO, surname_item);
     ui->clientsTable->setItem(currentRow, EMAIL, email_item);
@@ -73,11 +82,11 @@ void MainWindow::on_delClientButton_clicked()
     if(items.isEmpty()){
         msgBox.setText("Żadna z kolumn nie jest wybrana!");
         msgBox.exec();
-    }else if(items.size() > 6){
+    }else if(items.size() > 7){
         msgBox.setText("Wybrano więcej niż 1 kolumnę!");
         msgBox.exec();
     }else{
-        if(items[5]->text().toInt()!=0){
+        if(items[POSIADANE_FILMY]->text().toInt()!=0){
             msgBox.setText("Nie można usunąć klienta ponieważ ma on aktualnie wypożyczony film!");
             msgBox.exec();
             return;
@@ -106,13 +115,20 @@ void MainWindow::on_delMovieButton_clicked()
     if(items.isEmpty()){
         msgBox.setText("Żadna z kolumn nie jest wybrana!");
         msgBox.exec();
-    }else if(items.size() > 6){
+    }else if(items.size() > 7){
         msgBox.setText("Wybrano więcej niż 1 kolumnę!");
         msgBox.exec();
     }else{
-        if(items[4]->text().toInt()==0){
-            msgBox.setText("Nie można usunąć filmu ponieważ wszystkie egzemplarze są wypożyczone!");
+        if(items[DOSTEPNE]->text().toInt()==0){
+            msgBox.setText("Nie można usunąć filmu ponieważ wszystkie jego egzemplarze są tymczasowo wypożyczone!");
             msgBox.exec();
+            return;
+        }
+        if(items[WYPOZYCZONE]->text().toInt() != 0){
+            if(QMessageBox::Yes == QMessageBox::question(this, tr("Usuwanie filmu"), tr("Niektóre egzemplarze filmu są wypożyczone! Czy chcesz usunąć wszystkie dostępne egzemplarze?"))){
+                QTableWidgetItem *item = ui->moviesTable->item(items[0]->row(), DOSTEPNE);
+                item->setText(QString::number(0));
+            }
             return;
         }
         if(QMessageBox::Yes == QMessageBox::question(this, tr("Usuwanie filmu"), tr("Czy na pewno chcesz kontyunuować?"))){
@@ -141,14 +157,14 @@ void MainWindow::on_addMovieButton_clicked()
         int match_item = 0;
         QString search_table[4] = {title, director, genre, year};
         int row = repeated_items[i]->row();
-        for(int j = 0; j < 4; j++){
+        for(int j = 1; j < 5; j++){
             QTableWidgetItem *item = ui->moviesTable->item(row, j);
             if(item->text() == search_table[j])
                 match_item++;
         }
         if(match_item == 4){
             if(QMessageBox::Yes == QMessageBox::question(this, tr("Edycja filmu"), tr("W bazie już istnieje taki film, czy chcesz złączyć ilość egzemplarzy?"))){
-                QTableWidgetItem *item = ui->moviesTable->item(row, 4);
+                QTableWidgetItem *item = ui->moviesTable->item(row, DOSTEPNE);
                 int data = available.toInt();
                 data = data + item->text().toInt();
                 item->setText(QString::number(data));
@@ -175,6 +191,10 @@ void MainWindow::on_addMovieButton_clicked()
 
     ui->moviesTable->insertRow(ui->moviesTable->rowCount());
     int currentRow = ui->moviesTable->rowCount()-1;
+
+    QTableWidgetItem *temp_id_item = new QTableWidgetItem("TempID"); // DOZ MIANY
+    temp_id_item->setFlags(temp_id_item->flags() ^ Qt::ItemIsEditable); // DO ZMIANY
+    ui->moviesTable->setItem(currentRow, 0, temp_id_item); //DO ZMIANY TEMP DODAWANIE ID
 
     ui->moviesTable->setItem(currentRow, TYTUL, title_item);
     ui->moviesTable->setItem(currentRow, REZYSER, director_item);
@@ -240,11 +260,11 @@ void MainWindow::on_editMovieButton_clicked()
     if(items.isEmpty()){
         msgBox.setText("Żaden wiersz nie został wybrany!");
         msgBox.exec();
-    }else if(items.size() > 6){
+    }else if(items.size() > 7){
         msgBox.setText("Wybrano więcej niż 1 wiersz!");
         msgBox.exec();
     }else{
-        if(items[4]->text().toInt()==0){
+        if(items[DOSTEPNE]->text().toInt()==0){
             msgBox.setText("Nie można edytować filmu ponieważ wszystkie egzemplarze są wypożyczone!");
             msgBox.exec();
             return;
@@ -278,7 +298,7 @@ void MainWindow::on_editMovieButton_clicked()
             }
             if(match_item == 4 && row != selected_row){
                 if(QMessageBox::Yes == QMessageBox::question(this, tr("Edycja filmu"), tr("W bazie już istnieje taki film, czy chcesz złączyć ilość egzemplarzy?"))){
-                    QTableWidgetItem *item = ui->moviesTable->item(row, 4);
+                    QTableWidgetItem *item = ui->moviesTable->item(row, DOSTEPNE);
                     int data = available.toInt();
                     data = data + item->text().toInt();
                     item->setText(QString::number(data));
@@ -294,4 +314,317 @@ void MainWindow::on_editMovieButton_clicked()
             }
         }
     }
+}
+void MainWindow::on_sortClientButton_clicked()
+{
+    sortDialog sortDialog(nullptr, ui->clientsTable);
+    int ret1 = sortDialog.exec();
+    if(ret1 == QDialog::Rejected)
+        return;
+    int collumn = sortDialog.collumn();
+    Qt::SortOrder order = sortDialog.order();
+    ui->clientsTable->sortItems(collumn, order);
+}
+
+void MainWindow::on_sortMovieButton_clicked()
+{
+    sortDialog sortDialog(nullptr, ui->moviesTable);
+    int ret1 = sortDialog.exec();
+    if(ret1 == QDialog::Rejected)
+        return;
+    int collumn = sortDialog.collumn();
+    Qt::SortOrder order = sortDialog.order();
+    ui->moviesTable->sortItems(collumn, order);
+}
+
+void MainWindow::on_sortBorrowButton_clicked()
+{
+    sortDialog sortDialog(nullptr, ui->borrowsTable);
+    int ret1 = sortDialog.exec();
+    if(ret1 == QDialog::Rejected)
+        return;
+    int collumn = sortDialog.collumn();
+    Qt::SortOrder order = sortDialog.order();
+    ui->borrowsTable->sortItems(collumn, order);
+}
+
+void MainWindow::on_showID_toggled(bool arg1)
+{
+    ui->clientsTable->setColumnHidden(0,!arg1);
+    ui->moviesTable->setColumnHidden(0,!arg1);
+    ui->borrowsTable->setColumnHidden(0,!arg1);
+}
+
+void MainWindow::on_addDefaultData_triggered()
+{
+    QTableWidgetItem *title_item = new QTableWidgetItem("Hobbit");
+    QTableWidgetItem *director_item = new QTableWidgetItem("Jan Brzechwa");
+    QTableWidgetItem *genre_item = new QTableWidgetItem("Horror");
+    QTableWidgetItem *year_item = new QTableWidgetItem("2020");
+    QTableWidgetItem *available_item = new QTableWidgetItem("10");
+    QTableWidgetItem *borrowed_item = new QTableWidgetItem("0");
+
+    title_item->setFlags(title_item->flags() ^ Qt::ItemIsEditable);
+    director_item->setFlags(director_item->flags() ^ Qt::ItemIsEditable);
+    genre_item->setFlags(genre_item->flags() ^ Qt::ItemIsEditable);
+    year_item->setFlags(year_item->flags() ^ Qt::ItemIsEditable);
+    available_item->setFlags(available_item->flags() ^ Qt::ItemIsEditable);
+    borrowed_item->setFlags(borrowed_item->flags() ^ Qt::ItemIsEditable);
+
+    ui->moviesTable->insertRow(ui->moviesTable->rowCount());
+    int currentRow = ui->moviesTable->rowCount()-1;
+
+
+    ui->moviesTable->setItem(currentRow, 0, new QTableWidgetItem("TempID")); //DO ZMIANY TEMP DODAWANIE ID
+    ui->moviesTable->setItem(currentRow, TYTUL, title_item);
+    ui->moviesTable->setItem(currentRow, REZYSER, director_item);
+    ui->moviesTable->setItem(currentRow, GATUNEK, genre_item);
+    ui->moviesTable->setItem(currentRow, ROK, year_item);
+    ui->moviesTable->setItem(currentRow, DOSTEPNE, available_item);
+    ui->moviesTable->setItem(currentRow, WYPOZYCZONE, borrowed_item);
+
+    // NASTEPNY FILM //
+
+    title_item = new QTableWidgetItem("Harry Potter");
+    director_item = new QTableWidgetItem("J.K. Baczyński");
+    genre_item = new QTableWidgetItem("Kreskówka");
+    year_item = new QTableWidgetItem("1923");
+    available_item = new QTableWidgetItem("4");
+    borrowed_item = new QTableWidgetItem("0");
+
+    title_item->setFlags(title_item->flags() ^ Qt::ItemIsEditable);
+    director_item->setFlags(director_item->flags() ^ Qt::ItemIsEditable);
+    genre_item->setFlags(genre_item->flags() ^ Qt::ItemIsEditable);
+    year_item->setFlags(year_item->flags() ^ Qt::ItemIsEditable);
+    available_item->setFlags(available_item->flags() ^ Qt::ItemIsEditable);
+    borrowed_item->setFlags(borrowed_item->flags() ^ Qt::ItemIsEditable);
+
+    ui->moviesTable->insertRow(ui->moviesTable->rowCount());
+    currentRow = ui->moviesTable->rowCount()-1;
+
+    ui->moviesTable->setItem(currentRow, 0, new QTableWidgetItem("TempID")); //DO ZMIANY TEMP DODAWANIE ID
+    ui->moviesTable->setItem(currentRow, TYTUL, title_item);
+    ui->moviesTable->setItem(currentRow, REZYSER, director_item);
+    ui->moviesTable->setItem(currentRow, GATUNEK, genre_item);
+    ui->moviesTable->setItem(currentRow, ROK, year_item);
+    ui->moviesTable->setItem(currentRow, DOSTEPNE, available_item);
+    ui->moviesTable->setItem(currentRow, WYPOZYCZONE, borrowed_item);
+
+    // NASTEPNY FILM //
+
+    title_item = new QTableWidgetItem("Incepcja");
+    director_item = new QTableWidgetItem("Bronisław Komorowski");
+    genre_item = new QTableWidgetItem("Musical");
+    year_item = new QTableWidgetItem("1999");
+    available_item = new QTableWidgetItem("12");
+    borrowed_item = new QTableWidgetItem("0");
+
+    title_item->setFlags(title_item->flags() ^ Qt::ItemIsEditable);
+    director_item->setFlags(director_item->flags() ^ Qt::ItemIsEditable);
+    genre_item->setFlags(genre_item->flags() ^ Qt::ItemIsEditable);
+    year_item->setFlags(year_item->flags() ^ Qt::ItemIsEditable);
+    available_item->setFlags(available_item->flags() ^ Qt::ItemIsEditable);
+    borrowed_item->setFlags(borrowed_item->flags() ^ Qt::ItemIsEditable);
+
+    ui->moviesTable->insertRow(ui->moviesTable->rowCount());
+    currentRow = ui->moviesTable->rowCount()-1;
+
+    ui->moviesTable->setItem(currentRow, 0, new QTableWidgetItem("TempID")); //DO ZMIANY TEMP DODAWANIE ID
+    ui->moviesTable->setItem(currentRow, TYTUL, title_item);
+    ui->moviesTable->setItem(currentRow, REZYSER, director_item);
+    ui->moviesTable->setItem(currentRow, GATUNEK, genre_item);
+    ui->moviesTable->setItem(currentRow, ROK, year_item);
+    ui->moviesTable->setItem(currentRow, DOSTEPNE, available_item);
+    ui->moviesTable->setItem(currentRow, WYPOZYCZONE, borrowed_item);
+
+    // NASTEPNY FILM //
+
+    title_item = new QTableWidgetItem("Mały Książe");
+    director_item = new QTableWidgetItem("Michael Bay");
+    genre_item = new QTableWidgetItem("Film Grozy");
+    year_item = new QTableWidgetItem("1233");
+    available_item = new QTableWidgetItem("1");
+    borrowed_item = new QTableWidgetItem("0");
+
+    title_item->setFlags(title_item->flags() ^ Qt::ItemIsEditable);
+    director_item->setFlags(director_item->flags() ^ Qt::ItemIsEditable);
+    genre_item->setFlags(genre_item->flags() ^ Qt::ItemIsEditable);
+    year_item->setFlags(year_item->flags() ^ Qt::ItemIsEditable);
+    available_item->setFlags(available_item->flags() ^ Qt::ItemIsEditable);
+    borrowed_item->setFlags(borrowed_item->flags() ^ Qt::ItemIsEditable);
+
+    ui->moviesTable->insertRow(ui->moviesTable->rowCount());
+    currentRow = ui->moviesTable->rowCount()-1;
+
+    ui->moviesTable->setItem(currentRow, 0, new QTableWidgetItem("TempID")); //DO ZMIANY TEMP DODAWANIE ID
+    ui->moviesTable->setItem(currentRow, TYTUL, title_item);
+    ui->moviesTable->setItem(currentRow, REZYSER, director_item);
+    ui->moviesTable->setItem(currentRow, GATUNEK, genre_item);
+    ui->moviesTable->setItem(currentRow, ROK, year_item);
+    ui->moviesTable->setItem(currentRow, DOSTEPNE, available_item);
+    ui->moviesTable->setItem(currentRow, WYPOZYCZONE, borrowed_item);
+
+    // NASTEPNY FILM //
+
+    title_item = new QTableWidgetItem("Gambit Królowej");
+    director_item = new QTableWidgetItem("Netflix");
+    genre_item = new QTableWidgetItem("Nie wiem");
+    year_item = new QTableWidgetItem("413");
+    available_item = new QTableWidgetItem("44");
+    borrowed_item = new QTableWidgetItem("0");
+
+    title_item->setFlags(title_item->flags() ^ Qt::ItemIsEditable);
+    director_item->setFlags(director_item->flags() ^ Qt::ItemIsEditable);
+    genre_item->setFlags(genre_item->flags() ^ Qt::ItemIsEditable);
+    year_item->setFlags(year_item->flags() ^ Qt::ItemIsEditable);
+    available_item->setFlags(available_item->flags() ^ Qt::ItemIsEditable);
+    borrowed_item->setFlags(borrowed_item->flags() ^ Qt::ItemIsEditable);
+
+    ui->moviesTable->insertRow(ui->moviesTable->rowCount());
+    currentRow = ui->moviesTable->rowCount()-1;
+
+    ui->moviesTable->setItem(currentRow, 0, new QTableWidgetItem("TempID")); //DO ZMIANY TEMP DODAWANIE ID
+    ui->moviesTable->setItem(currentRow, TYTUL, title_item);
+    ui->moviesTable->setItem(currentRow, REZYSER, director_item);
+    ui->moviesTable->setItem(currentRow, GATUNEK, genre_item);
+    ui->moviesTable->setItem(currentRow, ROK, year_item);
+    ui->moviesTable->setItem(currentRow, DOSTEPNE, available_item);
+    ui->moviesTable->setItem(currentRow, WYPOZYCZONE, borrowed_item);
+
+    // NASTEPNY KLIENT //
+
+    ui->clientsTable->insertRow(ui->clientsTable->rowCount());
+    currentRow = ui->clientsTable->rowCount()-1;
+
+    QTableWidgetItem *name_item = new QTableWidgetItem("Maciej");
+    QTableWidgetItem *surname_item = new QTableWidgetItem("Umański");
+    QTableWidgetItem *email_item = new QTableWidgetItem("maciek@buziaczek.pl");
+    QTableWidgetItem *pesel_item = new QTableWidgetItem("12345678909");
+    QTableWidgetItem *phone_item = new QTableWidgetItem("123123123");
+    QTableWidgetItem *count_item = new QTableWidgetItem("0");
+
+    name_item->setFlags(name_item->flags() ^ Qt::ItemIsEditable);
+    surname_item->setFlags(surname_item->flags() ^ Qt::ItemIsEditable);
+    email_item->setFlags(email_item->flags() ^ Qt::ItemIsEditable);
+    pesel_item->setFlags(pesel_item->flags() ^ Qt::ItemIsEditable);
+    phone_item->setFlags(phone_item->flags() ^ Qt::ItemIsEditable);
+    count_item->setFlags(count_item->flags() ^ Qt::ItemIsEditable);
+
+    ui->clientsTable->setItem(currentRow, 0, new QTableWidgetItem("TempID")); //DO ZMIANY TEMP DODAWANIE ID
+    ui->clientsTable->setItem(currentRow, IMIE, name_item);
+    ui->clientsTable->setItem(currentRow, NAZWISKO, surname_item);
+    ui->clientsTable->setItem(currentRow, EMAIL, email_item);
+    ui->clientsTable->setItem(currentRow, PESEL, pesel_item);
+    ui->clientsTable->setItem(currentRow, TELEFON, phone_item);
+    ui->clientsTable->setItem(currentRow, POSIADANE_FILMY, count_item);
+
+    // NASTEPNY KLIENT //
+
+    ui->clientsTable->insertRow(ui->clientsTable->rowCount());
+    currentRow = ui->clientsTable->rowCount()-1;
+
+    name_item = new QTableWidgetItem("Jakub");
+    surname_item = new QTableWidgetItem("Witaś");
+    email_item = new QTableWidgetItem("lubieamine@op.pl");
+    pesel_item = new QTableWidgetItem("31231232112");
+    phone_item = new QTableWidgetItem("321321312");
+    count_item = new QTableWidgetItem("0");
+
+    name_item->setFlags(name_item->flags() ^ Qt::ItemIsEditable);
+    surname_item->setFlags(surname_item->flags() ^ Qt::ItemIsEditable);
+    email_item->setFlags(email_item->flags() ^ Qt::ItemIsEditable);
+    pesel_item->setFlags(pesel_item->flags() ^ Qt::ItemIsEditable);
+    phone_item->setFlags(phone_item->flags() ^ Qt::ItemIsEditable);
+    count_item->setFlags(count_item->flags() ^ Qt::ItemIsEditable);
+
+    ui->clientsTable->setItem(currentRow, 0, new QTableWidgetItem("TempID")); //DO ZMIANY TEMP DODAWANIE ID
+    ui->clientsTable->setItem(currentRow, IMIE, name_item);
+    ui->clientsTable->setItem(currentRow, NAZWISKO, surname_item);
+    ui->clientsTable->setItem(currentRow, EMAIL, email_item);
+    ui->clientsTable->setItem(currentRow, PESEL, pesel_item);
+    ui->clientsTable->setItem(currentRow, TELEFON, phone_item);
+    ui->clientsTable->setItem(currentRow, POSIADANE_FILMY, count_item);
+
+    // NASTEPNY KLIENT //
+
+    ui->clientsTable->insertRow(ui->clientsTable->rowCount());
+    currentRow = ui->clientsTable->rowCount()-1;
+
+    name_item = new QTableWidgetItem("Krystian");
+    surname_item = new QTableWidgetItem("Kołomański");
+    email_item = new QTableWidgetItem("hehehaha@op.pl");
+    pesel_item = new QTableWidgetItem("11111111111");
+    phone_item = new QTableWidgetItem("321333312");
+    count_item = new QTableWidgetItem("0");
+
+    name_item->setFlags(name_item->flags() ^ Qt::ItemIsEditable);
+    surname_item->setFlags(surname_item->flags() ^ Qt::ItemIsEditable);
+    email_item->setFlags(email_item->flags() ^ Qt::ItemIsEditable);
+    pesel_item->setFlags(pesel_item->flags() ^ Qt::ItemIsEditable);
+    phone_item->setFlags(phone_item->flags() ^ Qt::ItemIsEditable);
+    count_item->setFlags(count_item->flags() ^ Qt::ItemIsEditable);
+
+    ui->clientsTable->setItem(currentRow, 0, new QTableWidgetItem("TempID")); //DO ZMIANY TEMP DODAWANIE ID
+    ui->clientsTable->setItem(currentRow, IMIE, name_item);
+    ui->clientsTable->setItem(currentRow, NAZWISKO, surname_item);
+    ui->clientsTable->setItem(currentRow, EMAIL, email_item);
+    ui->clientsTable->setItem(currentRow, PESEL, pesel_item);
+    ui->clientsTable->setItem(currentRow, TELEFON, phone_item);
+    ui->clientsTable->setItem(currentRow, POSIADANE_FILMY, count_item);
+
+    // NASTEPNY KLIENT //
+
+    ui->clientsTable->insertRow(ui->clientsTable->rowCount());
+    currentRow = ui->clientsTable->rowCount()-1;
+
+    name_item = new QTableWidgetItem("Marcin");
+    surname_item = new QTableWidgetItem("Najman");
+    email_item = new QTableWidgetItem("xDDDDD@XD.pl");
+    pesel_item = new QTableWidgetItem("55544411323");
+    phone_item = new QTableWidgetItem("997");
+    count_item = new QTableWidgetItem("0");
+
+    name_item->setFlags(name_item->flags() ^ Qt::ItemIsEditable);
+    surname_item->setFlags(surname_item->flags() ^ Qt::ItemIsEditable);
+    email_item->setFlags(email_item->flags() ^ Qt::ItemIsEditable);
+    pesel_item->setFlags(pesel_item->flags() ^ Qt::ItemIsEditable);
+    phone_item->setFlags(phone_item->flags() ^ Qt::ItemIsEditable);
+    count_item->setFlags(count_item->flags() ^ Qt::ItemIsEditable);
+
+    ui->clientsTable->setItem(currentRow, 0, new QTableWidgetItem("TempID")); //DO ZMIANY TEMP DODAWANIE ID
+    ui->clientsTable->setItem(currentRow, IMIE, name_item);
+    ui->clientsTable->setItem(currentRow, NAZWISKO, surname_item);
+    ui->clientsTable->setItem(currentRow, EMAIL, email_item);
+    ui->clientsTable->setItem(currentRow, PESEL, pesel_item);
+    ui->clientsTable->setItem(currentRow, TELEFON, phone_item);
+    ui->clientsTable->setItem(currentRow, POSIADANE_FILMY, count_item);
+
+    // NASTEPNY KLIENT //
+
+    ui->clientsTable->insertRow(ui->clientsTable->rowCount());
+    currentRow = ui->clientsTable->rowCount()-1;
+
+    name_item = new QTableWidgetItem("Stefan");
+    surname_item = new QTableWidgetItem("Walaszek");
+    email_item = new QTableWidgetItem("patologia@XD.pl");
+    pesel_item = new QTableWidgetItem("32332145612");
+    phone_item = new QTableWidgetItem("112");
+    count_item = new QTableWidgetItem("0");
+
+    name_item->setFlags(name_item->flags() ^ Qt::ItemIsEditable);
+    surname_item->setFlags(surname_item->flags() ^ Qt::ItemIsEditable);
+    email_item->setFlags(email_item->flags() ^ Qt::ItemIsEditable);
+    pesel_item->setFlags(pesel_item->flags() ^ Qt::ItemIsEditable);
+    phone_item->setFlags(phone_item->flags() ^ Qt::ItemIsEditable);
+    count_item->setFlags(count_item->flags() ^ Qt::ItemIsEditable);
+
+    ui->clientsTable->setItem(currentRow, 0, new QTableWidgetItem("TempID")); //DO ZMIANY TEMP DODAWANIE ID
+    ui->clientsTable->setItem(currentRow, IMIE, name_item);
+    ui->clientsTable->setItem(currentRow, NAZWISKO, surname_item);
+    ui->clientsTable->setItem(currentRow, EMAIL, email_item);
+    ui->clientsTable->setItem(currentRow, PESEL, pesel_item);
+    ui->clientsTable->setItem(currentRow, TELEFON, phone_item);
+    ui->clientsTable->setItem(currentRow, POSIADANE_FILMY, count_item);
+
+    ui->addDefaultData->setDisabled(true);
 }
