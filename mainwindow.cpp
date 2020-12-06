@@ -6,15 +6,14 @@
 #include <editclientdialog.h>
 #include <editmoviedialog.h>
 #include <sortdialog.h>
+#include <addborrowdialog.h>
+#include <QDate>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    ui->clientsTable->setColumnHidden(0,true);
-    ui->moviesTable->setColumnHidden(0,true);
-    ui->borrowsTable->setColumnHidden(0,true);
 }
 
 MainWindow::~MainWindow()
@@ -55,17 +54,6 @@ void MainWindow::on_addClientButton_clicked()
     QTableWidgetItem *phone_item = new QTableWidgetItem(phone);
     QTableWidgetItem *count_item = new QTableWidgetItem("0");
 
-    name_item->setFlags(name_item->flags() ^ Qt::ItemIsEditable);
-    surname_item->setFlags(surname_item->flags() ^ Qt::ItemIsEditable);
-    email_item->setFlags(email_item->flags() ^ Qt::ItemIsEditable);
-    pesel_item->setFlags(pesel_item->flags() ^ Qt::ItemIsEditable);
-    phone_item->setFlags(phone_item->flags() ^ Qt::ItemIsEditable);
-    count_item->setFlags(count_item->flags() ^ Qt::ItemIsEditable);
-
-    QTableWidgetItem *temp_id_item = new QTableWidgetItem("TempID"); // DOZ MIANY
-    temp_id_item->setFlags(temp_id_item->flags() ^ Qt::ItemIsEditable); // DO ZMIANY
-    ui->clientsTable->setItem(currentRow, 0, temp_id_item); //DO ZMIANY TEMP DODAWANIE ID
-
     ui->clientsTable->setItem(currentRow, IMIE, name_item);
     ui->clientsTable->setItem(currentRow, NAZWISKO, surname_item);
     ui->clientsTable->setItem(currentRow, EMAIL, email_item);
@@ -82,7 +70,7 @@ void MainWindow::on_delClientButton_clicked()
     if(items.isEmpty()){
         msgBox.setText("Żadna z kolumn nie jest wybrana!");
         msgBox.exec();
-    }else if(items.size() > 7){
+    }else if(items.size() > 6){
         msgBox.setText("Wybrano więcej niż 1 kolumnę!");
         msgBox.exec();
     }else{
@@ -98,16 +86,6 @@ void MainWindow::on_delClientButton_clicked()
     }
 }
 
-void MainWindow::on_clientsTable_cellClicked(int row, int column)
-{
-    ui->clientsTable->selectRow(row);
-}
-
-void MainWindow::on_moviesTable_cellClicked(int row, int column)
-{
-    ui->moviesTable->selectRow(row);
-}
-
 void MainWindow::on_delMovieButton_clicked()
 {
     QMessageBox msgBox;
@@ -115,7 +93,7 @@ void MainWindow::on_delMovieButton_clicked()
     if(items.isEmpty()){
         msgBox.setText("Żadna z kolumn nie jest wybrana!");
         msgBox.exec();
-    }else if(items.size() > 7){
+    }else if(items.size() > 6){
         msgBox.setText("Wybrano więcej niż 1 kolumnę!");
         msgBox.exec();
     }else{
@@ -138,6 +116,59 @@ void MainWindow::on_delMovieButton_clicked()
     }
 }
 
+void MainWindow::on_addBorrowButton_clicked()
+{
+
+    addBorrowDialog addBorrowDialog(this, ui->clientsTable, ui->moviesTable);
+    int ret = addBorrowDialog.exec();
+    if(ret == QDialog::Rejected)
+        return;
+
+
+    QString borrowDate = addBorrowDialog.borrow_date();
+    QString returnDate = addBorrowDialog.return_date();
+    QString name = addBorrowDialog.name();
+    QString surname = addBorrowDialog.surname();
+    QString title = addBorrowDialog.title();
+
+
+
+    QList<QTableWidgetItem *> repeated_items = ui->borrowsTable->findItems(title, Qt::MatchExactly);
+
+    for(int i=0; i<repeated_items.size(); i++) {
+        int match_item = 0;
+        QString search_table[3] = {name, surname, title};
+        int row = repeated_items[i]->row();
+        for(int j=0; j<3;j++) {
+            QTableWidgetItem *item = ui->borrowsTable->item(row, j);
+            if(item->text() == search_table[j])
+                match_item++;
+        }
+        if(match_item==3) {
+            QMessageBox::information(this, tr("Istniejace wypożyczenie"),tr("W bazie już istnieje takie wypożyczenie!\nWybierz inny film."));
+            return;
+        }
+    }
+
+    QTableWidgetItem *title_item = new QTableWidgetItem(title);
+    QTableWidgetItem *name_item = new QTableWidgetItem(name);
+    QTableWidgetItem *surname_item = new QTableWidgetItem(surname);
+    QTableWidgetItem *borrowdate_item = new QTableWidgetItem(borrowDate);
+    QTableWidgetItem *returndate_item = new QTableWidgetItem(returnDate);
+    QTableWidgetItem *arrear_item = new QTableWidgetItem("0");
+
+    ui->borrowsTable->insertRow(ui->borrowsTable->rowCount());
+    int currentRow = ui->borrowsTable->rowCount()-1;
+
+    ui->borrowsTable->setItem(currentRow, IMIE, name_item);
+    ui->borrowsTable->setItem(currentRow, NAZWISKO, surname_item);
+    ui->borrowsTable->setItem(currentRow, TITLE, title_item);
+    ui->borrowsTable->setItem(currentRow, DATA_WYPOZYCZENIA, borrowdate_item);
+    ui->borrowsTable->setItem(currentRow, DATA_ZWROTU, returndate_item);
+    ui->borrowsTable->setItem(currentRow, ZALEGLOSC, arrear_item);
+
+}
+
 void MainWindow::on_addMovieButton_clicked()
 {
     addMovieDialog addMovieDialog;
@@ -157,7 +188,7 @@ void MainWindow::on_addMovieButton_clicked()
         int match_item = 0;
         QString search_table[4] = {title, director, genre, year};
         int row = repeated_items[i]->row();
-        for(int j = 1; j < 5; j++){
+        for(int j = 0; j < 4; j++){
             QTableWidgetItem *item = ui->moviesTable->item(row, j);
             if(item->text() == search_table[j])
                 match_item++;
@@ -181,20 +212,8 @@ void MainWindow::on_addMovieButton_clicked()
     QTableWidgetItem *available_item = new QTableWidgetItem(available);
     QTableWidgetItem *borrowed_item = new QTableWidgetItem("0");
 
-    title_item->setFlags(title_item->flags() ^ Qt::ItemIsEditable);
-    director_item->setFlags(director_item->flags() ^ Qt::ItemIsEditable);
-    genre_item->setFlags(genre_item->flags() ^ Qt::ItemIsEditable);
-    year_item->setFlags(year_item->flags() ^ Qt::ItemIsEditable);
-    available_item->setFlags(available_item->flags() ^ Qt::ItemIsEditable);
-    borrowed_item->setFlags(borrowed_item->flags() ^ Qt::ItemIsEditable);
-
-
     ui->moviesTable->insertRow(ui->moviesTable->rowCount());
     int currentRow = ui->moviesTable->rowCount()-1;
-
-    QTableWidgetItem *temp_id_item = new QTableWidgetItem("TempID"); // DOZ MIANY
-    temp_id_item->setFlags(temp_id_item->flags() ^ Qt::ItemIsEditable); // DO ZMIANY
-    ui->moviesTable->setItem(currentRow, 0, temp_id_item); //DO ZMIANY TEMP DODAWANIE ID
 
     ui->moviesTable->setItem(currentRow, TYTUL, title_item);
     ui->moviesTable->setItem(currentRow, REZYSER, director_item);
@@ -260,7 +279,7 @@ void MainWindow::on_editMovieButton_clicked()
     if(items.isEmpty()){
         msgBox.setText("Żaden wiersz nie został wybrany!");
         msgBox.exec();
-    }else if(items.size() > 7){
+    }else if(items.size() > 6){
         msgBox.setText("Wybrano więcej niż 1 wiersz!");
         msgBox.exec();
     }else{
@@ -315,6 +334,9 @@ void MainWindow::on_editMovieButton_clicked()
         }
     }
 }
+
+
+
 void MainWindow::on_sortClientButton_clicked()
 {
     sortDialog sortDialog(nullptr, ui->clientsTable);
@@ -348,13 +370,6 @@ void MainWindow::on_sortBorrowButton_clicked()
     ui->borrowsTable->sortItems(collumn, order);
 }
 
-void MainWindow::on_showID_toggled(bool arg1)
-{
-    ui->clientsTable->setColumnHidden(0,!arg1);
-    ui->moviesTable->setColumnHidden(0,!arg1);
-    ui->borrowsTable->setColumnHidden(0,!arg1);
-}
-
 void MainWindow::on_addDefaultData_triggered()
 {
     QTableWidgetItem *title_item = new QTableWidgetItem("Hobbit");
@@ -364,18 +379,11 @@ void MainWindow::on_addDefaultData_triggered()
     QTableWidgetItem *available_item = new QTableWidgetItem("10");
     QTableWidgetItem *borrowed_item = new QTableWidgetItem("0");
 
-    title_item->setFlags(title_item->flags() ^ Qt::ItemIsEditable);
-    director_item->setFlags(director_item->flags() ^ Qt::ItemIsEditable);
-    genre_item->setFlags(genre_item->flags() ^ Qt::ItemIsEditable);
-    year_item->setFlags(year_item->flags() ^ Qt::ItemIsEditable);
-    available_item->setFlags(available_item->flags() ^ Qt::ItemIsEditable);
-    borrowed_item->setFlags(borrowed_item->flags() ^ Qt::ItemIsEditable);
-
     ui->moviesTable->insertRow(ui->moviesTable->rowCount());
     int currentRow = ui->moviesTable->rowCount()-1;
 
 
-    ui->moviesTable->setItem(currentRow, 0, new QTableWidgetItem("TempID")); //DO ZMIANY TEMP DODAWANIE ID
+    //ui->moviesTable->setItem(currentRow, 0, new QTableWidgetItem("TempID")); //DO ZMIANY TEMP DODAWANIE ID
     ui->moviesTable->setItem(currentRow, TYTUL, title_item);
     ui->moviesTable->setItem(currentRow, REZYSER, director_item);
     ui->moviesTable->setItem(currentRow, GATUNEK, genre_item);
@@ -392,17 +400,10 @@ void MainWindow::on_addDefaultData_triggered()
     available_item = new QTableWidgetItem("4");
     borrowed_item = new QTableWidgetItem("0");
 
-    title_item->setFlags(title_item->flags() ^ Qt::ItemIsEditable);
-    director_item->setFlags(director_item->flags() ^ Qt::ItemIsEditable);
-    genre_item->setFlags(genre_item->flags() ^ Qt::ItemIsEditable);
-    year_item->setFlags(year_item->flags() ^ Qt::ItemIsEditable);
-    available_item->setFlags(available_item->flags() ^ Qt::ItemIsEditable);
-    borrowed_item->setFlags(borrowed_item->flags() ^ Qt::ItemIsEditable);
-
     ui->moviesTable->insertRow(ui->moviesTable->rowCount());
     currentRow = ui->moviesTable->rowCount()-1;
 
-    ui->moviesTable->setItem(currentRow, 0, new QTableWidgetItem("TempID")); //DO ZMIANY TEMP DODAWANIE ID
+    //ui->moviesTable->setItem(currentRow, 0, new QTableWidgetItem("TempID")); //DO ZMIANY TEMP DODAWANIE ID
     ui->moviesTable->setItem(currentRow, TYTUL, title_item);
     ui->moviesTable->setItem(currentRow, REZYSER, director_item);
     ui->moviesTable->setItem(currentRow, GATUNEK, genre_item);
@@ -419,17 +420,10 @@ void MainWindow::on_addDefaultData_triggered()
     available_item = new QTableWidgetItem("12");
     borrowed_item = new QTableWidgetItem("0");
 
-    title_item->setFlags(title_item->flags() ^ Qt::ItemIsEditable);
-    director_item->setFlags(director_item->flags() ^ Qt::ItemIsEditable);
-    genre_item->setFlags(genre_item->flags() ^ Qt::ItemIsEditable);
-    year_item->setFlags(year_item->flags() ^ Qt::ItemIsEditable);
-    available_item->setFlags(available_item->flags() ^ Qt::ItemIsEditable);
-    borrowed_item->setFlags(borrowed_item->flags() ^ Qt::ItemIsEditable);
-
     ui->moviesTable->insertRow(ui->moviesTable->rowCount());
     currentRow = ui->moviesTable->rowCount()-1;
 
-    ui->moviesTable->setItem(currentRow, 0, new QTableWidgetItem("TempID")); //DO ZMIANY TEMP DODAWANIE ID
+    //ui->moviesTable->setItem(currentRow, 0, new QTableWidgetItem("TempID")); //DO ZMIANY TEMP DODAWANIE ID
     ui->moviesTable->setItem(currentRow, TYTUL, title_item);
     ui->moviesTable->setItem(currentRow, REZYSER, director_item);
     ui->moviesTable->setItem(currentRow, GATUNEK, genre_item);
@@ -446,17 +440,10 @@ void MainWindow::on_addDefaultData_triggered()
     available_item = new QTableWidgetItem("1");
     borrowed_item = new QTableWidgetItem("0");
 
-    title_item->setFlags(title_item->flags() ^ Qt::ItemIsEditable);
-    director_item->setFlags(director_item->flags() ^ Qt::ItemIsEditable);
-    genre_item->setFlags(genre_item->flags() ^ Qt::ItemIsEditable);
-    year_item->setFlags(year_item->flags() ^ Qt::ItemIsEditable);
-    available_item->setFlags(available_item->flags() ^ Qt::ItemIsEditable);
-    borrowed_item->setFlags(borrowed_item->flags() ^ Qt::ItemIsEditable);
-
     ui->moviesTable->insertRow(ui->moviesTable->rowCount());
     currentRow = ui->moviesTable->rowCount()-1;
 
-    ui->moviesTable->setItem(currentRow, 0, new QTableWidgetItem("TempID")); //DO ZMIANY TEMP DODAWANIE ID
+    //ui->moviesTable->setItem(currentRow, 0, new QTableWidgetItem("TempID")); //DO ZMIANY TEMP DODAWANIE ID
     ui->moviesTable->setItem(currentRow, TYTUL, title_item);
     ui->moviesTable->setItem(currentRow, REZYSER, director_item);
     ui->moviesTable->setItem(currentRow, GATUNEK, genre_item);
@@ -473,17 +460,10 @@ void MainWindow::on_addDefaultData_triggered()
     available_item = new QTableWidgetItem("44");
     borrowed_item = new QTableWidgetItem("0");
 
-    title_item->setFlags(title_item->flags() ^ Qt::ItemIsEditable);
-    director_item->setFlags(director_item->flags() ^ Qt::ItemIsEditable);
-    genre_item->setFlags(genre_item->flags() ^ Qt::ItemIsEditable);
-    year_item->setFlags(year_item->flags() ^ Qt::ItemIsEditable);
-    available_item->setFlags(available_item->flags() ^ Qt::ItemIsEditable);
-    borrowed_item->setFlags(borrowed_item->flags() ^ Qt::ItemIsEditable);
-
     ui->moviesTable->insertRow(ui->moviesTable->rowCount());
     currentRow = ui->moviesTable->rowCount()-1;
 
-    ui->moviesTable->setItem(currentRow, 0, new QTableWidgetItem("TempID")); //DO ZMIANY TEMP DODAWANIE ID
+    //ui->moviesTable->setItem(currentRow, 0, new QTableWidgetItem("TempID")); //DO ZMIANY TEMP DODAWANIE ID
     ui->moviesTable->setItem(currentRow, TYTUL, title_item);
     ui->moviesTable->setItem(currentRow, REZYSER, director_item);
     ui->moviesTable->setItem(currentRow, GATUNEK, genre_item);
@@ -503,14 +483,7 @@ void MainWindow::on_addDefaultData_triggered()
     QTableWidgetItem *phone_item = new QTableWidgetItem("123123123");
     QTableWidgetItem *count_item = new QTableWidgetItem("0");
 
-    name_item->setFlags(name_item->flags() ^ Qt::ItemIsEditable);
-    surname_item->setFlags(surname_item->flags() ^ Qt::ItemIsEditable);
-    email_item->setFlags(email_item->flags() ^ Qt::ItemIsEditable);
-    pesel_item->setFlags(pesel_item->flags() ^ Qt::ItemIsEditable);
-    phone_item->setFlags(phone_item->flags() ^ Qt::ItemIsEditable);
-    count_item->setFlags(count_item->flags() ^ Qt::ItemIsEditable);
-
-    ui->clientsTable->setItem(currentRow, 0, new QTableWidgetItem("TempID")); //DO ZMIANY TEMP DODAWANIE ID
+    //ui->clientsTable->setItem(currentRow, 0, new QTableWidgetItem("TempID")); //DO ZMIANY TEMP DODAWANIE ID
     ui->clientsTable->setItem(currentRow, IMIE, name_item);
     ui->clientsTable->setItem(currentRow, NAZWISKO, surname_item);
     ui->clientsTable->setItem(currentRow, EMAIL, email_item);
@@ -530,14 +503,7 @@ void MainWindow::on_addDefaultData_triggered()
     phone_item = new QTableWidgetItem("321321312");
     count_item = new QTableWidgetItem("0");
 
-    name_item->setFlags(name_item->flags() ^ Qt::ItemIsEditable);
-    surname_item->setFlags(surname_item->flags() ^ Qt::ItemIsEditable);
-    email_item->setFlags(email_item->flags() ^ Qt::ItemIsEditable);
-    pesel_item->setFlags(pesel_item->flags() ^ Qt::ItemIsEditable);
-    phone_item->setFlags(phone_item->flags() ^ Qt::ItemIsEditable);
-    count_item->setFlags(count_item->flags() ^ Qt::ItemIsEditable);
-
-    ui->clientsTable->setItem(currentRow, 0, new QTableWidgetItem("TempID")); //DO ZMIANY TEMP DODAWANIE ID
+    //ui->clientsTable->setItem(currentRow, 0, new QTableWidgetItem("TempID")); //DO ZMIANY TEMP DODAWANIE ID
     ui->clientsTable->setItem(currentRow, IMIE, name_item);
     ui->clientsTable->setItem(currentRow, NAZWISKO, surname_item);
     ui->clientsTable->setItem(currentRow, EMAIL, email_item);
@@ -557,14 +523,7 @@ void MainWindow::on_addDefaultData_triggered()
     phone_item = new QTableWidgetItem("321333312");
     count_item = new QTableWidgetItem("0");
 
-    name_item->setFlags(name_item->flags() ^ Qt::ItemIsEditable);
-    surname_item->setFlags(surname_item->flags() ^ Qt::ItemIsEditable);
-    email_item->setFlags(email_item->flags() ^ Qt::ItemIsEditable);
-    pesel_item->setFlags(pesel_item->flags() ^ Qt::ItemIsEditable);
-    phone_item->setFlags(phone_item->flags() ^ Qt::ItemIsEditable);
-    count_item->setFlags(count_item->flags() ^ Qt::ItemIsEditable);
-
-    ui->clientsTable->setItem(currentRow, 0, new QTableWidgetItem("TempID")); //DO ZMIANY TEMP DODAWANIE ID
+    //ui->clientsTable->setItem(currentRow, 0, new QTableWidgetItem("TempID")); //DO ZMIANY TEMP DODAWANIE ID
     ui->clientsTable->setItem(currentRow, IMIE, name_item);
     ui->clientsTable->setItem(currentRow, NAZWISKO, surname_item);
     ui->clientsTable->setItem(currentRow, EMAIL, email_item);
@@ -584,14 +543,7 @@ void MainWindow::on_addDefaultData_triggered()
     phone_item = new QTableWidgetItem("997");
     count_item = new QTableWidgetItem("0");
 
-    name_item->setFlags(name_item->flags() ^ Qt::ItemIsEditable);
-    surname_item->setFlags(surname_item->flags() ^ Qt::ItemIsEditable);
-    email_item->setFlags(email_item->flags() ^ Qt::ItemIsEditable);
-    pesel_item->setFlags(pesel_item->flags() ^ Qt::ItemIsEditable);
-    phone_item->setFlags(phone_item->flags() ^ Qt::ItemIsEditable);
-    count_item->setFlags(count_item->flags() ^ Qt::ItemIsEditable);
-
-    ui->clientsTable->setItem(currentRow, 0, new QTableWidgetItem("TempID")); //DO ZMIANY TEMP DODAWANIE ID
+    //ui->clientsTable->setItem(currentRow, 0, new QTableWidgetItem("TempID")); //DO ZMIANY TEMP DODAWANIE ID
     ui->clientsTable->setItem(currentRow, IMIE, name_item);
     ui->clientsTable->setItem(currentRow, NAZWISKO, surname_item);
     ui->clientsTable->setItem(currentRow, EMAIL, email_item);
@@ -611,14 +563,7 @@ void MainWindow::on_addDefaultData_triggered()
     phone_item = new QTableWidgetItem("112");
     count_item = new QTableWidgetItem("0");
 
-    name_item->setFlags(name_item->flags() ^ Qt::ItemIsEditable);
-    surname_item->setFlags(surname_item->flags() ^ Qt::ItemIsEditable);
-    email_item->setFlags(email_item->flags() ^ Qt::ItemIsEditable);
-    pesel_item->setFlags(pesel_item->flags() ^ Qt::ItemIsEditable);
-    phone_item->setFlags(phone_item->flags() ^ Qt::ItemIsEditable);
-    count_item->setFlags(count_item->flags() ^ Qt::ItemIsEditable);
-
-    ui->clientsTable->setItem(currentRow, 0, new QTableWidgetItem("TempID")); //DO ZMIANY TEMP DODAWANIE ID
+    //ui->clientsTable->setItem(currentRow, 0, new QTableWidgetItem("TempID")); //DO ZMIANY TEMP DODAWANIE ID
     ui->clientsTable->setItem(currentRow, IMIE, name_item);
     ui->clientsTable->setItem(currentRow, NAZWISKO, surname_item);
     ui->clientsTable->setItem(currentRow, EMAIL, email_item);
@@ -628,3 +573,5 @@ void MainWindow::on_addDefaultData_triggered()
 
     ui->addDefaultData->setDisabled(true);
 }
+
+

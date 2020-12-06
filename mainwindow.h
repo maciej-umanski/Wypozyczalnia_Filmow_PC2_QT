@@ -21,10 +21,6 @@ private slots:
 
     void on_delClientButton_clicked();
 
-    void on_clientsTable_cellClicked(int row, int column);
-
-    void on_moviesTable_cellClicked(int row, int column);
-
     void on_delMovieButton_clicked();
 
     void on_addMovieButton_clicked();
@@ -39,19 +35,24 @@ private slots:
 
     void on_sortBorrowButton_clicked();
 
-    void on_showID_toggled(bool arg1);
-
     void on_addDefaultData_triggered();
+
+    void on_addBorrowButton_clicked();
 
 private:
     Ui::MainWindow *ui;
 
     enum CLIENT_COLLUMNS{
-        IMIE=1, NAZWISKO, PESEL, TELEFON, EMAIL, POSIADANE_FILMY
+        IMIE, NAZWISKO, PESEL, TELEFON, EMAIL, POSIADANE_FILMY
     };
 
     enum MOVIE_COLLUMNS{
-        TYTUL=1, REZYSER, GATUNEK, ROK, DOSTEPNE, WYPOZYCZONE
+        TYTUL, REZYSER, GATUNEK, ROK, DOSTEPNE, WYPOZYCZONE
     };
+
+    enum BORROW_COLLUMNS{
+        BORROW_COLLUMNS=(IMIE, NAZWISKO), TITLE=2, DATA_WYPOZYCZENIA, DATA_ZWROTU, ZALEGLOSC
+    };
+
 };
 #endif // MAINWINDOW_H
