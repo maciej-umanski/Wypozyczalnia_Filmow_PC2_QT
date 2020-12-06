@@ -684,3 +684,8 @@ void MainWindow::on_addDefaultData_triggered()
 
     ui->addDefaultData->setDisabled(true);
 }
+
+void MainWindow::on_borrowsTable_cellDoubleClicked(int row, int column)
+{
+    
+}
