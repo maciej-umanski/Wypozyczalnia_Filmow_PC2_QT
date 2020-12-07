@@ -39,6 +39,12 @@ private slots:
 
     void on_addBorrowButton_clicked();
 
+    void on_searchClientButton_clicked();
+
+    void on_searchBorrowsButton_clicked();
+
+    void on_searchMovieButton_clicked();
+
 private:
     Ui::MainWindow *ui;
 

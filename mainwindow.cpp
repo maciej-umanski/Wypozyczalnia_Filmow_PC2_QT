@@ -70,19 +70,13 @@ void MainWindow::on_delClientButton_clicked()
     if(items.isEmpty()){
         msgBox.setText("Żadna z kolumn nie jest wybrana!");
         msgBox.exec();
-    }else if(items.size() > 6){
-        msgBox.setText("Wybrano więcej niż 1 kolumnę!");
+    }else if(items[POSIADANE_FILMY]->text().toInt()!=0){
+        msgBox.setText("Nie można usunąć klienta ponieważ ma on aktualnie wypożyczony film!");
         msgBox.exec();
-    }else{
-        if(items[POSIADANE_FILMY]->text().toInt()!=0){
-            msgBox.setText("Nie można usunąć klienta ponieważ ma on aktualnie wypożyczony film!");
-            msgBox.exec();
-            return;
-        }
-        if(QMessageBox::Yes == QMessageBox::question(this, tr("Usuwanie klienta"), tr("Czy na pewno chcesz kontyunuować?"))){
-            int rowToRemove = ui->clientsTable->row(items[0]);
-            ui->clientsTable->removeRow(rowToRemove);
-        }
+        return;
+    }else if(QMessageBox::Yes == QMessageBox::question(this, tr("Usuwanie klienta"), tr("Czy na pewno chcesz kontyunuować?"))){
+        int rowToRemove = ui->clientsTable->row(items[0]);
+        ui->clientsTable->removeRow(rowToRemove);
     }
 }
 
@@ -93,26 +87,19 @@ void MainWindow::on_delMovieButton_clicked()
     if(items.isEmpty()){
         msgBox.setText("Żadna z kolumn nie jest wybrana!");
         msgBox.exec();
-    }else if(items.size() > 6){
-        msgBox.setText("Wybrano więcej niż 1 kolumnę!");
+    }else if(items[DOSTEPNE]->text().toInt()==0){
+        msgBox.setText("Nie można usunąć filmu ponieważ wszystkie jego egzemplarze są tymczasowo wypożyczone!");
         msgBox.exec();
-    }else{
-        if(items[DOSTEPNE]->text().toInt()==0){
-            msgBox.setText("Nie można usunąć filmu ponieważ wszystkie jego egzemplarze są tymczasowo wypożyczone!");
-            msgBox.exec();
-            return;
+        return;
+    }else if(items[WYPOZYCZONE]->text().toInt() != 0){
+        if(QMessageBox::Yes == QMessageBox::question(this, tr("Usuwanie filmu"), tr("Niektóre egzemplarze filmu są wypożyczone! Czy chcesz usunąć wszystkie dostępne egzemplarze?"))){
+            QTableWidgetItem *item = ui->moviesTable->item(items[0]->row(), DOSTEPNE);
+            item->setText(QString::number(0));
         }
-        if(items[WYPOZYCZONE]->text().toInt() != 0){
-            if(QMessageBox::Yes == QMessageBox::question(this, tr("Usuwanie filmu"), tr("Niektóre egzemplarze filmu są wypożyczone! Czy chcesz usunąć wszystkie dostępne egzemplarze?"))){
-                QTableWidgetItem *item = ui->moviesTable->item(items[0]->row(), DOSTEPNE);
-                item->setText(QString::number(0));
-            }
-            return;
-        }
-        if(QMessageBox::Yes == QMessageBox::question(this, tr("Usuwanie filmu"), tr("Czy na pewno chcesz kontyunuować?"))){
-            int rowToRemove = ui->moviesTable->row(items[0]);
-            ui->moviesTable->removeRow(rowToRemove);
-        }
+        return;
+    }else if(QMessageBox::Yes == QMessageBox::question(this, tr("Usuwanie filmu"), tr("Czy na pewno chcesz kontyunuować?"))){
+        int rowToRemove = ui->moviesTable->row(items[0]);
+        ui->moviesTable->removeRow(rowToRemove);
     }
 }
 
@@ -130,7 +117,6 @@ void MainWindow::on_addBorrowButton_clicked()
     QString name = addBorrowDialog.name();
     QString surname = addBorrowDialog.surname();
     QString title = addBorrowDialog.title();
-
 
 
     QList<QTableWidgetItem *> repeated_items = ui->borrowsTable->findItems(title, Qt::MatchExactly);
@@ -166,6 +152,22 @@ void MainWindow::on_addBorrowButton_clicked()
     ui->borrowsTable->setItem(currentRow, DATA_WYPOZYCZENIA, borrowdate_item);
     ui->borrowsTable->setItem(currentRow, DATA_ZWROTU, returndate_item);
     ui->borrowsTable->setItem(currentRow, ZALEGLOSC, arrear_item);
+
+    //dodawanie info do tablic głównych//
+    int chosenClientRow = addBorrowDialog.chosenClientRow();
+    int ownedMoviesCount = ui->clientsTable->item(chosenClientRow,POSIADANE_FILMY)->text().toInt();
+    ownedMoviesCount++;
+    ui->clientsTable->item(chosenClientRow,POSIADANE_FILMY)->setText(QString::number(ownedMoviesCount));
+
+    int chosenMovieRow = addBorrowDialog.chosenMovieRow();
+    int freeMoviesCount = ui->moviesTable->item(chosenMovieRow, DOSTEPNE)->text().toInt();
+    int borrowedMoviesCount = ui->moviesTable->item(chosenMovieRow, WYPOZYCZONE)->text().toInt();
+    freeMoviesCount--;
+    borrowedMoviesCount++;
+    ui->moviesTable->item(chosenMovieRow,DOSTEPNE)->setText(QString::number(freeMoviesCount));
+    ui->moviesTable->item(chosenMovieRow,WYPOZYCZONE)->setText(QString::number(borrowedMoviesCount));
+
+
 
 }
 
@@ -575,3 +577,63 @@ void MainWindow::on_addDefaultData_triggered()
 }
 
 
+
+void MainWindow::on_searchClientButton_clicked()
+{
+    if(ui->searchClientField->text().isEmpty()){
+        for(int i = 0; i < ui->clientsTable->rowCount(); i++){
+            ui->clientsTable->showRow(i);
+        }
+    }else{
+        QString searchedPhrase = ui->searchClientField->text();
+        QList<QTableWidgetItem *> foundItems = ui->clientsTable->findItems(searchedPhrase, Qt::MatchContains);
+
+        for(int i = 0; i < ui->clientsTable->rowCount(); i++){
+            ui->clientsTable->hideRow(i);
+        }
+
+        for(int i = 0; i < foundItems.size(); i++){
+            ui->clientsTable->showRow(foundItems[i]->row());
+        }
+    }
+}
+
+void MainWindow::on_searchBorrowsButton_clicked()
+{
+    if(ui->searchBorrowField->text().isEmpty()){
+        for(int i = 0; i < ui->borrowsTable->rowCount(); i++){
+            ui->borrowsTable->showRow(i);
+        }
+    }else{
+        QString searchedPhrase = ui->searchBorrowField->text();
+        QList<QTableWidgetItem *> foundItems = ui->borrowsTable->findItems(searchedPhrase, Qt::MatchContains);
+
+        for(int i = 0; i < ui->borrowsTable->rowCount(); i++){
+            ui->borrowsTable->hideRow(i);
+        }
+
+        for(int i = 0; i < foundItems.size(); i++){
+            ui->borrowsTable->showRow(foundItems[i]->row());
+        }
+    }
+}
+
+void MainWindow::on_searchMovieButton_clicked()
+{
+    if(ui->searchMovieField->text().isEmpty()){
+        for(int i = 0; i < ui->moviesTable->rowCount(); i++){
+            ui->moviesTable->showRow(i);
+        }
+    }else{
+        QString searchedPhrase = ui->searchMovieField->text();
+        QList<QTableWidgetItem *> foundItems = ui->moviesTable->findItems(searchedPhrase, Qt::MatchContains);
+
+        for(int i = 0; i < ui->moviesTable->rowCount(); i++){
+            ui->moviesTable->hideRow(i);
+        }
+
+        for(int i = 0; i < foundItems.size(); i++){
+            ui->moviesTable->showRow(foundItems[i]->row());
+        }
+    }
+}

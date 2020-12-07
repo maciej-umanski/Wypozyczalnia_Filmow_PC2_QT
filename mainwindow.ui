@@ -24,14 +24,14 @@
        </sizepolicy>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
         <string>Wypożyczenia</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout">
-        <item row="1" column="0">
+        <item row="2" column="0">
          <layout class="QHBoxLayout" name="horizontalLayout_2">
           <item>
            <widget class="QPushButton" name="addBorrowButton">
@@ -63,7 +63,7 @@
           </item>
          </layout>
         </item>
-        <item row="0" column="0">
+        <item row="1" column="0">
          <widget class="QTableWidget" name="borrowsTable">
           <property name="editTriggers">
            <set>QAbstractItemView::NoEditTriggers</set>
@@ -106,6 +106,20 @@
           </column>
          </widget>
         </item>
+        <item row="0" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <item>
+           <widget class="QLineEdit" name="searchBorrowField"/>
+          </item>
+          <item>
+           <widget class="QPushButton" name="searchBorrowsButton">
+            <property name="text">
+             <string>Szukaj</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
        </layout>
       </widget>
       <widget class="QWidget" name="tab_2">
@@ -113,7 +127,7 @@
         <string>Klienci</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_2">
-        <item row="1" column="0">
+        <item row="2" column="0">
          <layout class="QHBoxLayout" name="horizontalLayout_4">
           <item>
            <widget class="QPushButton" name="addClientButton">
@@ -146,6 +160,20 @@
          </layout>
         </item>
         <item row="0" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_5">
+          <item>
+           <widget class="QLineEdit" name="searchClientField"/>
+          </item>
+          <item>
+           <widget class="QPushButton" name="searchClientButton">
+            <property name="text">
+             <string>Szukaj</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="1" column="0">
          <widget class="QTableWidget" name="clientsTable">
           <property name="editTriggers">
            <set>QAbstractItemView::NoEditTriggers</set>
@@ -195,7 +223,7 @@
         <string>Filmy</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_3">
-        <item row="0" column="0">
+        <item row="1" column="0">
          <widget class="QTableWidget" name="moviesTable">
           <property name="editTriggers">
            <set>QAbstractItemView::NoEditTriggers</set>
@@ -238,7 +266,7 @@
           </column>
          </widget>
         </item>
-        <item row="1" column="0">
+        <item row="2" column="0">
          <layout class="QHBoxLayout" name="horizontalLayout">
           <item>
            <widget class="QPushButton" name="addMovieButton">
@@ -265,6 +293,20 @@
            <widget class="QPushButton" name="sortMovieButton">
             <property name="text">
              <string>Sortuj</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="0" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_6">
+          <item>
+           <widget class="QLineEdit" name="searchMovieField"/>
+          </item>
+          <item>
+           <widget class="QPushButton" name="searchMovieButton">
+            <property name="text">
+             <string>Szukaj</string>
             </property>
            </widget>
           </item>

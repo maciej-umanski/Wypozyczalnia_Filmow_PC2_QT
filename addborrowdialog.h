@@ -23,7 +23,13 @@ public:
     QString surname() const;
     QString title() const;
 
+    int chosenClientRow() const;
+    int chosenMovieRow() const;
+
+    std::pair<int,int> chosenMovie() const;
+
 private slots:
+
     void on_buttonBox_rejected();
 
     void on_borrowsMoviesTable_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn);
@@ -32,8 +38,22 @@ private slots:
 
     void on_buttonBox_accepted();
 
+    void on_searchClientButton_clicked();
+
+    void on_searchMovieButton_clicked();
+
 private:
     Ui::addBorrowDialog *ui;
+    int clientRow, movieRow;
+    QTableWidget *moviesTableTemp;
+
+    enum CLIENT_COLLUMNS{
+        IMIE, NAZWISKO, PESEL, TELEFON, EMAIL, POSIADANE_FILMY
+    };
+
+    enum MOVIE_COLLUMNS{
+        TYTUL, REZYSER, GATUNEK, ROK, DOSTEPNE, WYPOZYCZONE
+    };
 };
 
 #endif // ADDBORROWDIALOG_H
