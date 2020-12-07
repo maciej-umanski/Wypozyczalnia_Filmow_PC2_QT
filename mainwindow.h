@@ -45,19 +45,21 @@ private slots:
 
     void on_searchMovieButton_clicked();
 
+    void on_actionShowID_toggled(bool arg1);
+
 private:
     Ui::MainWindow *ui;
 
     enum CLIENT_COLLUMNS{
-        IMIE, NAZWISKO, PESEL, TELEFON, EMAIL, POSIADANE_FILMY
+        IMIE = 1, NAZWISKO, PESEL, TELEFON, EMAIL, POSIADANE_FILMY
     };
 
     enum MOVIE_COLLUMNS{
-        TYTUL, REZYSER, GATUNEK, ROK, DOSTEPNE, WYPOZYCZONE
+        TYTUL = 1, REZYSER, GATUNEK, ROK, DOSTEPNE, WYPOZYCZONE
     };
 
     enum BORROW_COLLUMNS{
-        BORROW_COLLUMNS=(IMIE, NAZWISKO), TITLE=2, DATA_WYPOZYCZENIA, DATA_ZWROTU, ZALEGLOSC
+        ID_KLIENT = 1, ID_FILM, IMIEB, NAZWISKOB, TITLE, DATA_WYPOZYCZENIA, DATA_ZWROTU, ZALEGLOSC
     };
 
 };

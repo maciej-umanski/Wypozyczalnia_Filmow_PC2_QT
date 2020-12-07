@@ -57,6 +57,11 @@
          </property>
          <column>
           <property name="text">
+           <string>ID</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
            <string>Imię</string>
           </property>
          </column>
@@ -165,6 +170,11 @@
          <property name="selectionBehavior">
           <enum>QAbstractItemView::SelectRows</enum>
          </property>
+         <column>
+          <property name="text">
+           <string>ID</string>
+          </property>
+         </column>
          <column>
           <property name="text">
            <string>Tytuł</string>

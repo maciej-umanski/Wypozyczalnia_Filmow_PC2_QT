@@ -13,7 +13,7 @@ class addBorrowDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit addBorrowDialog(QWidget *parent = nullptr, QTableWidget *clientsTable=nullptr, QTableWidget *moviesTable=nullptr);
+    explicit addBorrowDialog(QWidget *parent = nullptr, QTableWidget *clientsTable=nullptr, QTableWidget *moviesTable=nullptr, bool showIdState = false);
     ~addBorrowDialog();
 
     QString borrow_date() const;
@@ -22,6 +22,8 @@ public:
     QString name() const;
     QString surname() const;
     QString title() const;
+    QString clientID() const;
+    QString movieID() const;
 
     int chosenClientRow() const;
     int chosenMovieRow() const;
@@ -45,14 +47,15 @@ private slots:
 private:
     Ui::addBorrowDialog *ui;
     int clientRow, movieRow;
-    QTableWidget *moviesTableTemp;
+    QTableWidget *moviesTableTemp, *clientsTableTemp;
+    QString clientIDTemp, movieIDTemp;
 
     enum CLIENT_COLLUMNS{
-        IMIE, NAZWISKO, PESEL, TELEFON, EMAIL, POSIADANE_FILMY
+        IMIE=1, NAZWISKO, PESEL, TELEFON, EMAIL, POSIADANE_FILMY
     };
 
     enum MOVIE_COLLUMNS{
-        TYTUL, REZYSER, GATUNEK, ROK, DOSTEPNE, WYPOZYCZONE
+        TYTUL=1, REZYSER, GATUNEK, ROK, DOSTEPNE, WYPOZYCZONE
     };
 };
 

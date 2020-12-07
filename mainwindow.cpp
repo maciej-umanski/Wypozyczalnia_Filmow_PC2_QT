@@ -61,6 +61,8 @@ void MainWindow::on_addClientButton_clicked()
     ui->clientsTable->setItem(currentRow, TELEFON, phone_item);
     ui->clientsTable->setItem(currentRow, POSIADANE_FILMY, count_item);
 
+    ui->clientsTable->setItem(currentRow, 0, new QTableWidgetItem("Temp ID")); // TEMP DO ZMIANY
+
 }
 
 void MainWindow::on_delClientButton_clicked()
@@ -106,12 +108,13 @@ void MainWindow::on_delMovieButton_clicked()
 void MainWindow::on_addBorrowButton_clicked()
 {
 
-    addBorrowDialog addBorrowDialog(this, ui->clientsTable, ui->moviesTable);
+    addBorrowDialog addBorrowDialog(this, ui->clientsTable, ui->moviesTable, ui->actionShowID->isChecked());
     int ret = addBorrowDialog.exec();
     if(ret == QDialog::Rejected)
         return;
 
-
+    QString clientID = addBorrowDialog.clientID();
+    QString movieID = addBorrowDialog.movieID();
     QString borrowDate = addBorrowDialog.borrow_date();
     QString returnDate = addBorrowDialog.return_date();
     QString name = addBorrowDialog.name();
@@ -121,7 +124,7 @@ void MainWindow::on_addBorrowButton_clicked()
 
     QList<QTableWidgetItem *> repeated_items = ui->borrowsTable->findItems(title, Qt::MatchExactly);
 
-    for(int i=0; i<repeated_items.size(); i++) {
+    for(int i=IMIEB; i<repeated_items.size(); i++) {
         int match_item = 0;
         QString search_table[3] = {name, surname, title};
         int row = repeated_items[i]->row();
@@ -135,7 +138,8 @@ void MainWindow::on_addBorrowButton_clicked()
             return;
         }
     }
-
+    QTableWidgetItem *clientID_item = new QTableWidgetItem(clientID);
+    QTableWidgetItem *movieID_item = new QTableWidgetItem(movieID);
     QTableWidgetItem *title_item = new QTableWidgetItem(title);
     QTableWidgetItem *name_item = new QTableWidgetItem(name);
     QTableWidgetItem *surname_item = new QTableWidgetItem(surname);
@@ -146,8 +150,12 @@ void MainWindow::on_addBorrowButton_clicked()
     ui->borrowsTable->insertRow(ui->borrowsTable->rowCount());
     int currentRow = ui->borrowsTable->rowCount()-1;
 
-    ui->borrowsTable->setItem(currentRow, IMIE, name_item);
-    ui->borrowsTable->setItem(currentRow, NAZWISKO, surname_item);
+    ui->borrowsTable->setItem(currentRow, 0, new QTableWidgetItem("Temp ID")); // TEMP ID DO ZMIANY
+
+    ui->borrowsTable->setItem(currentRow, ID_KLIENT, clientID_item);
+    ui->borrowsTable->setItem(currentRow, ID_FILM, movieID_item);
+    ui->borrowsTable->setItem(currentRow, IMIEB, name_item);
+    ui->borrowsTable->setItem(currentRow, NAZWISKOB, surname_item);
     ui->borrowsTable->setItem(currentRow, TITLE, title_item);
     ui->borrowsTable->setItem(currentRow, DATA_WYPOZYCZENIA, borrowdate_item);
     ui->borrowsTable->setItem(currentRow, DATA_ZWROTU, returndate_item);
@@ -186,7 +194,7 @@ void MainWindow::on_addMovieButton_clicked()
 
     QList<QTableWidgetItem *> repeated_items = ui->moviesTable->findItems(title, Qt::MatchExactly);
 
-    for(int i = 0; i < repeated_items.size() ; i++){
+    for(int i = TYTUL; i < repeated_items.size() ; i++){
         int match_item = 0;
         QString search_table[4] = {title, director, genre, year};
         int row = repeated_items[i]->row();
@@ -223,6 +231,8 @@ void MainWindow::on_addMovieButton_clicked()
     ui->moviesTable->setItem(currentRow, ROK, year_item);
     ui->moviesTable->setItem(currentRow, DOSTEPNE, available_item);
     ui->moviesTable->setItem(currentRow, WYPOZYCZONE, borrowed_item);
+
+    ui->moviesTable->setItem(currentRow, 0, new QTableWidgetItem("Temp ID")); // TEMP DO ZMIANY
 }
 
 void MainWindow::on_editClientButton_clicked()
@@ -306,7 +316,7 @@ void MainWindow::on_editMovieButton_clicked()
 
         QList<QTableWidgetItem *> repeated_items = ui->moviesTable->findItems(title, Qt::MatchExactly);
 
-        for(int i = 0; i < repeated_items.size() ; i++){
+        for(int i = TYTUL; i < repeated_items.size() ; i++){
             int match_item = 0;
             QString search_table[4] = {title, director, genre, year};
             int row = repeated_items[i]->row();
@@ -385,7 +395,7 @@ void MainWindow::on_addDefaultData_triggered()
     int currentRow = ui->moviesTable->rowCount()-1;
 
 
-    //ui->moviesTable->setItem(currentRow, 0, new QTableWidgetItem("TempID")); //DO ZMIANY TEMP DODAWANIE ID
+    ui->moviesTable->setItem(currentRow, 0, new QTableWidgetItem("TEMP_ID"));
     ui->moviesTable->setItem(currentRow, TYTUL, title_item);
     ui->moviesTable->setItem(currentRow, REZYSER, director_item);
     ui->moviesTable->setItem(currentRow, GATUNEK, genre_item);
@@ -405,7 +415,7 @@ void MainWindow::on_addDefaultData_triggered()
     ui->moviesTable->insertRow(ui->moviesTable->rowCount());
     currentRow = ui->moviesTable->rowCount()-1;
 
-    //ui->moviesTable->setItem(currentRow, 0, new QTableWidgetItem("TempID")); //DO ZMIANY TEMP DODAWANIE ID
+    ui->moviesTable->setItem(currentRow, 0, new QTableWidgetItem("TempID")); //DO ZMIANY TEMP DODAWANIE ID
     ui->moviesTable->setItem(currentRow, TYTUL, title_item);
     ui->moviesTable->setItem(currentRow, REZYSER, director_item);
     ui->moviesTable->setItem(currentRow, GATUNEK, genre_item);
@@ -425,7 +435,7 @@ void MainWindow::on_addDefaultData_triggered()
     ui->moviesTable->insertRow(ui->moviesTable->rowCount());
     currentRow = ui->moviesTable->rowCount()-1;
 
-    //ui->moviesTable->setItem(currentRow, 0, new QTableWidgetItem("TempID")); //DO ZMIANY TEMP DODAWANIE ID
+    ui->moviesTable->setItem(currentRow, 0, new QTableWidgetItem("TempID")); //DO ZMIANY TEMP DODAWANIE ID
     ui->moviesTable->setItem(currentRow, TYTUL, title_item);
     ui->moviesTable->setItem(currentRow, REZYSER, director_item);
     ui->moviesTable->setItem(currentRow, GATUNEK, genre_item);
@@ -445,7 +455,7 @@ void MainWindow::on_addDefaultData_triggered()
     ui->moviesTable->insertRow(ui->moviesTable->rowCount());
     currentRow = ui->moviesTable->rowCount()-1;
 
-    //ui->moviesTable->setItem(currentRow, 0, new QTableWidgetItem("TempID")); //DO ZMIANY TEMP DODAWANIE ID
+    ui->moviesTable->setItem(currentRow, 0, new QTableWidgetItem("TempID")); //DO ZMIANY TEMP DODAWANIE ID
     ui->moviesTable->setItem(currentRow, TYTUL, title_item);
     ui->moviesTable->setItem(currentRow, REZYSER, director_item);
     ui->moviesTable->setItem(currentRow, GATUNEK, genre_item);
@@ -465,7 +475,7 @@ void MainWindow::on_addDefaultData_triggered()
     ui->moviesTable->insertRow(ui->moviesTable->rowCount());
     currentRow = ui->moviesTable->rowCount()-1;
 
-    //ui->moviesTable->setItem(currentRow, 0, new QTableWidgetItem("TempID")); //DO ZMIANY TEMP DODAWANIE ID
+    ui->moviesTable->setItem(currentRow, 0, new QTableWidgetItem("TempID")); //DO ZMIANY TEMP DODAWANIE ID
     ui->moviesTable->setItem(currentRow, TYTUL, title_item);
     ui->moviesTable->setItem(currentRow, REZYSER, director_item);
     ui->moviesTable->setItem(currentRow, GATUNEK, genre_item);
@@ -485,7 +495,7 @@ void MainWindow::on_addDefaultData_triggered()
     QTableWidgetItem *phone_item = new QTableWidgetItem("123123123");
     QTableWidgetItem *count_item = new QTableWidgetItem("0");
 
-    //ui->clientsTable->setItem(currentRow, 0, new QTableWidgetItem("TempID")); //DO ZMIANY TEMP DODAWANIE ID
+    ui->clientsTable->setItem(currentRow, 0, new QTableWidgetItem("TempID")); //DO ZMIANY TEMP DODAWANIE ID
     ui->clientsTable->setItem(currentRow, IMIE, name_item);
     ui->clientsTable->setItem(currentRow, NAZWISKO, surname_item);
     ui->clientsTable->setItem(currentRow, EMAIL, email_item);
@@ -505,7 +515,7 @@ void MainWindow::on_addDefaultData_triggered()
     phone_item = new QTableWidgetItem("321321312");
     count_item = new QTableWidgetItem("0");
 
-    //ui->clientsTable->setItem(currentRow, 0, new QTableWidgetItem("TempID")); //DO ZMIANY TEMP DODAWANIE ID
+    ui->clientsTable->setItem(currentRow, 0, new QTableWidgetItem("TempID")); //DO ZMIANY TEMP DODAWANIE ID
     ui->clientsTable->setItem(currentRow, IMIE, name_item);
     ui->clientsTable->setItem(currentRow, NAZWISKO, surname_item);
     ui->clientsTable->setItem(currentRow, EMAIL, email_item);
@@ -525,7 +535,7 @@ void MainWindow::on_addDefaultData_triggered()
     phone_item = new QTableWidgetItem("321333312");
     count_item = new QTableWidgetItem("0");
 
-    //ui->clientsTable->setItem(currentRow, 0, new QTableWidgetItem("TempID")); //DO ZMIANY TEMP DODAWANIE ID
+    ui->clientsTable->setItem(currentRow, 0, new QTableWidgetItem("TempID")); //DO ZMIANY TEMP DODAWANIE ID
     ui->clientsTable->setItem(currentRow, IMIE, name_item);
     ui->clientsTable->setItem(currentRow, NAZWISKO, surname_item);
     ui->clientsTable->setItem(currentRow, EMAIL, email_item);
@@ -545,7 +555,7 @@ void MainWindow::on_addDefaultData_triggered()
     phone_item = new QTableWidgetItem("997");
     count_item = new QTableWidgetItem("0");
 
-    //ui->clientsTable->setItem(currentRow, 0, new QTableWidgetItem("TempID")); //DO ZMIANY TEMP DODAWANIE ID
+    ui->clientsTable->setItem(currentRow, 0, new QTableWidgetItem("TempID")); //DO ZMIANY TEMP DODAWANIE ID
     ui->clientsTable->setItem(currentRow, IMIE, name_item);
     ui->clientsTable->setItem(currentRow, NAZWISKO, surname_item);
     ui->clientsTable->setItem(currentRow, EMAIL, email_item);
@@ -565,7 +575,7 @@ void MainWindow::on_addDefaultData_triggered()
     phone_item = new QTableWidgetItem("112");
     count_item = new QTableWidgetItem("0");
 
-    //ui->clientsTable->setItem(currentRow, 0, new QTableWidgetItem("TempID")); //DO ZMIANY TEMP DODAWANIE ID
+    ui->clientsTable->setItem(currentRow, 0, new QTableWidgetItem("TempID")); //DO ZMIANY TEMP DODAWANIE ID
     ui->clientsTable->setItem(currentRow, IMIE, name_item);
     ui->clientsTable->setItem(currentRow, NAZWISKO, surname_item);
     ui->clientsTable->setItem(currentRow, EMAIL, email_item);
@@ -635,5 +645,22 @@ void MainWindow::on_searchMovieButton_clicked()
         for(int i = 0; i < foundItems.size(); i++){
             ui->moviesTable->showRow(foundItems[i]->row());
         }
+    }
+}
+
+void MainWindow::on_actionShowID_toggled(bool arg1)
+{
+    if(arg1){
+        ui->clientsTable->showColumn(0);
+        ui->moviesTable->showColumn(0);
+        ui->borrowsTable->showColumn(0);
+        ui->borrowsTable->showColumn(1);
+        ui->borrowsTable->showColumn(2);
+    }else{
+        ui->clientsTable->hideColumn(0);
+        ui->moviesTable->hideColumn(0);
+        ui->borrowsTable->hideColumn(0);
+        ui->borrowsTable->hideColumn(1);
+        ui->borrowsTable->hideColumn(2);
     }
 }

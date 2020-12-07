@@ -5,9 +5,10 @@
 #include <QString>
 
 int clientRow, movieRow;
-QTableWidget *moviesTableTemp;
+QTableWidget *moviesTableTemp, *clientsTableTemp;
+QString clientID, movieID;
 
-addBorrowDialog::addBorrowDialog(QWidget *parent, QTableWidget *clientsTable, QTableWidget *moviesTable) :
+addBorrowDialog::addBorrowDialog(QWidget *parent, QTableWidget *clientsTable, QTableWidget *moviesTable, bool showIdState) :
     QDialog(parent),
     ui(new Ui::addBorrowDialog)
 {
@@ -47,6 +48,15 @@ addBorrowDialog::addBorrowDialog(QWidget *parent, QTableWidget *clientsTable, QT
     ui->returndate->setDate(QDate::currentDate());
 
     moviesTableTemp = moviesTable;
+    clientsTableTemp = clientsTable;
+
+    if(showIdState){
+        ui->borrowsClientsTable->showColumn(0);
+        ui->borrowsMoviesTable->showColumn(0);
+    }else{
+        ui->borrowsClientsTable->hideColumn(0);
+        ui->borrowsMoviesTable->hideColumn(0);
+    }
 }
 
 addBorrowDialog::~addBorrowDialog()
@@ -88,6 +98,14 @@ int addBorrowDialog::chosenClientRow() const{
     return clientRow;
 }
 
+QString addBorrowDialog::clientID() const{
+    return clientIDTemp;
+}
+
+QString addBorrowDialog::movieID() const{
+    return movieIDTemp;
+}
+
 int addBorrowDialog::chosenMovieRow() const{
     QString title = ui->borrowsMoviesTable->item(movieRow,TYTUL)->text();
     QString director = ui->borrowsMoviesTable->item(movieRow,REZYSER)->text();
@@ -114,15 +132,17 @@ int addBorrowDialog::chosenMovieRow() const{
 
 void addBorrowDialog::on_borrowsMoviesTable_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
 {
-    ui->chosenMovieLabel->setText(ui->borrowsMoviesTable->item(currentRow, 0)->text());
+    ui->chosenMovieLabel->setText(ui->borrowsMoviesTable->item(currentRow, TYTUL)->text());
     movieRow = currentRow;
+    movieIDTemp = moviesTableTemp->item(currentRow,0)->text();
 }
 
 void addBorrowDialog::on_borrowsClientsTable_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
 {
-    ui->chosenClientName->setText(ui->borrowsClientsTable->item(currentRow, 0)->text());
-    ui->chosenClientSurname->setText(ui->borrowsClientsTable->item(currentRow, 1)->text());
+    ui->chosenClientName->setText(ui->borrowsClientsTable->item(currentRow, IMIE)->text());
+    ui->chosenClientSurname->setText(ui->borrowsClientsTable->item(currentRow, NAZWISKO)->text());
     clientRow = currentRow;
+    clientIDTemp = clientsTableTemp->item(currentRow,0)->text();
 }
 
 void addBorrowDialog::on_buttonBox_accepted()
