@@ -7,7 +7,9 @@
 #include <editmoviedialog.h>
 #include <sortdialog.h>
 #include <addborrowdialog.h>
+#include <editborrowdialog.h>
 #include <QDate>
+#include <QString>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -54,13 +56,6 @@ void MainWindow::on_addClientButton_clicked()
     QTableWidgetItem *phone_item = new QTableWidgetItem(phone);
     QTableWidgetItem *count_item = new QTableWidgetItem("0");
 
-    name_item->setFlags(name_item->flags() ^ Qt::ItemIsEditable);
-    surname_item->setFlags(surname_item->flags() ^ Qt::ItemIsEditable);
-    email_item->setFlags(email_item->flags() ^ Qt::ItemIsEditable);
-    pesel_item->setFlags(pesel_item->flags() ^ Qt::ItemIsEditable);
-    phone_item->setFlags(phone_item->flags() ^ Qt::ItemIsEditable);
-    count_item->setFlags(count_item->flags() ^ Qt::ItemIsEditable);
-
     ui->clientsTable->setItem(currentRow, IMIE, name_item);
     ui->clientsTable->setItem(currentRow, NAZWISKO, surname_item);
     ui->clientsTable->setItem(currentRow, EMAIL, email_item);
@@ -77,30 +72,14 @@ void MainWindow::on_delClientButton_clicked()
     if(items.isEmpty()){
         msgBox.setText("Żadna z kolumn nie jest wybrana!");
         msgBox.exec();
-    }else if(items.size() > 6){
-        msgBox.setText("Wybrano więcej niż 1 kolumnę!");
+    }else if(items[POSIADANE_FILMY]->text().toInt()!=0){
+        msgBox.setText("Nie można usunąć klienta ponieważ ma on aktualnie wypożyczony film!");
         msgBox.exec();
-    }else{
-        if(items[POSIADANE_FILMY]->text().toInt()!=0){
-            msgBox.setText("Nie można usunąć klienta ponieważ ma on aktualnie wypożyczony film!");
-            msgBox.exec();
-            return;
-        }
-        if(QMessageBox::Yes == QMessageBox::question(this, tr("Usuwanie klienta"), tr("Czy na pewno chcesz kontyunuować?"))){
-            int rowToRemove = ui->clientsTable->row(items[0]);
-            ui->clientsTable->removeRow(rowToRemove);
-        }
+        return;
+    }else if(QMessageBox::Yes == QMessageBox::question(this, tr("Usuwanie klienta"), tr("Czy na pewno chcesz kontyunuować?"))){
+        int rowToRemove = ui->clientsTable->row(items[0]);
+        ui->clientsTable->removeRow(rowToRemove);
     }
-}
-
-void MainWindow::on_clientsTable_cellClicked(int row, int column)
-{
-    ui->clientsTable->selectRow(row);
-}
-
-void MainWindow::on_moviesTable_cellClicked(int row, int column)
-{
-    ui->moviesTable->selectRow(row);
 }
 
 void MainWindow::on_delMovieButton_clicked()
@@ -110,26 +89,19 @@ void MainWindow::on_delMovieButton_clicked()
     if(items.isEmpty()){
         msgBox.setText("Żadna z kolumn nie jest wybrana!");
         msgBox.exec();
-    }else if(items.size() > 6){
-        msgBox.setText("Wybrano więcej niż 1 kolumnę!");
+    }else if(items[DOSTEPNE]->text().toInt()==0){
+        msgBox.setText("Nie można usunąć filmu ponieważ wszystkie jego egzemplarze są tymczasowo wypożyczone!");
         msgBox.exec();
-    }else{
-        if(items[DOSTEPNE]->text().toInt()==0){
-            msgBox.setText("Nie można usunąć filmu ponieważ wszystkie jego egzemplarze są tymczasowo wypożyczone!");
-            msgBox.exec();
-            return;
+        return;
+    }else if(items[WYPOZYCZONE]->text().toInt() != 0){
+        if(QMessageBox::Yes == QMessageBox::question(this, tr("Usuwanie filmu"), tr("Niektóre egzemplarze filmu są wypożyczone! Czy chcesz usunąć wszystkie dostępne egzemplarze?"))){
+            QTableWidgetItem *item = ui->moviesTable->item(items[0]->row(), DOSTEPNE);
+            item->setText(QString::number(0));
         }
-        if(items[WYPOZYCZONE]->text().toInt() != 0){
-            if(QMessageBox::Yes == QMessageBox::question(this, tr("Usuwanie filmu"), tr("Niektóre egzemplarze filmu są wypożyczone! Czy chcesz usunąć wszystkie dostępne egzemplarze?"))){
-                QTableWidgetItem *item = ui->moviesTable->item(items[0]->row(), DOSTEPNE);
-                item->setText(QString::number(0));
-            }
-            return;
-        }
-        if(QMessageBox::Yes == QMessageBox::question(this, tr("Usuwanie filmu"), tr("Czy na pewno chcesz kontyunuować?"))){
-            int rowToRemove = ui->moviesTable->row(items[0]);
-            ui->moviesTable->removeRow(rowToRemove);
-        }
+        return;
+    }else if(QMessageBox::Yes == QMessageBox::question(this, tr("Usuwanie filmu"), tr("Czy na pewno chcesz kontyunuować?"))){
+        int rowToRemove = ui->moviesTable->row(items[0]);
+        ui->moviesTable->removeRow(rowToRemove);
     }
 }
 
@@ -147,7 +119,7 @@ void MainWindow::on_addBorrowButton_clicked()
     QString name = addBorrowDialog.name();
     QString surname = addBorrowDialog.surname();
     QString title = addBorrowDialog.title();
-
+    QString charge = addBorrowDialog.charge();
 
 
     QList<QTableWidgetItem *> repeated_items = ui->borrowsTable->findItems(title, Qt::MatchExactly);
@@ -164,23 +136,15 @@ void MainWindow::on_addBorrowButton_clicked()
         if(match_item==3) {
             QMessageBox::information(this, tr("Istniejace wypożyczenie"),tr("W bazie już istnieje takie wypożyczenie!\nWybierz inny film."));
             return;
-            }
         }
+    }
 
     QTableWidgetItem *title_item = new QTableWidgetItem(title);
     QTableWidgetItem *name_item = new QTableWidgetItem(name);
     QTableWidgetItem *surname_item = new QTableWidgetItem(surname);
     QTableWidgetItem *borrowdate_item = new QTableWidgetItem(borrowDate);
     QTableWidgetItem *returndate_item = new QTableWidgetItem(returnDate);
-    QTableWidgetItem *arrear_item = new QTableWidgetItem("0");
-
-    title_item->setFlags(title_item->flags() ^ Qt::ItemIsEditable);
-    name_item->setFlags(name_item->flags() ^ Qt::ItemIsEditable);
-    surname_item->setFlags(surname_item->flags() ^ Qt::ItemIsEditable);
-    borrowdate_item->setFlags(borrowdate_item->flags() ^ Qt::ItemIsEditable);
-    returndate_item->setFlags(returndate_item->flags() ^ Qt::ItemIsEditable);
-    arrear_item->setFlags(arrear_item->flags() ^ Qt::ItemIsEditable);
-
+    QTableWidgetItem *charge_item = new QTableWidgetItem(charge);
 
     ui->borrowsTable->insertRow(ui->borrowsTable->rowCount());
     int currentRow = ui->borrowsTable->rowCount()-1;
@@ -190,7 +154,23 @@ void MainWindow::on_addBorrowButton_clicked()
     ui->borrowsTable->setItem(currentRow, TITLE, title_item);
     ui->borrowsTable->setItem(currentRow, DATA_WYPOZYCZENIA, borrowdate_item);
     ui->borrowsTable->setItem(currentRow, DATA_ZWROTU, returndate_item);
-    ui->borrowsTable->setItem(currentRow, ZALEGLOSC, arrear_item);
+    ui->borrowsTable->setItem(currentRow, KOSZT, charge_item);
+
+    //dodawanie info do tablic głównych//
+    int chosenClientRow = addBorrowDialog.chosenClientRow();
+    int ownedMoviesCount = ui->clientsTable->item(chosenClientRow,POSIADANE_FILMY)->text().toInt();
+    ownedMoviesCount++;
+    ui->clientsTable->item(chosenClientRow,POSIADANE_FILMY)->setText(QString::number(ownedMoviesCount));
+
+    int chosenMovieRow = addBorrowDialog.chosenMovieRow();
+    int freeMoviesCount = ui->moviesTable->item(chosenMovieRow, DOSTEPNE)->text().toInt();
+    int borrowedMoviesCount = ui->moviesTable->item(chosenMovieRow, WYPOZYCZONE)->text().toInt();
+    freeMoviesCount--;
+    borrowedMoviesCount++;
+    ui->moviesTable->item(chosenMovieRow,DOSTEPNE)->setText(QString::number(freeMoviesCount));
+    ui->moviesTable->item(chosenMovieRow,WYPOZYCZONE)->setText(QString::number(borrowedMoviesCount));
+
+
 
 }
 
@@ -237,17 +217,8 @@ void MainWindow::on_addMovieButton_clicked()
     QTableWidgetItem *available_item = new QTableWidgetItem(available);
     QTableWidgetItem *borrowed_item = new QTableWidgetItem("0");
 
-    title_item->setFlags(title_item->flags() ^ Qt::ItemIsEditable);
-    director_item->setFlags(director_item->flags() ^ Qt::ItemIsEditable);
-    genre_item->setFlags(genre_item->flags() ^ Qt::ItemIsEditable);
-    year_item->setFlags(year_item->flags() ^ Qt::ItemIsEditable);
-    available_item->setFlags(available_item->flags() ^ Qt::ItemIsEditable);
-    borrowed_item->setFlags(borrowed_item->flags() ^ Qt::ItemIsEditable);
-
-
     ui->moviesTable->insertRow(ui->moviesTable->rowCount());
     int currentRow = ui->moviesTable->rowCount()-1;
-
 
     ui->moviesTable->setItem(currentRow, TYTUL, title_item);
     ui->moviesTable->setItem(currentRow, REZYSER, director_item);
@@ -404,13 +375,6 @@ void MainWindow::on_sortBorrowButton_clicked()
     ui->borrowsTable->sortItems(collumn, order);
 }
 
-void MainWindow::on_showID_toggled(bool arg1)
-{
-    ui->clientsTable->setColumnHidden(0,!arg1);
-    ui->moviesTable->setColumnHidden(0,!arg1);
-    ui->borrowsTable->setColumnHidden(0,!arg1);
-}
-
 void MainWindow::on_addDefaultData_triggered()
 {
     QTableWidgetItem *title_item = new QTableWidgetItem("Hobbit");
@@ -419,13 +383,6 @@ void MainWindow::on_addDefaultData_triggered()
     QTableWidgetItem *year_item = new QTableWidgetItem("2020");
     QTableWidgetItem *available_item = new QTableWidgetItem("10");
     QTableWidgetItem *borrowed_item = new QTableWidgetItem("0");
-
-    title_item->setFlags(title_item->flags() ^ Qt::ItemIsEditable);
-    director_item->setFlags(director_item->flags() ^ Qt::ItemIsEditable);
-    genre_item->setFlags(genre_item->flags() ^ Qt::ItemIsEditable);
-    year_item->setFlags(year_item->flags() ^ Qt::ItemIsEditable);
-    available_item->setFlags(available_item->flags() ^ Qt::ItemIsEditable);
-    borrowed_item->setFlags(borrowed_item->flags() ^ Qt::ItemIsEditable);
 
     ui->moviesTable->insertRow(ui->moviesTable->rowCount());
     int currentRow = ui->moviesTable->rowCount()-1;
@@ -448,13 +405,6 @@ void MainWindow::on_addDefaultData_triggered()
     available_item = new QTableWidgetItem("4");
     borrowed_item = new QTableWidgetItem("0");
 
-    title_item->setFlags(title_item->flags() ^ Qt::ItemIsEditable);
-    director_item->setFlags(director_item->flags() ^ Qt::ItemIsEditable);
-    genre_item->setFlags(genre_item->flags() ^ Qt::ItemIsEditable);
-    year_item->setFlags(year_item->flags() ^ Qt::ItemIsEditable);
-    available_item->setFlags(available_item->flags() ^ Qt::ItemIsEditable);
-    borrowed_item->setFlags(borrowed_item->flags() ^ Qt::ItemIsEditable);
-
     ui->moviesTable->insertRow(ui->moviesTable->rowCount());
     currentRow = ui->moviesTable->rowCount()-1;
 
@@ -474,13 +424,6 @@ void MainWindow::on_addDefaultData_triggered()
     year_item = new QTableWidgetItem("1999");
     available_item = new QTableWidgetItem("12");
     borrowed_item = new QTableWidgetItem("0");
-
-    title_item->setFlags(title_item->flags() ^ Qt::ItemIsEditable);
-    director_item->setFlags(director_item->flags() ^ Qt::ItemIsEditable);
-    genre_item->setFlags(genre_item->flags() ^ Qt::ItemIsEditable);
-    year_item->setFlags(year_item->flags() ^ Qt::ItemIsEditable);
-    available_item->setFlags(available_item->flags() ^ Qt::ItemIsEditable);
-    borrowed_item->setFlags(borrowed_item->flags() ^ Qt::ItemIsEditable);
 
     ui->moviesTable->insertRow(ui->moviesTable->rowCount());
     currentRow = ui->moviesTable->rowCount()-1;
@@ -502,13 +445,6 @@ void MainWindow::on_addDefaultData_triggered()
     available_item = new QTableWidgetItem("1");
     borrowed_item = new QTableWidgetItem("0");
 
-    title_item->setFlags(title_item->flags() ^ Qt::ItemIsEditable);
-    director_item->setFlags(director_item->flags() ^ Qt::ItemIsEditable);
-    genre_item->setFlags(genre_item->flags() ^ Qt::ItemIsEditable);
-    year_item->setFlags(year_item->flags() ^ Qt::ItemIsEditable);
-    available_item->setFlags(available_item->flags() ^ Qt::ItemIsEditable);
-    borrowed_item->setFlags(borrowed_item->flags() ^ Qt::ItemIsEditable);
-
     ui->moviesTable->insertRow(ui->moviesTable->rowCount());
     currentRow = ui->moviesTable->rowCount()-1;
 
@@ -528,13 +464,6 @@ void MainWindow::on_addDefaultData_triggered()
     year_item = new QTableWidgetItem("413");
     available_item = new QTableWidgetItem("44");
     borrowed_item = new QTableWidgetItem("0");
-
-    title_item->setFlags(title_item->flags() ^ Qt::ItemIsEditable);
-    director_item->setFlags(director_item->flags() ^ Qt::ItemIsEditable);
-    genre_item->setFlags(genre_item->flags() ^ Qt::ItemIsEditable);
-    year_item->setFlags(year_item->flags() ^ Qt::ItemIsEditable);
-    available_item->setFlags(available_item->flags() ^ Qt::ItemIsEditable);
-    borrowed_item->setFlags(borrowed_item->flags() ^ Qt::ItemIsEditable);
 
     ui->moviesTable->insertRow(ui->moviesTable->rowCount());
     currentRow = ui->moviesTable->rowCount()-1;
@@ -559,13 +488,6 @@ void MainWindow::on_addDefaultData_triggered()
     QTableWidgetItem *phone_item = new QTableWidgetItem("123123123");
     QTableWidgetItem *count_item = new QTableWidgetItem("0");
 
-    name_item->setFlags(name_item->flags() ^ Qt::ItemIsEditable);
-    surname_item->setFlags(surname_item->flags() ^ Qt::ItemIsEditable);
-    email_item->setFlags(email_item->flags() ^ Qt::ItemIsEditable);
-    pesel_item->setFlags(pesel_item->flags() ^ Qt::ItemIsEditable);
-    phone_item->setFlags(phone_item->flags() ^ Qt::ItemIsEditable);
-    count_item->setFlags(count_item->flags() ^ Qt::ItemIsEditable);
-
     //ui->clientsTable->setItem(currentRow, 0, new QTableWidgetItem("TempID")); //DO ZMIANY TEMP DODAWANIE ID
     ui->clientsTable->setItem(currentRow, IMIE, name_item);
     ui->clientsTable->setItem(currentRow, NAZWISKO, surname_item);
@@ -585,13 +507,6 @@ void MainWindow::on_addDefaultData_triggered()
     pesel_item = new QTableWidgetItem("31231232112");
     phone_item = new QTableWidgetItem("321321312");
     count_item = new QTableWidgetItem("0");
-
-    name_item->setFlags(name_item->flags() ^ Qt::ItemIsEditable);
-    surname_item->setFlags(surname_item->flags() ^ Qt::ItemIsEditable);
-    email_item->setFlags(email_item->flags() ^ Qt::ItemIsEditable);
-    pesel_item->setFlags(pesel_item->flags() ^ Qt::ItemIsEditable);
-    phone_item->setFlags(phone_item->flags() ^ Qt::ItemIsEditable);
-    count_item->setFlags(count_item->flags() ^ Qt::ItemIsEditable);
 
     //ui->clientsTable->setItem(currentRow, 0, new QTableWidgetItem("TempID")); //DO ZMIANY TEMP DODAWANIE ID
     ui->clientsTable->setItem(currentRow, IMIE, name_item);
@@ -613,13 +528,6 @@ void MainWindow::on_addDefaultData_triggered()
     phone_item = new QTableWidgetItem("321333312");
     count_item = new QTableWidgetItem("0");
 
-    name_item->setFlags(name_item->flags() ^ Qt::ItemIsEditable);
-    surname_item->setFlags(surname_item->flags() ^ Qt::ItemIsEditable);
-    email_item->setFlags(email_item->flags() ^ Qt::ItemIsEditable);
-    pesel_item->setFlags(pesel_item->flags() ^ Qt::ItemIsEditable);
-    phone_item->setFlags(phone_item->flags() ^ Qt::ItemIsEditable);
-    count_item->setFlags(count_item->flags() ^ Qt::ItemIsEditable);
-
     //ui->clientsTable->setItem(currentRow, 0, new QTableWidgetItem("TempID")); //DO ZMIANY TEMP DODAWANIE ID
     ui->clientsTable->setItem(currentRow, IMIE, name_item);
     ui->clientsTable->setItem(currentRow, NAZWISKO, surname_item);
@@ -639,13 +547,6 @@ void MainWindow::on_addDefaultData_triggered()
     pesel_item = new QTableWidgetItem("55544411323");
     phone_item = new QTableWidgetItem("997");
     count_item = new QTableWidgetItem("0");
-
-    name_item->setFlags(name_item->flags() ^ Qt::ItemIsEditable);
-    surname_item->setFlags(surname_item->flags() ^ Qt::ItemIsEditable);
-    email_item->setFlags(email_item->flags() ^ Qt::ItemIsEditable);
-    pesel_item->setFlags(pesel_item->flags() ^ Qt::ItemIsEditable);
-    phone_item->setFlags(phone_item->flags() ^ Qt::ItemIsEditable);
-    count_item->setFlags(count_item->flags() ^ Qt::ItemIsEditable);
 
     //ui->clientsTable->setItem(currentRow, 0, new QTableWidgetItem("TempID")); //DO ZMIANY TEMP DODAWANIE ID
     ui->clientsTable->setItem(currentRow, IMIE, name_item);
@@ -667,13 +568,6 @@ void MainWindow::on_addDefaultData_triggered()
     phone_item = new QTableWidgetItem("112");
     count_item = new QTableWidgetItem("0");
 
-    name_item->setFlags(name_item->flags() ^ Qt::ItemIsEditable);
-    surname_item->setFlags(surname_item->flags() ^ Qt::ItemIsEditable);
-    email_item->setFlags(email_item->flags() ^ Qt::ItemIsEditable);
-    pesel_item->setFlags(pesel_item->flags() ^ Qt::ItemIsEditable);
-    phone_item->setFlags(phone_item->flags() ^ Qt::ItemIsEditable);
-    count_item->setFlags(count_item->flags() ^ Qt::ItemIsEditable);
-
     //ui->clientsTable->setItem(currentRow, 0, new QTableWidgetItem("TempID")); //DO ZMIANY TEMP DODAWANIE ID
     ui->clientsTable->setItem(currentRow, IMIE, name_item);
     ui->clientsTable->setItem(currentRow, NAZWISKO, surname_item);
@@ -683,4 +577,128 @@ void MainWindow::on_addDefaultData_triggered()
     ui->clientsTable->setItem(currentRow, POSIADANE_FILMY, count_item);
 
     ui->addDefaultData->setDisabled(true);
+}
+
+
+
+void MainWindow::on_searchClientButton_clicked()
+{
+    if(ui->searchClientField->text().isEmpty()){
+        for(int i = 0; i < ui->clientsTable->rowCount(); i++){
+            ui->clientsTable->showRow(i);
+        }
+    }else{
+        QString searchedPhrase = ui->searchClientField->text();
+        QList<QTableWidgetItem *> foundItems = ui->clientsTable->findItems(searchedPhrase, Qt::MatchContains);
+
+        for(int i = 0; i < ui->clientsTable->rowCount(); i++){
+            ui->clientsTable->hideRow(i);
+        }
+
+        for(int i = 0; i < foundItems.size(); i++){
+            ui->clientsTable->showRow(foundItems[i]->row());
+        }
+    }
+}
+
+void MainWindow::on_searchBorrowsButton_clicked()
+{
+    if(ui->searchBorrowField->text().isEmpty()){
+        for(int i = 0; i < ui->borrowsTable->rowCount(); i++){
+            ui->borrowsTable->showRow(i);
+        }
+    }else{
+        QString searchedPhrase = ui->searchBorrowField->text();
+        QList<QTableWidgetItem *> foundItems = ui->borrowsTable->findItems(searchedPhrase, Qt::MatchContains);
+
+        for(int i = 0; i < ui->borrowsTable->rowCount(); i++){
+            ui->borrowsTable->hideRow(i);
+        }
+
+        for(int i = 0; i < foundItems.size(); i++){
+            ui->borrowsTable->showRow(foundItems[i]->row());
+        }
+    }
+}
+
+void MainWindow::on_searchMovieButton_clicked()
+{
+    if(ui->searchMovieField->text().isEmpty()){
+        for(int i = 0; i < ui->moviesTable->rowCount(); i++){
+            ui->moviesTable->showRow(i);
+        }
+    }else{
+        QString searchedPhrase = ui->searchMovieField->text();
+        QList<QTableWidgetItem *> foundItems = ui->moviesTable->findItems(searchedPhrase, Qt::MatchContains);
+
+        for(int i = 0; i < ui->moviesTable->rowCount(); i++){
+            ui->moviesTable->hideRow(i);
+        }
+
+        for(int i = 0; i < foundItems.size(); i++){
+            ui->moviesTable->showRow(foundItems[i]->row());
+        }
+    }
+}
+
+void MainWindow::on_searchBorrowField_returnPressed()
+{
+    MainWindow::on_searchBorrowsButton_clicked();
+}
+
+void MainWindow::on_searchClientField_returnPressed()
+{
+    MainWindow::on_searchClientButton_clicked();
+}
+
+void MainWindow::on_searchMovieField_returnPressed()
+{
+    MainWindow::on_searchMovieButton_clicked();
+}
+
+void MainWindow::on_delBorrowButton_clicked()
+{
+    QMessageBox msgBox;
+    QList<QTableWidgetItem *> items = ui->borrowsTable->selectedItems();
+    if(items.isEmpty()){
+        msgBox.setText("Żadna z kolumn nie jest wybrana!");
+        msgBox.exec();
+    }else{
+        int rowToRemove = ui->borrowsTable->row(items[0]);
+        QDate borrowdate, returndate;
+        borrowdate = QDate::fromString(ui->borrowsTable->item(rowToRemove, DATA_WYPOZYCZENIA)->text(), "dd.MM.yyyy");
+        returndate = QDate::fromString(ui->borrowsTable->item(rowToRemove, DATA_ZWROTU)->text(), "dd.MM.yyyy");
+        int datediff = borrowdate.daysTo(returndate);
+        int datetonow = returndate.daysTo(QDate::currentDate());
+        int cena = (ui->borrowsTable->item(rowToRemove, 5)->text()).split(" ")[0].toInt();
+        int naleznosc = datediff * cena + datetonow*cena;
+
+        if(datetonow > 0) {
+            //DORZUCIĆ KARE
+            msgBox.setText("Wypożyczenie oddane po terminie!\nKara zostanie doliczona do rachunku.\nNależność do zapłaty: "+QString::number(naleznosc)+"zł.");
+            msgBox.exec();
+            ui->borrowsTable->removeRow(rowToRemove);
+        }
+        else {
+           msgBox.setText("Należność do zapłaty: "+QString::number(naleznosc)+"zł.");
+           msgBox.exec();
+           ui->borrowsTable->removeRow(rowToRemove);
+        }
+   }
+}
+
+void MainWindow::on_editBorrowButton_2_clicked()
+{
+    QMessageBox msgBox;
+    QList<QTableWidgetItem *> items = ui->borrowsTable->selectedItems();
+    if(items.isEmpty()) {
+        msgBox.setText("Żaden wiersz nie został wybrany!");
+        msgBox.exec();
+        return;
+    }else if (items.size() > 6) {
+        msgBox.setText("Wybrano więcej niż jeden wiersz!");
+        msgBox.exec();
+        return;
+    }
+
 }

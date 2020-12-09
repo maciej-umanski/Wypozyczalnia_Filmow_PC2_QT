@@ -31,7 +31,7 @@
         <string>Wypożyczenia</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout">
-        <item row="1" column="0">
+        <item row="2" column="0">
          <layout class="QHBoxLayout" name="horizontalLayout_2">
           <item>
            <widget class="QPushButton" name="addBorrowButton">
@@ -64,9 +64,29 @@
          </layout>
         </item>
         <item row="0" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <item>
+           <widget class="QLineEdit" name="searchBorrowField"/>
+          </item>
+          <item>
+           <widget class="QPushButton" name="searchBorrowsButton">
+            <property name="text">
+             <string>Szukaj</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="1" column="0">
          <widget class="QTableWidget" name="borrowsTable">
           <property name="editTriggers">
-           <set>QAbstractItemView::EditKeyPressed</set>
+           <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
+          <property name="selectionMode">
+           <enum>QAbstractItemView::SingleSelection</enum>
+          </property>
+          <property name="selectionBehavior">
+           <enum>QAbstractItemView::SelectRows</enum>
           </property>
           <column>
            <property name="text">
@@ -95,7 +115,7 @@
           </column>
           <column>
            <property name="text">
-            <string>Zaległość</string>
+            <string>Dzienny Koszt (PLN)</string>
            </property>
           </column>
          </widget>
@@ -107,7 +127,7 @@
         <string>Klienci</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_2">
-        <item row="1" column="0">
+        <item row="2" column="0">
          <layout class="QHBoxLayout" name="horizontalLayout_4">
           <item>
            <widget class="QPushButton" name="addClientButton">
@@ -140,7 +160,30 @@
          </layout>
         </item>
         <item row="0" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_5">
+          <item>
+           <widget class="QLineEdit" name="searchClientField"/>
+          </item>
+          <item>
+           <widget class="QPushButton" name="searchClientButton">
+            <property name="text">
+             <string>Szukaj</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="1" column="0">
          <widget class="QTableWidget" name="clientsTable">
+          <property name="editTriggers">
+           <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
+          <property name="selectionMode">
+           <enum>QAbstractItemView::SingleSelection</enum>
+          </property>
+          <property name="selectionBehavior">
+           <enum>QAbstractItemView::SelectRows</enum>
+          </property>
           <column>
            <property name="text">
             <string>Imie</string>
@@ -180,8 +223,17 @@
         <string>Filmy</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_3">
-        <item row="0" column="0">
+        <item row="1" column="0">
          <widget class="QTableWidget" name="moviesTable">
+          <property name="editTriggers">
+           <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
+          <property name="selectionMode">
+           <enum>QAbstractItemView::SingleSelection</enum>
+          </property>
+          <property name="selectionBehavior">
+           <enum>QAbstractItemView::SelectRows</enum>
+          </property>
           <column>
            <property name="text">
             <string>Tytuł</string>
@@ -214,7 +266,7 @@
           </column>
          </widget>
         </item>
-        <item row="1" column="0">
+        <item row="2" column="0">
          <layout class="QHBoxLayout" name="horizontalLayout">
           <item>
            <widget class="QPushButton" name="addMovieButton">
@@ -246,6 +298,20 @@
           </item>
          </layout>
         </item>
+        <item row="0" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_6">
+          <item>
+           <widget class="QLineEdit" name="searchMovieField"/>
+          </item>
+          <item>
+           <widget class="QPushButton" name="searchMovieButton">
+            <property name="text">
+             <string>Szukaj</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
        </layout>
       </widget>
      </widget>
@@ -265,26 +331,11 @@
     <property name="title">
      <string>Debug</string>
     </property>
-    <addaction name="showID"/>
     <addaction name="addDefaultData"/>
    </widget>
    <addaction name="debugSettingsMenu"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <action name="showID">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="checked">
-    <bool>false</bool>
-   </property>
-   <property name="enabled">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Show ID</string>
-   </property>
-  </action>
   <action name="addDefaultData">
    <property name="text">
     <string>Add Default Data</string>

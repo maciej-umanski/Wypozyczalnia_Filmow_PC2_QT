@@ -7,7 +7,7 @@ sortDialog::sortDialog(QWidget *parent, QTableWidget *table) :
 {
     ui->setupUi(this);
 
-    for(int i = 1 ; i < table->columnCount(); i++){
+    for(int i = 0 ; i < table->columnCount(); i++){
         ui->comboBox->addItem(table->horizontalHeaderItem(i)->text());
     }
 

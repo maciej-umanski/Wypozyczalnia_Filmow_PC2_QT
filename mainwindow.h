@@ -21,10 +21,6 @@ private slots:
 
     void on_delClientButton_clicked();
 
-    void on_clientsTable_cellClicked(int row, int column);
-
-    void on_moviesTable_cellClicked(int row, int column);
-
     void on_delMovieButton_clicked();
 
     void on_addMovieButton_clicked();
@@ -39,11 +35,25 @@ private slots:
 
     void on_sortBorrowButton_clicked();
 
-    void on_showID_toggled(bool arg1);
-
     void on_addDefaultData_triggered();
 
     void on_addBorrowButton_clicked();
+
+    void on_searchClientButton_clicked();
+
+    void on_searchBorrowsButton_clicked();
+
+    void on_searchMovieButton_clicked();
+
+    void on_searchBorrowField_returnPressed();
+
+    void on_searchClientField_returnPressed();
+
+    void on_searchMovieField_returnPressed();
+
+    void on_delBorrowButton_clicked();
+
+    void on_editBorrowButton_2_clicked();
 
 private:
     Ui::MainWindow *ui;
@@ -57,7 +67,7 @@ private:
     };
 
     enum BORROW_COLLUMNS{
-        BORROW_COLLUMNS=(IMIE, NAZWISKO), TITLE=2, DATA_WYPOZYCZENIA, DATA_ZWROTU, ZALEGLOSC
+        BORROW_COLLUMNS=(IMIE, NAZWISKO), TITLE=2, DATA_WYPOZYCZENIA, DATA_ZWROTU, KOSZT
     };
 
 };
