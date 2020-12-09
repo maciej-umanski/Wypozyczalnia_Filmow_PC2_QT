@@ -277,6 +277,36 @@ void MainWindow::on_editClientButton_clicked()
     }
 }
 
+void MainWindow::on_editBorrowButton_2_clicked()
+{
+    QMessageBox msgBox;
+    QList<QTableWidgetItem *> items = ui->borrowsTable->selectedItems();
+    if(items.isEmpty()) {
+        msgBox.setText("Żaden wiersz nie został wybrany!");
+        msgBox.exec();
+        return;
+    }else if (items.size() > 6) {
+        msgBox.setText("Wybrano więcej niż jeden wiersz!");
+        msgBox.exec();
+        return;
+    }
+
+    editBorrowDialog editBorrowDialog(nullptr, items[4]->text());
+    int ret = editBorrowDialog.exec();
+    if(ret == QDialog::Rejected)
+        return;
+
+    QString returndate = editBorrowDialog.returndate();
+
+    if(QDate::fromString(returndate, "dd.MM.yyyy") <= QDate::currentDate()) {
+        msgBox.setText("Wypożyczenie należy przedłużyć o conajmniej jeden dzień od dzisiaj!");
+        msgBox.exec();
+    }
+    else {
+        ui->borrowsTable->item(items[0]->row(), DATA_ZWROTU)->setText(returndate);
+    }
+}
+
 void MainWindow::on_editMovieButton_clicked()
 {
     QList<QTableWidgetItem *> items = ui->moviesTable->selectedItems();
@@ -687,18 +717,4 @@ void MainWindow::on_delBorrowButton_clicked()
    }
 }
 
-void MainWindow::on_editBorrowButton_2_clicked()
-{
-    QMessageBox msgBox;
-    QList<QTableWidgetItem *> items = ui->borrowsTable->selectedItems();
-    if(items.isEmpty()) {
-        msgBox.setText("Żaden wiersz nie został wybrany!");
-        msgBox.exec();
-        return;
-    }else if (items.size() > 6) {
-        msgBox.setText("Wybrano więcej niż jeden wiersz!");
-        msgBox.exec();
-        return;
-    }
 
-}
