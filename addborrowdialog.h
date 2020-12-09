@@ -18,7 +18,7 @@ public:
 
     QString borrow_date() const;
     QString return_date() const;
-    QString arrear() const;
+    QString charge() const;
     QString name() const;
     QString surname() const;
     QString title() const;
@@ -41,6 +41,10 @@ private slots:
     void on_searchClientButton_clicked();
 
     void on_searchMovieButton_clicked();
+
+    void on_searchClientField_returnPressed();
+
+    void on_searchMovieField_returnPressed();
 
 private:
     Ui::addBorrowDialog *ui;

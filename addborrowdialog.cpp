@@ -68,8 +68,8 @@ QString addBorrowDialog::borrow_date() const {
     return ui->borrowdate->text();
 }
 
-QString addBorrowDialog::arrear() const {
-    return "0";
+QString addBorrowDialog::charge() const {
+    return ui->chargevalue->text();
 }
 
 QString addBorrowDialog::title() const {
@@ -186,4 +186,14 @@ void addBorrowDialog::on_searchMovieButton_clicked()
             ui->borrowsMoviesTable->showRow(foundItems[i]->row());
         }
     }
+}
+
+void addBorrowDialog::on_searchClientField_returnPressed()
+{
+    addBorrowDialog::on_searchClientButton_clicked();
+}
+
+void addBorrowDialog::on_searchMovieField_returnPressed()
+{
+    addBorrowDialog::on_searchMovieButton_clicked();
 }

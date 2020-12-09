@@ -268,6 +268,23 @@
          <item row="1" column="1">
           <widget class="QDateEdit" name="returndate"/>
          </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="label_3">
+           <property name="text">
+            <string>Koszt za dzień (PLN):</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QSpinBox" name="chargevalue">
+           <property name="minimum">
+            <number>0</number>
+           </property>
+           <property name="value">
+            <number>10</number>
+           </property>
+          </widget>
+         </item>
         </layout>
        </item>
        <item>

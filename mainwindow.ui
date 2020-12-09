@@ -24,7 +24,7 @@
        </sizepolicy>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -58,6 +58,20 @@
            <widget class="QPushButton" name="sortBorrowButton">
             <property name="text">
              <string>Sortuj</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="0" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <item>
+           <widget class="QLineEdit" name="searchBorrowField"/>
+          </item>
+          <item>
+           <widget class="QPushButton" name="searchBorrowsButton">
+            <property name="text">
+             <string>Szukaj</string>
             </property>
            </widget>
           </item>
@@ -101,24 +115,10 @@
           </column>
           <column>
            <property name="text">
-            <string>Zaległość</string>
+            <string>Dzienny Koszt (PLN)</string>
            </property>
           </column>
          </widget>
-        </item>
-        <item row="0" column="0">
-         <layout class="QHBoxLayout" name="horizontalLayout_3">
-          <item>
-           <widget class="QLineEdit" name="searchBorrowField"/>
-          </item>
-          <item>
-           <widget class="QPushButton" name="searchBorrowsButton">
-            <property name="text">
-             <string>Szukaj</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
         </item>
        </layout>
       </widget>

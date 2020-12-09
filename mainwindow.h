@@ -45,6 +45,16 @@ private slots:
 
     void on_searchMovieButton_clicked();
 
+    void on_searchBorrowField_returnPressed();
+
+    void on_searchClientField_returnPressed();
+
+    void on_searchMovieField_returnPressed();
+
+    void on_delBorrowButton_clicked();
+
+    void on_editBorrowButton_2_clicked();
+
 private:
     Ui::MainWindow *ui;
 
@@ -57,7 +67,7 @@ private:
     };
 
     enum BORROW_COLLUMNS{
-        BORROW_COLLUMNS=(IMIE, NAZWISKO), TITLE=2, DATA_WYPOZYCZENIA, DATA_ZWROTU, ZALEGLOSC
+        BORROW_COLLUMNS=(IMIE, NAZWISKO), TITLE=2, DATA_WYPOZYCZENIA, DATA_ZWROTU, KOSZT
     };
 
 };

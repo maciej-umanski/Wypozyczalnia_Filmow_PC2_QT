@@ -7,7 +7,9 @@
 #include <editmoviedialog.h>
 #include <sortdialog.h>
 #include <addborrowdialog.h>
+#include <editborrowdialog.h>
 #include <QDate>
+#include <QString>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -117,6 +119,7 @@ void MainWindow::on_addBorrowButton_clicked()
     QString name = addBorrowDialog.name();
     QString surname = addBorrowDialog.surname();
     QString title = addBorrowDialog.title();
+    QString charge = addBorrowDialog.charge();
 
 
     QList<QTableWidgetItem *> repeated_items = ui->borrowsTable->findItems(title, Qt::MatchExactly);
@@ -141,7 +144,7 @@ void MainWindow::on_addBorrowButton_clicked()
     QTableWidgetItem *surname_item = new QTableWidgetItem(surname);
     QTableWidgetItem *borrowdate_item = new QTableWidgetItem(borrowDate);
     QTableWidgetItem *returndate_item = new QTableWidgetItem(returnDate);
-    QTableWidgetItem *arrear_item = new QTableWidgetItem("0");
+    QTableWidgetItem *charge_item = new QTableWidgetItem(charge);
 
     ui->borrowsTable->insertRow(ui->borrowsTable->rowCount());
     int currentRow = ui->borrowsTable->rowCount()-1;
@@ -151,7 +154,7 @@ void MainWindow::on_addBorrowButton_clicked()
     ui->borrowsTable->setItem(currentRow, TITLE, title_item);
     ui->borrowsTable->setItem(currentRow, DATA_WYPOZYCZENIA, borrowdate_item);
     ui->borrowsTable->setItem(currentRow, DATA_ZWROTU, returndate_item);
-    ui->borrowsTable->setItem(currentRow, ZALEGLOSC, arrear_item);
+    ui->borrowsTable->setItem(currentRow, KOSZT, charge_item);
 
     //dodawanie info do tablic głównych//
     int chosenClientRow = addBorrowDialog.chosenClientRow();
@@ -271,6 +274,36 @@ void MainWindow::on_editClientButton_clicked()
             msgBox.exec();
             return;
         }
+    }
+}
+
+void MainWindow::on_editBorrowButton_2_clicked()
+{
+    QMessageBox msgBox;
+    QList<QTableWidgetItem *> items = ui->borrowsTable->selectedItems();
+    if(items.isEmpty()) {
+        msgBox.setText("Żaden wiersz nie został wybrany!");
+        msgBox.exec();
+        return;
+    }else if (items.size() > 6) {
+        msgBox.setText("Wybrano więcej niż jeden wiersz!");
+        msgBox.exec();
+        return;
+    }
+
+    editBorrowDialog editBorrowDialog(nullptr, items[4]->text());
+    int ret = editBorrowDialog.exec();
+    if(ret == QDialog::Rejected)
+        return;
+
+    QString returndate = editBorrowDialog.returndate();
+
+    if(QDate::fromString(returndate, "dd.MM.yyyy") <= QDate::currentDate()) {
+        msgBox.setText("Wypożyczenie należy przedłużyć o conajmniej jeden dzień od dzisiaj!");
+        msgBox.exec();
+    }
+    else {
+        ui->borrowsTable->item(items[0]->row(), DATA_ZWROTU)->setText(returndate);
     }
 }
 
@@ -637,3 +670,51 @@ void MainWindow::on_searchMovieButton_clicked()
         }
     }
 }
+
+void MainWindow::on_searchBorrowField_returnPressed()
+{
+    MainWindow::on_searchBorrowsButton_clicked();
+}
+
+void MainWindow::on_searchClientField_returnPressed()
+{
+    MainWindow::on_searchClientButton_clicked();
+}
+
+void MainWindow::on_searchMovieField_returnPressed()
+{
+    MainWindow::on_searchMovieButton_clicked();
+}
+
+void MainWindow::on_delBorrowButton_clicked()
+{
+    QMessageBox msgBox;
+    QList<QTableWidgetItem *> items = ui->borrowsTable->selectedItems();
+    if(items.isEmpty()){
+        msgBox.setText("Żadna z kolumn nie jest wybrana!");
+        msgBox.exec();
+    }else{
+        int rowToRemove = ui->borrowsTable->row(items[0]);
+        QDate borrowdate, returndate;
+        borrowdate = QDate::fromString(ui->borrowsTable->item(rowToRemove, DATA_WYPOZYCZENIA)->text(), "dd.MM.yyyy");
+        returndate = QDate::fromString(ui->borrowsTable->item(rowToRemove, DATA_ZWROTU)->text(), "dd.MM.yyyy");
+        int datediff = borrowdate.daysTo(returndate);
+        int datetonow = returndate.daysTo(QDate::currentDate());
+        int cena = (ui->borrowsTable->item(rowToRemove, 5)->text()).split(" ")[0].toInt();
+        int naleznosc = datediff * cena + datetonow*cena;
+
+        if(datetonow > 0) {
+            //DORZUCIĆ KARE
+            msgBox.setText("Wypożyczenie oddane po terminie!\nKara zostanie doliczona do rachunku.\nNależność do zapłaty: "+QString::number(naleznosc)+"zł.");
+            msgBox.exec();
+            ui->borrowsTable->removeRow(rowToRemove);
+        }
+        else {
+           msgBox.setText("Należność do zapłaty: "+QString::number(naleznosc)+"zł.");
+           msgBox.exec();
+           ui->borrowsTable->removeRow(rowToRemove);
+        }
+   }
+}
+
+
