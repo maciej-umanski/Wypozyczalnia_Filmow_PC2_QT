@@ -1,6 +1,7 @@
 #include "addclientdialog.h"
 #include "ui_addclientdialog.h"
 #include "QMessageBox"
+#include "others.h"
 
 AddClientDialog::AddClientDialog(QWidget *parent) :
     QDialog(parent),
@@ -28,12 +29,13 @@ void AddClientDialog::on_buttonBox_accepted()
             ui->surnameClientEdit->text().isEmpty() ||
             ui->peselClientEdit->text().isEmpty() ||
             ui->phoneClientEdit->text().isEmpty() ||
-            ui->phoneClientEdit->text().isEmpty())
+            ui->emailClientEdit->text().isEmpty())
     {
         msgBox.setText("Wszystkie pola muszą być wypełnione!");
         msgBox.exec();
     }else{
-        if(peselConversion && phoneConversion && ui->peselClientEdit->text().length() == 11 && ui->phoneClientEdit->text().length() == 9)
+
+        if(peselConversion && phoneConversion && ui->peselClientEdit->text().length() == 11 && ui->phoneClientEdit->text().length() == 9 && Email_check(ui->emailClientEdit->text()))
             accept();
 
         if(!peselConversion || ui->peselClientEdit->text().length() < 11){
@@ -42,6 +44,10 @@ void AddClientDialog::on_buttonBox_accepted()
         }
         if(!phoneConversion || ui->phoneClientEdit->text().length() < 9){
             msgBox.setText("Błąd!  Sprawdź poprawność numeru telefonu!");
+            msgBox.exec();
+        }
+        if(!Email_check(ui->emailClientEdit->text())) {
+            msgBox.setText("Błąd! Sprawdź poprawność adresu email!");
             msgBox.exec();
         }
     }
@@ -71,3 +77,5 @@ QString AddClientDialog::phone() const{
 QString AddClientDialog::email() const{
     return ui->emailClientEdit->text();
 }
+
+
