@@ -333,12 +333,30 @@
     </property>
     <addaction name="addDefaultData"/>
    </widget>
+   <widget class="QMenu" name="menuPlik">
+    <property name="title">
+     <string>Plik</string>
+    </property>
+    <addaction name="actionZapisz_do_pliku"/>
+    <addaction name="actionWczytaj_bazy_z_pliku"/>
+   </widget>
+   <addaction name="menuPlik"/>
    <addaction name="debugSettingsMenu"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="addDefaultData">
    <property name="text">
     <string>Add Default Data</string>
+   </property>
+  </action>
+  <action name="actionZapisz_do_pliku">
+   <property name="text">
+    <string>Zapisz bazy do pliku</string>
+   </property>
+  </action>
+  <action name="actionWczytaj_bazy_z_pliku">
+   <property name="text">
+    <string>Wczytaj bazy z pliku</string>
    </property>
   </action>
  </widget>

@@ -10,11 +10,16 @@
 #include <editborrowdialog.h>
 #include <QDate>
 #include <QString>
+#include <QFile>
+#include <QTextStream>
+#include <QDir>
+#include <QTextCodec>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
+    QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF-8"));
     ui->setupUi(this);
 }
 
@@ -718,3 +723,173 @@ void MainWindow::on_delBorrowButton_clicked()
 }
 
 
+
+void MainWindow::on_actionZapisz_do_pliku_triggered()
+{
+    QString path("databases/");
+    QDir dir;
+    if(!dir.exists(path))
+        dir.mkpath(path);
+
+    QFile f_clients(path + "clientsTable.csv");
+    QFile f_movies(path + "moviesTable.csv");
+    QFile f_borrows(path + "borrowsTable.csv");
+
+    if(f_clients.exists() || f_movies.exists() || f_borrows.exists()){
+        if(QMessageBox::No == QMessageBox::question(this, tr("Zapis baz danych"), tr("Istnieją już pliki baz danych, czy chcesz je nadpisać?"))){
+            return;
+        }
+    }
+
+    if (f_clients.open(QFile::WriteOnly | QFile::Truncate)){
+        QTextStream data(&f_clients);
+        QStringList strList;
+
+        for(int i = 0; i < ui->clientsTable->rowCount(); i++){
+            strList.clear();
+            for(int j = 0; j < ui->clientsTable->columnCount(); j++){
+                strList << ui->clientsTable->item(i,j)->text();
+            }
+            data << strList.join(";")+"\n";
+        }
+        f_clients.close();
+    }
+
+
+    if (f_movies.open(QFile::WriteOnly | QFile::Truncate)){
+        QTextStream data(&f_movies);
+        QStringList strList;
+
+        for(int i = 0; i < ui->moviesTable->rowCount(); i++){
+            strList.clear();
+            for(int j = 0; j < ui->moviesTable->columnCount(); j++){
+                strList << ui->moviesTable->item(i,j)->text();
+            }
+            data << strList.join(";")+"\n";
+        }
+        f_movies.close();
+    }
+
+    if (f_borrows.open(QFile::WriteOnly | QFile::Truncate)){
+        QTextStream data(&f_borrows);
+        QStringList strList;
+
+        for(int i = 0; i < ui->borrowsTable->rowCount(); i++){
+            strList.clear();
+            for(int j = 0; j < ui->borrowsTable->columnCount(); j++){
+                strList << ui->borrowsTable->item(i,j)->text();
+            }
+            data << strList.join(";")+"\n";
+        }
+        f_borrows.close();
+    }
+
+    QMessageBox msgBox;
+    msgBox.setText("Poprawnie zapisano pliki!");
+    msgBox.exec();
+
+}
+
+void MainWindow::on_actionWczytaj_bazy_z_pliku_triggered()
+{
+    QString path("databases/");
+    QDir dir;
+    if(!dir.exists(path))
+        dir.mkpath(path);
+
+    QFile f_clients(path + "clientsTable.csv");
+    QFile f_movies(path + "moviesTable.csv");
+    QFile f_borrows(path + "borrowsTable.csv");
+
+    if(!(f_clients.exists() || f_movies.exists() || f_borrows.exists())){
+        QMessageBox msgBox;
+        msgBox.setText("Pliki baz danych nie istnieją lub są niekompletne!");
+        msgBox.exec();
+        return;
+    }
+
+    if(QMessageBox::No == QMessageBox::question(this, tr("Odczyt baz danych"), tr("Czy na pewno chcesz wczytać bazy danych?"))){
+        return;
+    }
+
+    ui->clientsTable->clearContents();
+    ui->clientsTable->setRowCount(0);
+    ui->moviesTable->clearContents();
+    ui->moviesTable->setRowCount(0);
+    ui->borrowsTable->clearContents();
+    ui->borrowsTable->setRowCount(0);
+
+    QString data;
+    QStringList rowOfData;
+    QStringList rowData;
+    data.clear();
+    rowOfData.clear();
+    rowData.clear();
+
+    if (f_clients.open(QFile::ReadOnly)){
+        data = f_clients.readAll();
+        rowOfData = data.split("\n");
+        f_clients.close();
+    }
+
+    for (int x = 0; x < rowOfData.size(); x++)
+    {
+        rowData = rowOfData.at(x).split(";");
+        ui->clientsTable->insertRow(ui->clientsTable->rowCount());
+        int currentRow = ui->clientsTable->rowCount()-1;
+        for (int y = 0; y < rowData.size(); y++)
+        {
+            ui->clientsTable->setItem(currentRow,y,new QTableWidgetItem(rowData[y]));
+        }
+    }
+    ui->clientsTable->removeRow(ui->clientsTable->rowCount()-1);
+
+    data.clear();
+    rowOfData.clear();
+    rowData.clear();
+
+    if (f_movies.open(QFile::ReadOnly)){
+        data = f_movies.readAll();
+        rowOfData = data.split("\n");
+        f_movies.close();
+    }
+
+    for (int x = 0; x < rowOfData.size(); x++)
+    {
+        rowData = rowOfData.at(x).split(";");
+        ui->moviesTable->insertRow(ui->moviesTable->rowCount());
+        int currentRow = ui->moviesTable->rowCount()-1;
+        for (int y = 0; y < rowData.size(); y++)
+        {
+            ui->moviesTable->setItem(currentRow,y,new QTableWidgetItem(rowData[y]));
+        }
+    }
+    ui->moviesTable->removeRow(ui->moviesTable->rowCount()-1);
+
+    data.clear();
+    rowOfData.clear();
+    rowData.clear();
+
+    if (f_borrows.open(QFile::ReadOnly)){
+        data = f_borrows.readAll();
+        rowOfData = data.split("\n");
+        f_borrows.close();
+    }
+
+    for (int x = 0; x < rowOfData.size(); x++)
+    {
+        rowData = rowOfData.at(x).split(";");
+        ui->borrowsTable->insertRow(ui->borrowsTable->rowCount());
+        int currentRow = ui->borrowsTable->rowCount()-1;
+        for (int y = 0; y < rowData.size(); y++)
+        {
+            ui->borrowsTable->setItem(currentRow,y,new QTableWidgetItem(rowData[y]));
+        }
+    }
+    ui->borrowsTable->removeRow(ui->borrowsTable->rowCount()-1);
+
+    QMessageBox msgBox;
+    msgBox.setText("Poprawnie załadowano bazy danych!");
+    msgBox.exec();
+
+}
