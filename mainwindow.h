@@ -31,12 +31,6 @@ private slots:
 
     void on_editMovieButton_clicked();
 
-    void on_sortClientButton_clicked();
-
-    void on_sortMovieButton_clicked();
-
-    void on_sortBorrowButton_clicked();
-
     void on_addDefaultData_triggered();
 
     void on_addBorrowButton_clicked();
@@ -60,6 +54,7 @@ private slots:
     void on_actionZapisz_do_pliku_triggered();
 
     void on_actionWczytaj_bazy_z_pliku_triggered();
+
 private:
     Ui::MainWindow *ui;
 

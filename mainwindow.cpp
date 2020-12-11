@@ -5,7 +5,6 @@
 #include <addmoviedialog.h>
 #include <editclientdialog.h>
 #include <editmoviedialog.h>
-#include <sortdialog.h>
 #include <addborrowdialog.h>
 #include <editborrowdialog.h>
 #include <QDate>
@@ -23,6 +22,9 @@ MainWindow::MainWindow(QWidget *parent)
     QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF-8"));
     ui->setupUi(this);
     ui->actionWczytaj_bazy_z_pliku->trigger();
+    ui->clientsTable->setSortingEnabled(true);
+    ui->moviesTable->setSortingEnabled(true);
+    ui->borrowsTable->setSortingEnabled(true);
 }
 
 MainWindow::~MainWindow()
@@ -388,41 +390,6 @@ void MainWindow::on_editMovieButton_clicked()
     }
 }
 
-
-
-void MainWindow::on_sortClientButton_clicked()
-{
-    sortDialog sortDialog(nullptr, ui->clientsTable);
-    int ret1 = sortDialog.exec();
-    if(ret1 == QDialog::Rejected)
-        return;
-    int collumn = sortDialog.collumn();
-    Qt::SortOrder order = sortDialog.order();
-    ui->clientsTable->sortItems(collumn, order);
-}
-
-void MainWindow::on_sortMovieButton_clicked()
-{
-    sortDialog sortDialog(nullptr, ui->moviesTable);
-    int ret1 = sortDialog.exec();
-    if(ret1 == QDialog::Rejected)
-        return;
-    int collumn = sortDialog.collumn();
-    Qt::SortOrder order = sortDialog.order();
-    ui->moviesTable->sortItems(collumn, order);
-}
-
-void MainWindow::on_sortBorrowButton_clicked()
-{
-    sortDialog sortDialog(nullptr, ui->borrowsTable);
-    int ret1 = sortDialog.exec();
-    if(ret1 == QDialog::Rejected)
-        return;
-    int collumn = sortDialog.collumn();
-    Qt::SortOrder order = sortDialog.order();
-    ui->borrowsTable->sortItems(collumn, order);
-}
-
 void MainWindow::on_addDefaultData_triggered()
 {
     QTableWidgetItem *title_item = new QTableWidgetItem("Hobbit");
@@ -748,10 +715,8 @@ void MainWindow::on_actionZapisz_do_pliku_triggered()
     QFile f_movies(path + "moviesTable.csv");
     QFile f_borrows(path + "borrowsTable.csv");
 
-    if(f_clients.exists() || f_movies.exists() || f_borrows.exists()){
-        if(QMessageBox::No == QMessageBox::question(this, tr("Zapis baz danych"), tr("Czy chcesz zapisać bazy danych?"))){
-            return;
-        }
+    if(QMessageBox::No == QMessageBox::question(this, tr("Zapis baz danych"), tr("Czy chcesz zapisać bazy danych?"))){
+        return;
     }
 
     if (f_clients.open(QFile::WriteOnly | QFile::Truncate)){

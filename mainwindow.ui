@@ -24,7 +24,7 @@
        </sizepolicy>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -51,13 +51,6 @@
            <widget class="QPushButton" name="editBorrowButton_2">
             <property name="text">
              <string>Edytuj wypożyczenie</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="sortBorrowButton">
-            <property name="text">
-             <string>Sortuj</string>
             </property>
            </widget>
           </item>
@@ -88,6 +81,12 @@
           <property name="selectionBehavior">
            <enum>QAbstractItemView::SelectRows</enum>
           </property>
+          <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+           <bool>true</bool>
+          </attribute>
+          <attribute name="verticalHeaderShowSortIndicator" stdset="0">
+           <bool>false</bool>
+          </attribute>
           <column>
            <property name="text">
             <string>Imie</string>
@@ -150,13 +149,6 @@
             </property>
            </widget>
           </item>
-          <item>
-           <widget class="QPushButton" name="sortClientButton">
-            <property name="text">
-             <string>Sortuj</string>
-            </property>
-           </widget>
-          </item>
          </layout>
         </item>
         <item row="0" column="0">
@@ -184,6 +176,12 @@
           <property name="selectionBehavior">
            <enum>QAbstractItemView::SelectRows</enum>
           </property>
+          <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+           <bool>true</bool>
+          </attribute>
+          <attribute name="verticalHeaderShowSortIndicator" stdset="0">
+           <bool>false</bool>
+          </attribute>
           <column>
            <property name="text">
             <string>Imie</string>
@@ -234,6 +232,12 @@
           <property name="selectionBehavior">
            <enum>QAbstractItemView::SelectRows</enum>
           </property>
+          <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+           <bool>true</bool>
+          </attribute>
+          <attribute name="verticalHeaderShowSortIndicator" stdset="0">
+           <bool>false</bool>
+          </attribute>
           <column>
            <property name="text">
             <string>Tytuł</string>
@@ -286,13 +290,6 @@
            <widget class="QPushButton" name="editMovieButton">
             <property name="text">
              <string>Edytuj Film</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="sortMovieButton">
-            <property name="text">
-             <string>Sortuj</string>
             </property>
            </widget>
           </item>

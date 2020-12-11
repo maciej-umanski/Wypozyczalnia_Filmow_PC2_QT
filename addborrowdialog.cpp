@@ -12,6 +12,8 @@ addBorrowDialog::addBorrowDialog(QWidget *parent, QTableWidget *clientsTable, QT
     ui(new Ui::addBorrowDialog)
 {
     ui->setupUi(this);
+    ui->borrowsClientsTable->setSortingEnabled(true);
+    ui->borrowsMoviesTable->setSortingEnabled(true);
 
     //PRZEPISANIE TABELI KLIENTÓW
     for(int i=0;i<clientsTable->rowCount();i++) {
