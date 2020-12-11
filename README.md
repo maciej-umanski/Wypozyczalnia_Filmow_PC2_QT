@@ -11,9 +11,9 @@
 - Przypomnienie przy uruchomieniu programu o zaległych wypożyczeniach
 - Przycisk do wyświetlania zaległych wypożyczeń
 - Zapis / odczyt ustawień do pliku
-- Zapisywanie / odczytywanie baz danych przy uruchomieniu, wyłączeniu programu
 
 # ZROBIONE : 
+- Zapisywanie / odczytywanie baz danych przy uruchomieniu, wyłączeniu programu
 - Zapis / odczyt baz danych do pliku
 - Cena wypożyczenia za dzień przy tworzeniu wypożyczenia
 - Usunięcie wypożyczenia (obliczenie należności i kary)
