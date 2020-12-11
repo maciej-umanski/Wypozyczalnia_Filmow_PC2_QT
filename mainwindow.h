@@ -17,6 +17,8 @@ public:
 
 private slots:
 
+    void closeEvent(QCloseEvent *event);
+
     void on_addClientButton_clicked();
 
     void on_delClientButton_clicked();
@@ -58,7 +60,6 @@ private slots:
     void on_actionZapisz_do_pliku_triggered();
 
     void on_actionWczytaj_bazy_z_pliku_triggered();
-
 private:
     Ui::MainWindow *ui;
 

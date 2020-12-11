@@ -14,6 +14,7 @@
 #include <QTextStream>
 #include <QDir>
 #include <QTextCodec>
+#include <QCloseEvent>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -21,11 +22,23 @@ MainWindow::MainWindow(QWidget *parent)
 {
     QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF-8"));
     ui->setupUi(this);
+    ui->actionWczytaj_bazy_z_pliku->trigger();
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+    event->ignore();
+    if (QMessageBox::Yes == QMessageBox::question(this, "Wyjście", "Czy na pewno chcesz zakończyć program?", QMessageBox::Yes | QMessageBox::No))
+    {
+        ui->actionZapisz_do_pliku->trigger();
+        event->accept();
+    }
+
 }
 
 void MainWindow::on_addClientButton_clicked()
@@ -736,7 +749,7 @@ void MainWindow::on_actionZapisz_do_pliku_triggered()
     QFile f_borrows(path + "borrowsTable.csv");
 
     if(f_clients.exists() || f_movies.exists() || f_borrows.exists()){
-        if(QMessageBox::No == QMessageBox::question(this, tr("Zapis baz danych"), tr("Istnieją już pliki baz danych, czy chcesz je nadpisać?"))){
+        if(QMessageBox::No == QMessageBox::question(this, tr("Zapis baz danych"), tr("Czy chcesz zapisać bazy danych?"))){
             return;
         }
     }
@@ -783,11 +796,6 @@ void MainWindow::on_actionZapisz_do_pliku_triggered()
         }
         f_borrows.close();
     }
-
-    QMessageBox msgBox;
-    msgBox.setText("Poprawnie zapisano pliki!");
-    msgBox.exec();
-
 }
 
 void MainWindow::on_actionWczytaj_bazy_z_pliku_triggered()
@@ -801,14 +809,14 @@ void MainWindow::on_actionWczytaj_bazy_z_pliku_triggered()
     QFile f_movies(path + "moviesTable.csv");
     QFile f_borrows(path + "borrowsTable.csv");
 
+    if(QMessageBox::No == QMessageBox::question(this, tr("Odczyt baz danych"), tr("Czy chcesz wczytać bazy danych?"))){
+        return;
+    }
+
     if(!(f_clients.exists() || f_movies.exists() || f_borrows.exists())){
         QMessageBox msgBox;
         msgBox.setText("Pliki baz danych nie istnieją lub są niekompletne!");
         msgBox.exec();
-        return;
-    }
-
-    if(QMessageBox::No == QMessageBox::question(this, tr("Odczyt baz danych"), tr("Czy na pewno chcesz wczytać bazy danych?"))){
         return;
     }
 
@@ -887,9 +895,4 @@ void MainWindow::on_actionWczytaj_bazy_z_pliku_triggered()
         }
     }
     ui->borrowsTable->removeRow(ui->borrowsTable->rowCount()-1);
-
-    QMessageBox msgBox;
-    msgBox.setText("Poprawnie załadowano bazy danych!");
-    msgBox.exec();
-
 }
