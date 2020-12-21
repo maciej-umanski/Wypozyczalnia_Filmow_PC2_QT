@@ -24,7 +24,7 @@
        </sizepolicy>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -65,6 +65,13 @@
            <widget class="QPushButton" name="searchBorrowsButton">
             <property name="text">
              <string>Szukaj</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="showOverdueBorrowButton">
+            <property name="text">
+             <string>Pokaż zaległe</string>
             </property>
            </widget>
           </item>
@@ -334,8 +341,15 @@
     <property name="title">
      <string>Plik</string>
     </property>
+    <widget class="QMenu" name="menuUstawienia">
+     <property name="title">
+      <string>Ustawienia</string>
+     </property>
+     <addaction name="actionPod_wietlaj_zaleg_e"/>
+    </widget>
     <addaction name="actionZapisz_do_pliku"/>
     <addaction name="actionWczytaj_bazy_z_pliku"/>
+    <addaction name="menuUstawienia"/>
    </widget>
    <addaction name="menuPlik"/>
    <addaction name="debugSettingsMenu"/>
@@ -354,6 +368,14 @@
   <action name="actionWczytaj_bazy_z_pliku">
    <property name="text">
     <string>Wczytaj bazy z pliku</string>
+   </property>
+  </action>
+  <action name="actionPod_wietlaj_zaleg_e">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Podświetlaj zaległe</string>
    </property>
   </action>
  </widget>

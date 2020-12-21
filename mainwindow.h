@@ -55,6 +55,10 @@ private slots:
 
     void on_actionWczytaj_bazy_z_pliku_triggered();
 
+    void on_showOverdueBorrowButton_clicked();
+
+    void on_actionPod_wietlaj_zaleg_e_toggled(bool arg1);
+
 private:
     Ui::MainWindow *ui;
 

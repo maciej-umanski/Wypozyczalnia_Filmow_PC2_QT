@@ -861,3 +861,46 @@ void MainWindow::on_actionWczytaj_bazy_z_pliku_triggered()
     }
     ui->borrowsTable->removeRow(ui->borrowsTable->rowCount()-1);
 }
+
+void MainWindow::on_showOverdueBorrowButton_clicked()
+{
+    if(ui->showOverdueBorrowButton->text() == "Pokaż zaległe"){
+        QDate currentDate = QDate::currentDate();
+        QString currentDateStr = currentDate.toString("dd.MM.yyyy");
+        for(int i = 0; i < ui->borrowsTable->rowCount(); i++){
+            int cmp = ui->borrowsTable->item(i,DATA_ZWROTU)->text().compare(currentDateStr);
+            if(cmp > 0){
+                ui->borrowsTable->hideRow(i);
+            }
+         }
+        ui->showOverdueBorrowButton->setText("Pokaż wszystkie");
+    }else{
+        for(int i = 0; i < ui->borrowsTable->rowCount(); i++){
+            ui->borrowsTable->showRow(i);
+        }
+        ui->showOverdueBorrowButton->setText("Pokaż zaległe");
+    }
+
+}
+
+void MainWindow::on_actionPod_wietlaj_zaleg_e_toggled(bool arg1)
+{
+    if(arg1){
+        QDate currentDate = QDate::currentDate();
+        QString currentDateStr = currentDate.toString("dd.MM.yyyy");
+        for(int i = 0; i < ui->borrowsTable->rowCount(); i++){
+            int cmp = ui->borrowsTable->item(i,DATA_ZWROTU)->text().compare(currentDateStr);
+            if(cmp < 0){
+                for(int j = 0; j < ui->borrowsTable->columnCount(); j++){
+                    ui->borrowsTable->item(i,j)->setBackground(Qt::red);
+                }
+            }
+         }
+    }else{
+       for(int i = 0; i < ui->borrowsTable->rowCount(); i++){
+           for(int j = 0; j < ui->borrowsTable->columnCount();j++){
+                ui->borrowsTable->item(i,j)->setBackground(Qt::white);
+           }
+       }
+    }
+}
