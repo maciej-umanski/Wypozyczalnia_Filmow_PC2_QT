@@ -2,14 +2,12 @@
 
 # DO ZROBIENIA :
 
-- Generowanie ID dla nowo dodanego filmu
-- Generowanie ID dla nowo dodanego klienta
-- Generowanie ID dla nowo dodanego wypożyczenia
+- Generowanie ID
 - zmienienie nazw okien z defaultowych
+- Zmiana ilości dostępnych / wypożyczonych filmów w tabeli filmy oraz posiadane filmy w tabeli klienci
 
 # ZROBIONE :
 - Zapisywanie / odczytywanie baz danych przy uruchomieniu, wyłączeniu programu
-- Zapis / odczyt baz danych do pliku
 - Cena wypożyczenia za dzień przy tworzeniu wypożyczenia
 - Usunięcie wypożyczenia (obliczenie należności i kary)
 - Edycja wypożyczenia (przedłużenie czasu)
