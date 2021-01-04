@@ -1,5 +1,8 @@
 # Wypozyczalnia_Filmow_PC2_QT
 
+# eghm
+ - dodałem databases_example z zaległymi wypożyczeniami żeby można było je szybko testować pozdro
+
 # DO ZROBIENIA :
 
 - Generowanie ID
