@@ -346,6 +346,7 @@
       <string>Ustawienia</string>
      </property>
      <addaction name="actionPod_wietlaj_zaleg_e"/>
+     <addaction name="actionUstal_wysoko_kary"/>
     </widget>
     <addaction name="actionZapisz_do_pliku"/>
     <addaction name="actionWczytaj_bazy_z_pliku"/>
@@ -376,6 +377,11 @@
    </property>
    <property name="text">
     <string>Podświetlaj zaległe</string>
+   </property>
+  </action>
+  <action name="actionUstal_wysoko_kary">
+   <property name="text">
+    <string>Ustal wysokość kary</string>
    </property>
   </action>
  </widget>

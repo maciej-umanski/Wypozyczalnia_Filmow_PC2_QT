@@ -14,17 +14,38 @@
 #include <QDir>
 #include <QTextCodec>
 #include <QCloseEvent>
+#include <setpenaltydialog.h>
+
+float penalty;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
+
+    this->penalty = 2.0f;
+
     QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF-8"));
     ui->setupUi(this);
     ui->actionWczytaj_bazy_z_pliku->trigger();
     ui->clientsTable->setSortingEnabled(true);
     ui->moviesTable->setSortingEnabled(true);
     ui->borrowsTable->setSortingEnabled(true);
+
+    //POWIADOMIENIE O ZALEGŁYCH//
+    QString currentDateStr = QDate::currentDate().toString("dd.MM.yyyy");
+    int count = 0;
+    for(int i = 0; i < ui->borrowsTable->rowCount(); i++){
+        int cmp = ui->borrowsTable->item(i,DATA_ZWROTU)->text().compare(currentDateStr);
+        if(cmp < 0){
+            count ++;
+        }
+    }
+    if(count > 0){
+        QMessageBox msgBox;
+        msgBox.setText(QString("Istnieje %1 zaległych wypożyczeń! Skontaktuj się z klientami").arg(count));
+        msgBox.exec();
+    }
 }
 
 MainWindow::~MainWindow()
@@ -686,16 +707,19 @@ void MainWindow::on_delBorrowButton_clicked()
         int datediff = borrowdate.daysTo(returndate);
         int datetonow = returndate.daysTo(QDate::currentDate());
         int cena = (ui->borrowsTable->item(rowToRemove, 5)->text()).split(" ")[0].toInt();
-        int naleznosc = datediff * cena + datetonow*cena;
+        int naleznosc_podstawowa = datediff * cena;
+        float naleznosc_kara = datetonow * this->penalty;
 
         if(datetonow > 0) {
-            //DORZUCIĆ KARE
-            msgBox.setText("Wypożyczenie oddane po terminie!\nKara zostanie doliczona do rachunku.\nNależność do zapłaty: "+QString::number(naleznosc)+"zł.");
+            msgBox.setText("Wypożyczenie oddane po terminie!\nKara zostanie doliczona do rachunku.\nNależność podstawowa: "+QString::number(naleznosc_podstawowa)+"zł.\nKara: " + QString::number(naleznosc_kara)+"zł.\nRazem do zapłaty: " + QString::number(naleznosc_kara+naleznosc_podstawowa)+"zł.");
             msgBox.exec();
             ui->borrowsTable->removeRow(rowToRemove);
+
+            // TRZEBA DOROBIĆ TUTAJ KONIECZNIE PRACE Z ID ZEBY USUWAŁO ILOSC WYPOZYCZONYCH FILMOW ORAZ USUWALO ZE KLIENT MA WYPOZYCZONY FILM
+
         }
         else {
-           msgBox.setText("Należność do zapłaty: "+QString::number(naleznosc)+"zł.");
+           msgBox.setText("Należność do zapłaty: "+QString::number(naleznosc_podstawowa)+"zł.");
            msgBox.exec();
            ui->borrowsTable->removeRow(rowToRemove);
         }
@@ -711,9 +735,10 @@ void MainWindow::on_actionZapisz_do_pliku_triggered()
     if(!dir.exists(path))
         dir.mkpath(path);
 
-    QFile f_clients(path + "clientsTable.csv");
-    QFile f_movies(path + "moviesTable.csv");
-    QFile f_borrows(path + "borrowsTable.csv");
+    QFile f_clients(path + "clientsTable.db");
+    QFile f_movies(path + "moviesTable.db");
+    QFile f_borrows(path + "borrowsTable.db");
+    QFile f_penalty(path + "penalty.db");
 
     if(QMessageBox::No == QMessageBox::question(this, tr("Zapis baz danych"), tr("Czy chcesz zapisać bazy danych?"))){
         return;
@@ -761,6 +786,14 @@ void MainWindow::on_actionZapisz_do_pliku_triggered()
         }
         f_borrows.close();
     }
+
+    if (f_penalty.open(QFile::WriteOnly | QFile::Truncate)){
+        QTextStream data(&f_penalty);
+        QStringList strList;
+        strList << QString::number(this->penalty);
+        data << strList.join("");
+        f_penalty.close();
+    }
 }
 
 void MainWindow::on_actionWczytaj_bazy_z_pliku_triggered()
@@ -770,9 +803,10 @@ void MainWindow::on_actionWczytaj_bazy_z_pliku_triggered()
     if(!dir.exists(path))
         dir.mkpath(path);
 
-    QFile f_clients(path + "clientsTable.csv");
-    QFile f_movies(path + "moviesTable.csv");
-    QFile f_borrows(path + "borrowsTable.csv");
+    QFile f_clients(path + "clientsTable.db");
+    QFile f_movies(path + "moviesTable.db");
+    QFile f_borrows(path + "borrowsTable.db");
+    QFile f_penalty(path + "penalty.db");
 
     if(QMessageBox::No == QMessageBox::question(this, tr("Odczyt baz danych"), tr("Czy chcesz wczytać bazy danych?"))){
         return;
@@ -783,6 +817,17 @@ void MainWindow::on_actionWczytaj_bazy_z_pliku_triggered()
         msgBox.setText("Pliki baz danych nie istnieją lub są niekompletne!");
         msgBox.exec();
         return;
+    }
+
+    if (f_penalty.open(QFile::ReadOnly)){
+        QString data = f_penalty.readAll();
+        if (f_penalty.size() != 0){
+            bool succes = false;
+            float penalty_f = data.toFloat(&succes);
+            if(succes){
+                this->penalty = penalty_f;
+            }
+        }
     }
 
     ui->clientsTable->clearContents();
@@ -903,4 +948,13 @@ void MainWindow::on_actionPod_wietlaj_zaleg_e_toggled(bool arg1)
            }
        }
     }
+}
+
+void MainWindow::on_actionUstal_wysoko_kary_triggered()
+{
+    setPenaltyDialog setPenaltyDialog(nullptr, this->penalty);
+    int ret = setPenaltyDialog.exec();
+    if(ret == QDialog::Rejected)
+        return;
+    this->penalty = setPenaltyDialog.penalty();
 }

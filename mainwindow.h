@@ -59,7 +59,12 @@ private slots:
 
     void on_actionPod_wietlaj_zaleg_e_toggled(bool arg1);
 
+    void on_actionUstal_wysoko_kary_triggered();
+
 private:
+
+    float penalty;
+
     Ui::MainWindow *ui;
 
     enum CLIENT_COLLUMNS{

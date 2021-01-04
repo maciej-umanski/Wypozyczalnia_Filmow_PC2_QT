@@ -2,14 +2,10 @@
 
 # DO ZROBIENIA :
 
-- Dodać osobną funkcję obliczającą wysokość kary (kara zmienna przez użytkownika)
 - Generowanie ID dla nowo dodanego filmu
 - Generowanie ID dla nowo dodanego klienta
 - Generowanie ID dla nowo dodanego wypożyczenia
-- Nadanie wartości kary dla przekroczenia czasu wypożyczenia
 - zmienienie nazw okien z defaultowych
-- Przypomnienie przy uruchomieniu programu o zaległych wypożyczeniach
-- Zapis / odczyt ustawień do pliku
 
 # ZROBIONE :
 - Zapisywanie / odczytywanie baz danych przy uruchomieniu, wyłączeniu programu
@@ -20,3 +16,6 @@
 - Walidacja emailów (regex)
 - Przycisk do wyświetlania zaległych wypożyczeń
 - Domyślne podświetlanie zaległych wypożyczeń
+- Przypomnienie przy uruchomieniu programu o zaległych wypożyczeniach
+- Zapis / odczyt ustawień do pliku
+- Nadanie wartości kary dla przekroczenia czasu wypożyczenia
