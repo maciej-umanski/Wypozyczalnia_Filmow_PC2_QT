@@ -1,12 +1,11 @@
 # Wypozyczalnia_Filmow_PC2_QT
 
 # eghm
- - dodałem databases_example z zaległymi wypożyczeniami żeby można było je szybko testować pozdro
+ - dodałem databases_example z zaległymi wypożyczeniami żeby można było je szybko testować pozdro wrzuć je do /databases
 
 # DO ZROBIENIA :
 
 - Generowanie ID
-- zmienienie nazw okien z defaultowych
 - Zmiana ilości dostępnych / wypożyczonych filmów w tabeli filmy oraz posiadane filmy w tabeli klienci
 
 # ZROBIONE :
@@ -20,3 +19,4 @@
 - Przypomnienie przy uruchomieniu programu o zaległych wypożyczeniach
 - Zapis / odczyt ustawień do pliku
 - Nadanie wartości kary dla przekroczenia czasu wypożyczenia
+- zmienienie nazw okien z defaultowych

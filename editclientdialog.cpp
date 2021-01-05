@@ -28,6 +28,7 @@ editClientDialog::~editClientDialog()
 void editClientDialog::on_buttonBox_accepted()
 {
     QMessageBox msgBox;
+    msgBox.setWindowTitle("Błąd");
     bool peselConversion, phoneConversion;
     ui->peselClientEdit->text().toULongLong(&peselConversion);
     ui->phoneClientEdit->text().toUInt(&phoneConversion);

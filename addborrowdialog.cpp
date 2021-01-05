@@ -130,6 +130,7 @@ void addBorrowDialog::on_borrowsClientsTable_currentCellChanged(int currentRow, 
 void addBorrowDialog::on_buttonBox_accepted()
 {
     QMessageBox msgBox;
+    msgBox.setWindowTitle("Błąd");
     QDate borrowdate = ui->borrowdate->date(),
             returndate = ui->returndate->date();
     int datediff = borrowdate.daysTo(returndate);

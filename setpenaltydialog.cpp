@@ -18,6 +18,7 @@ setPenaltyDialog::~setPenaltyDialog()
 void setPenaltyDialog::on_buttonBox_accepted()
 {
     QMessageBox msgBox;
+    msgBox.setWindowTitle("Błąd");
     bool succes = false;
     if(ui->penaltyEdit->text().isEmpty()){
         msgBox.setText("Pole nie może być puste!");

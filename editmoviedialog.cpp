@@ -29,6 +29,7 @@ void editMovieDialog::on_buttonBox_accepted()
 {
     QDate date;
     QMessageBox msgBox;
+    msgBox.setWindowTitle("Błąd");
     bool yearConversion, availableConversion;
     ui->yearMovieEdit->text().toUInt(&yearConversion);
     ui->availableMovieEdit->text().toUInt(&availableConversion);

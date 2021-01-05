@@ -43,6 +43,7 @@ MainWindow::MainWindow(QWidget *parent)
     }
     if(count > 0){
         QMessageBox msgBox;
+        msgBox.setWindowTitle("Zaległe wypożyczenia");
         msgBox.setText(QString("Istnieje %1 zaległych wypożyczeń! Skontaktuj się z klientami").arg(count));
         msgBox.exec();
     }
@@ -82,6 +83,7 @@ void MainWindow::on_addClientButton_clicked()
 
     if(ItemList.count() > 0){
         QMessageBox msgBox;
+        msgBox.setWindowTitle("Błąd");
         msgBox.setText("Klient o danym peselu już istnieje w bazie!");
         msgBox.exec();
         return;
@@ -109,6 +111,7 @@ void MainWindow::on_addClientButton_clicked()
 void MainWindow::on_delClientButton_clicked()
 {
     QMessageBox msgBox;
+    msgBox.setWindowTitle("Błąd");
     QList<QTableWidgetItem *> items = ui->clientsTable->selectedItems();
     if(items.isEmpty()){
         msgBox.setText("Żadna z kolumn nie jest wybrana!");
@@ -126,6 +129,7 @@ void MainWindow::on_delClientButton_clicked()
 void MainWindow::on_delMovieButton_clicked()
 {
     QMessageBox msgBox;
+    msgBox.setWindowTitle("Błąd");
     QList<QTableWidgetItem *> items = ui->moviesTable->selectedItems();
     if(items.isEmpty()){
         msgBox.setText("Żadna z kolumn nie jest wybrana!");
@@ -272,6 +276,7 @@ void MainWindow::on_addMovieButton_clicked()
 void MainWindow::on_editClientButton_clicked()
 {
     QMessageBox msgBox;
+    msgBox.setWindowTitle("Błąd");
     QList<QTableWidgetItem *> items = ui->clientsTable->selectedItems();
     if(items.isEmpty()){
         msgBox.setText("Żadna z kolumn nie jest wybrana!");
@@ -311,6 +316,7 @@ void MainWindow::on_editClientButton_clicked()
             ui->clientsTable->item(row_bufor,EMAIL)->setText(email);
         }else{
             QMessageBox msgBox;
+            msgBox.setWindowTitle("Błąd");
             msgBox.setText("Inny Klient o danym peselu już istnieje w bazie!");
             msgBox.exec();
             return;
@@ -321,6 +327,7 @@ void MainWindow::on_editClientButton_clicked()
 void MainWindow::on_editBorrowButton_2_clicked()
 {
     QMessageBox msgBox;
+    msgBox.setWindowTitle("Błąd");
     QList<QTableWidgetItem *> items = ui->borrowsTable->selectedItems();
     if(items.isEmpty()) {
         msgBox.setText("Żaden wiersz nie został wybrany!");
@@ -352,6 +359,7 @@ void MainWindow::on_editMovieButton_clicked()
 {
     QList<QTableWidgetItem *> items = ui->moviesTable->selectedItems();
     QMessageBox msgBox;
+    msgBox.setWindowTitle("Błąd");
     if(items.isEmpty()){
         msgBox.setText("Żaden wiersz nie został wybrany!");
         msgBox.exec();
@@ -697,6 +705,7 @@ void MainWindow::on_delBorrowButton_clicked()
     QMessageBox msgBox;
     QList<QTableWidgetItem *> items = ui->borrowsTable->selectedItems();
     if(items.isEmpty()){
+        msgBox.setWindowTitle("Błąd");
         msgBox.setText("Żadna z kolumn nie jest wybrana!");
         msgBox.exec();
     }else{
@@ -711,6 +720,7 @@ void MainWindow::on_delBorrowButton_clicked()
         float naleznosc_kara = datetonow * this->penalty;
 
         if(datetonow > 0) {
+            msgBox.setWindowTitle("Zwrot wypożyczenia");
             msgBox.setText("Wypożyczenie oddane po terminie!\nKara zostanie doliczona do rachunku.\nNależność podstawowa: "+QString::number(naleznosc_podstawowa)+"zł.\nKara: " + QString::number(naleznosc_kara)+"zł.\nRazem do zapłaty: " + QString::number(naleznosc_kara+naleznosc_podstawowa)+"zł.");
             msgBox.exec();
             ui->borrowsTable->removeRow(rowToRemove);
@@ -814,6 +824,7 @@ void MainWindow::on_actionWczytaj_bazy_z_pliku_triggered()
 
     if(!(f_clients.exists() || f_movies.exists() || f_borrows.exists())){
         QMessageBox msgBox;
+        msgBox.setWindowTitle("Błąd");
         msgBox.setText("Pliki baz danych nie istnieją lub są niekompletne!");
         msgBox.exec();
         return;

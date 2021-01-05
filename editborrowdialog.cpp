@@ -25,6 +25,7 @@ void editBorrowDialog::on_buttonBox_rejected()
 void editBorrowDialog::on_buttonBox_accepted()
 {
     QMessageBox msgBox;
+    msgBox.setWindowTitle("Błąd");
     if(ui->dateEdit->text().isEmpty() ||
             ui->dateEdit->date() <= QDate::currentDate()){
         msgBox.setText("Pole musi być wypełnione datą dzień dłuższą od dzisiaj!");
