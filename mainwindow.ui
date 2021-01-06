@@ -88,6 +88,9 @@
           <property name="selectionBehavior">
            <enum>QAbstractItemView::SelectRows</enum>
           </property>
+          <property name="sortingEnabled">
+           <bool>true</bool>
+          </property>
           <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
            <bool>true</bool>
           </attribute>
@@ -122,6 +125,16 @@
           <column>
            <property name="text">
             <string>Dzienny Koszt (PLN)</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>ID_FILMU_WYP</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>ID_KLIENTA_WYP</string>
            </property>
           </column>
          </widget>
@@ -183,6 +196,9 @@
           <property name="selectionBehavior">
            <enum>QAbstractItemView::SelectRows</enum>
           </property>
+          <property name="sortingEnabled">
+           <bool>true</bool>
+          </property>
           <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
            <bool>true</bool>
           </attribute>
@@ -219,6 +235,11 @@
             <string>Posiadane Filmy</string>
            </property>
           </column>
+          <column>
+           <property name="text">
+            <string>ID_KLIENTA</string>
+           </property>
+          </column>
          </widget>
         </item>
        </layout>
@@ -238,6 +259,9 @@
           </property>
           <property name="selectionBehavior">
            <enum>QAbstractItemView::SelectRows</enum>
+          </property>
+          <property name="sortingEnabled">
+           <bool>true</bool>
           </property>
           <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
            <bool>true</bool>
@@ -273,6 +297,11 @@
           <column>
            <property name="text">
             <string>Wypożyczone</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>ID_FILMU</string>
            </property>
           </column>
          </widget>
@@ -322,6 +351,7 @@
     </item>
    </layout>
   </widget>
+  <widget class="QStatusBar" name="statusbar"/>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
@@ -331,36 +361,27 @@
      <height>21</height>
     </rect>
    </property>
-   <widget class="QMenu" name="debugSettingsMenu">
-    <property name="title">
-     <string>Debug</string>
-    </property>
-    <addaction name="addDefaultData"/>
-   </widget>
    <widget class="QMenu" name="menuPlik">
     <property name="title">
      <string>Plik</string>
     </property>
-    <widget class="QMenu" name="menuUstawienia">
-     <property name="title">
-      <string>Ustawienia</string>
-     </property>
-     <addaction name="actionPod_wietlaj_zaleg_e"/>
-     <addaction name="actionUstal_wysoko_kary"/>
-    </widget>
     <addaction name="actionZapisz_do_pliku"/>
     <addaction name="actionWczytaj_bazy_z_pliku"/>
-    <addaction name="menuUstawienia"/>
+    <addaction name="actionWyjd"/>
+   </widget>
+   <widget class="QMenu" name="menuUstawienia_2">
+    <property name="title">
+     <string>Ustawienia</string>
+    </property>
+    <addaction name="actionShow_penalty"/>
+    <addaction name="actionUstal_wysoko_kary"/>
+    <addaction name="actionPod_wietlaj_zaleg_e"/>
+    <addaction name="actionShow_Last_IDs"/>
+    <addaction name="actionShow_IDs"/>
    </widget>
    <addaction name="menuPlik"/>
-   <addaction name="debugSettingsMenu"/>
+   <addaction name="menuUstawienia_2"/>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
-  <action name="addDefaultData">
-   <property name="text">
-    <string>Add Default Data</string>
-   </property>
-  </action>
   <action name="actionZapisz_do_pliku">
    <property name="text">
     <string>Zapisz bazy do pliku</string>
@@ -382,6 +403,32 @@
   <action name="actionUstal_wysoko_kary">
    <property name="text">
     <string>Ustal wysokość kary</string>
+   </property>
+  </action>
+  <action name="actionShow_Last_IDs">
+   <property name="text">
+    <string>Wyświetl Ostatnie ID</string>
+   </property>
+  </action>
+  <action name="actionShow_penalty">
+   <property name="text">
+    <string>Wyświetl wartość kary</string>
+   </property>
+  </action>
+  <action name="actionShow_IDs">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Pokazuj ID </string>
+   </property>
+  </action>
+  <action name="actionWyjd">
+   <property name="text">
+    <string>Wyjdź</string>
    </property>
   </action>
  </widget>

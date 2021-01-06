@@ -5,15 +5,19 @@
 #include <QString>
 
 int clientRow, movieRow;
+QString clientID, movieID;
 QTableWidget *moviesTableTemp;
 
-addBorrowDialog::addBorrowDialog(QWidget *parent, QTableWidget *clientsTable, QTableWidget *moviesTable) :
+addBorrowDialog::addBorrowDialog(QWidget *parent, QTableWidget *clientsTable, QTableWidget *moviesTable, bool id_setting) :
     QDialog(parent),
     ui(new Ui::addBorrowDialog)
 {
     ui->setupUi(this);
-    ui->borrowsClientsTable->setSortingEnabled(true);
-    ui->borrowsMoviesTable->setSortingEnabled(true);
+
+    ui->borrowsClientsTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->borrowsMoviesTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->borrowsClientsTable->setColumnHidden(ID_KLIENTA,!id_setting);
+    ui->borrowsMoviesTable->setColumnHidden(ID_FILMU,!id_setting);
 
     //PRZEPISANIE TABELI KLIENTÓW
     for(int i=0;i<clientsTable->rowCount();i++) {
@@ -23,15 +27,6 @@ addBorrowDialog::addBorrowDialog(QWidget *parent, QTableWidget *clientsTable, QT
             ui->borrowsClientsTable->setItem(i, j, new QTableWidgetItem(temp));
         }
     }
-
-    /* Twój stary kod, nie usuwam na wypadek gdybyś coś potrzebował
-    for(int i=0;i<moviesTable->rowCount();i++) {
-        ui->borrowsMoviesTable->insertRow(i);
-        for(int j=0;j<moviesTable->columnCount();j++){
-            QString temp = moviesTable->item(i, j)->text();
-            ui->borrowsMoviesTable->setItem(i, j, new QTableWidgetItem(temp));
-        }
-    }*/
 
     //PRZEPISANIE TABELI FILMÓW
     for(int i = 0; i < moviesTable->rowCount();i++){
@@ -90,6 +85,14 @@ int addBorrowDialog::chosenClientRow() const{
     return clientRow;
 }
 
+QString addBorrowDialog::chosenClientID() const {
+    return clientID;
+}
+
+QString addBorrowDialog::chosenMovieID() const {
+    return movieID;
+}
+
 int addBorrowDialog::chosenMovieRow() const{
     QString title = ui->borrowsMoviesTable->item(movieRow,TYTUL)->text();
     QString director = ui->borrowsMoviesTable->item(movieRow,REZYSER)->text();
@@ -114,17 +117,20 @@ int addBorrowDialog::chosenMovieRow() const{
     return 0;
 }
 
-void addBorrowDialog::on_borrowsMoviesTable_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
+void addBorrowDialog::on_borrowsMoviesTable_currentCellChanged(int currentRow)
 {
     ui->chosenMovieLabel->setText(ui->borrowsMoviesTable->item(currentRow, 0)->text());
     movieRow = currentRow;
+    movieID = ui->borrowsClientsTable->item(currentRow, ID_FILMU)->text();
 }
 
-void addBorrowDialog::on_borrowsClientsTable_currentCellChanged(int currentRow, int currentColumn, int previousRow, int previousColumn)
+void addBorrowDialog::on_borrowsClientsTable_currentCellChanged(int currentRow)
 {
     ui->chosenClientName->setText(ui->borrowsClientsTable->item(currentRow, 0)->text());
     ui->chosenClientSurname->setText(ui->borrowsClientsTable->item(currentRow, 1)->text());
     clientRow = currentRow;
+    clientID = ui->borrowsClientsTable->item(currentRow, ID_KLIENTA)->text();
+
 }
 
 void addBorrowDialog::on_buttonBox_accepted()
@@ -146,7 +152,18 @@ void addBorrowDialog::on_buttonBox_accepted()
             msgBox.exec();
         }
     else {
-        accept();
+        QString string = ui->chosenClientName->text() + " " + ui->chosenClientSurname->text() + " Wypożycza film ";
+        string += ui->chosenMovieLabel->text() + "\nNa dni: " + QString::number(datediff) + ", Koszt: " + QString::number(datediff*ui->chargevalue->value()) + " zł";
+        string += "\nZaakceptować?";
+        if (QMessageBox::Yes == QMessageBox::question(this, "Podsumowanie", string, QMessageBox::Yes | QMessageBox::No))
+        {
+            accept();
+
+        }else
+        {
+            return;
+        }
+
     }
 }
 

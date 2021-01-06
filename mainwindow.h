@@ -31,8 +31,6 @@ private slots:
 
     void on_editMovieButton_clicked();
 
-    void on_addDefaultData_triggered();
-
     void on_addBorrowButton_clicked();
 
     void on_searchClientButton_clicked();
@@ -61,22 +59,31 @@ private slots:
 
     void on_actionUstal_wysoko_kary_triggered();
 
+    void on_actionShow_Last_IDs_triggered();
+
+    void on_actionShow_penalty_triggered();
+
+    void on_actionShow_IDs_toggled(bool arg1);
+
+    void on_actionWyjd_triggered();
+
 private:
 
     float penalty;
+    int clients_lastID, movies_lastID;
 
     Ui::MainWindow *ui;
 
     enum CLIENT_COLLUMNS{
-        IMIE, NAZWISKO, PESEL, TELEFON, EMAIL, POSIADANE_FILMY
+        IMIE, NAZWISKO, PESEL, TELEFON, EMAIL, POSIADANE_FILMY, ID_KLIENTA
     };
 
     enum MOVIE_COLLUMNS{
-        TYTUL, REZYSER, GATUNEK, ROK, DOSTEPNE, WYPOZYCZONE
+        TYTUL, REZYSER, GATUNEK, ROK, DOSTEPNE, WYPOZYCZONE, ID_FILMU
     };
 
     enum BORROW_COLLUMNS{
-        BORROW_COLLUMNS=(IMIE, NAZWISKO), TITLE=2, DATA_WYPOZYCZENIA, DATA_ZWROTU, KOSZT
+        IMIE_WYP, NAZWISKO_WYP, TITLE, DATA_WYPOZYCZENIA, DATA_ZWROTU, KOSZT, ID_FILMU_WYP, ID_KLIENTA_WYP
     };
 
 };

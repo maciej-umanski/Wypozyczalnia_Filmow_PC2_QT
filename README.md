@@ -4,9 +4,9 @@
  - dodałem databases_example z zaległymi wypożyczeniami żeby można było je szybko testować pozdro wrzuć je do /databases
 
 # DO ZROBIENIA :
-
-- Generowanie ID
-- Zmiana ilości dostępnych / wypożyczonych filmów w tabeli filmy oraz posiadane filmy w tabeli klienci
+ - Sprawozdanie
+ - Dokumentacja DoxyGen
+ - Ikona
 
 # ZROBIONE :
 - Zapisywanie / odczytywanie baz danych przy uruchomieniu, wyłączeniu programu
@@ -20,3 +20,5 @@
 - Zapis / odczyt ustawień do pliku
 - Nadanie wartości kary dla przekroczenia czasu wypożyczenia
 - zmienienie nazw okien z defaultowych
+- Generowanie ID
+- Zmiana ilości dostępnych / wypożyczonych filmów w tabeli filmy oraz posiadane filmy w tabeli klienci

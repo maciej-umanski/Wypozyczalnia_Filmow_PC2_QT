@@ -52,6 +52,9 @@
          <property name="selectionBehavior">
           <enum>QAbstractItemView::SelectRows</enum>
          </property>
+         <property name="sortingEnabled">
+          <bool>true</bool>
+         </property>
          <property name="rowCount">
           <number>0</number>
          </property>
@@ -86,6 +89,11 @@
          <column>
           <property name="text">
            <string>Posiadane Filmy</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>ID_KLIENTA</string>
           </property>
          </column>
         </widget>
@@ -168,6 +176,9 @@
          <property name="selectionBehavior">
           <enum>QAbstractItemView::SelectRows</enum>
          </property>
+         <property name="sortingEnabled">
+          <bool>true</bool>
+         </property>
          <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
           <bool>true</bool>
          </attribute>
@@ -199,6 +210,11 @@
          <column>
           <property name="text">
            <string>Wypożyczone</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>ID_FILMU</string>
           </property>
          </column>
         </widget>

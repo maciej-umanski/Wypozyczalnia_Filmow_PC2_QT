@@ -17,6 +17,8 @@
 #include <setpenaltydialog.h>
 
 float penalty;
+unsigned long long clients_lastID;
+unsigned long long movies_lastID;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -24,13 +26,19 @@ MainWindow::MainWindow(QWidget *parent)
 {
 
     this->penalty = 2.0f;
+    this->clients_lastID = 0;
+    this->movies_lastID = 0;
 
     QTextCodec::setCodecForLocale(QTextCodec::codecForName("UTF-8"));
     ui->setupUi(this);
     ui->actionWczytaj_bazy_z_pliku->trigger();
-    ui->clientsTable->setSortingEnabled(true);
-    ui->moviesTable->setSortingEnabled(true);
-    ui->borrowsTable->setSortingEnabled(true);
+    ui->actionShow_IDs->toggle();
+    ui->borrowsTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->clientsTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->moviesTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+
+    QApplication::setAttribute(Qt::AA_DisableWindowContextHelpButton);
+
 
     //POWIADOMIENIE O ZALEGŁYCH//
     QString currentDateStr = QDate::currentDate().toString("dd.MM.yyyy");
@@ -89,6 +97,8 @@ void MainWindow::on_addClientButton_clicked()
         return;
     }
 
+    this->clients_lastID++;
+
     ui->clientsTable->insertRow(ui->clientsTable->rowCount());
     int currentRow = ui->clientsTable->rowCount()-1;
 
@@ -98,6 +108,7 @@ void MainWindow::on_addClientButton_clicked()
     QTableWidgetItem *pesel_item = new QTableWidgetItem(pesel);
     QTableWidgetItem *phone_item = new QTableWidgetItem(phone);
     QTableWidgetItem *count_item = new QTableWidgetItem("0");
+    QTableWidgetItem *ID_item = new QTableWidgetItem(QString::number(clients_lastID));
 
     ui->clientsTable->setItem(currentRow, IMIE, name_item);
     ui->clientsTable->setItem(currentRow, NAZWISKO, surname_item);
@@ -105,6 +116,7 @@ void MainWindow::on_addClientButton_clicked()
     ui->clientsTable->setItem(currentRow, PESEL, pesel_item);
     ui->clientsTable->setItem(currentRow, TELEFON, phone_item);
     ui->clientsTable->setItem(currentRow, POSIADANE_FILMY, count_item);
+    ui->clientsTable->setItem(currentRow, ID_KLIENTA, ID_item);
 
 }
 
@@ -153,7 +165,7 @@ void MainWindow::on_delMovieButton_clicked()
 void MainWindow::on_addBorrowButton_clicked()
 {
 
-    addBorrowDialog addBorrowDialog(this, ui->clientsTable, ui->moviesTable);
+    addBorrowDialog addBorrowDialog(this, ui->clientsTable, ui->moviesTable, ui->actionShow_IDs->isChecked());
     int ret = addBorrowDialog.exec();
     if(ret == QDialog::Rejected)
         return;
@@ -165,7 +177,8 @@ void MainWindow::on_addBorrowButton_clicked()
     QString surname = addBorrowDialog.surname();
     QString title = addBorrowDialog.title();
     QString charge = addBorrowDialog.charge();
-
+    QString movieID = addBorrowDialog.chosenMovieID();
+    QString clientID = addBorrowDialog.chosenClientID();
 
     QList<QTableWidgetItem *> repeated_items = ui->borrowsTable->findItems(title, Qt::MatchExactly);
 
@@ -190,16 +203,20 @@ void MainWindow::on_addBorrowButton_clicked()
     QTableWidgetItem *borrowdate_item = new QTableWidgetItem(borrowDate);
     QTableWidgetItem *returndate_item = new QTableWidgetItem(returnDate);
     QTableWidgetItem *charge_item = new QTableWidgetItem(charge);
+    QTableWidgetItem *movieID_item = new QTableWidgetItem(movieID);
+    QTableWidgetItem *clientID_item = new QTableWidgetItem(clientID);
 
     ui->borrowsTable->insertRow(ui->borrowsTable->rowCount());
     int currentRow = ui->borrowsTable->rowCount()-1;
 
-    ui->borrowsTable->setItem(currentRow, IMIE, name_item);
-    ui->borrowsTable->setItem(currentRow, NAZWISKO, surname_item);
+    ui->borrowsTable->setItem(currentRow, IMIE_WYP, name_item);
+    ui->borrowsTable->setItem(currentRow, NAZWISKO_WYP, surname_item);
     ui->borrowsTable->setItem(currentRow, TITLE, title_item);
     ui->borrowsTable->setItem(currentRow, DATA_WYPOZYCZENIA, borrowdate_item);
     ui->borrowsTable->setItem(currentRow, DATA_ZWROTU, returndate_item);
     ui->borrowsTable->setItem(currentRow, KOSZT, charge_item);
+    ui->borrowsTable->setItem(currentRow, ID_FILMU_WYP, movieID_item);
+    ui->borrowsTable->setItem(currentRow, ID_KLIENTA_WYP, clientID_item);
 
     //dodawanie info do tablic głównych//
     int chosenClientRow = addBorrowDialog.chosenClientRow();
@@ -255,12 +272,15 @@ void MainWindow::on_addMovieButton_clicked()
 
     }
 
+    this->movies_lastID++;
+
     QTableWidgetItem *title_item = new QTableWidgetItem(title);
     QTableWidgetItem *director_item = new QTableWidgetItem(director);
     QTableWidgetItem *genre_item = new QTableWidgetItem(genre);
     QTableWidgetItem *year_item = new QTableWidgetItem(year);
     QTableWidgetItem *available_item = new QTableWidgetItem(available);
     QTableWidgetItem *borrowed_item = new QTableWidgetItem("0");
+    QTableWidgetItem *ID_item = new QTableWidgetItem(QString::number(movies_lastID));
 
     ui->moviesTable->insertRow(ui->moviesTable->rowCount());
     int currentRow = ui->moviesTable->rowCount()-1;
@@ -271,6 +291,7 @@ void MainWindow::on_addMovieButton_clicked()
     ui->moviesTable->setItem(currentRow, ROK, year_item);
     ui->moviesTable->setItem(currentRow, DOSTEPNE, available_item);
     ui->moviesTable->setItem(currentRow, WYPOZYCZONE, borrowed_item);
+    ui->moviesTable->setItem(currentRow, ID_FILMU, ID_item);
 }
 
 void MainWindow::on_editClientButton_clicked()
@@ -419,212 +440,6 @@ void MainWindow::on_editMovieButton_clicked()
     }
 }
 
-void MainWindow::on_addDefaultData_triggered()
-{
-    QTableWidgetItem *title_item = new QTableWidgetItem("Hobbit");
-    QTableWidgetItem *director_item = new QTableWidgetItem("Jan Brzechwa");
-    QTableWidgetItem *genre_item = new QTableWidgetItem("Horror");
-    QTableWidgetItem *year_item = new QTableWidgetItem("2020");
-    QTableWidgetItem *available_item = new QTableWidgetItem("10");
-    QTableWidgetItem *borrowed_item = new QTableWidgetItem("0");
-
-    ui->moviesTable->insertRow(ui->moviesTable->rowCount());
-    int currentRow = ui->moviesTable->rowCount()-1;
-
-
-    //ui->moviesTable->setItem(currentRow, 0, new QTableWidgetItem("TempID")); //DO ZMIANY TEMP DODAWANIE ID
-    ui->moviesTable->setItem(currentRow, TYTUL, title_item);
-    ui->moviesTable->setItem(currentRow, REZYSER, director_item);
-    ui->moviesTable->setItem(currentRow, GATUNEK, genre_item);
-    ui->moviesTable->setItem(currentRow, ROK, year_item);
-    ui->moviesTable->setItem(currentRow, DOSTEPNE, available_item);
-    ui->moviesTable->setItem(currentRow, WYPOZYCZONE, borrowed_item);
-
-    // NASTEPNY FILM //
-
-    title_item = new QTableWidgetItem("Harry Potter");
-    director_item = new QTableWidgetItem("J.K. Baczyński");
-    genre_item = new QTableWidgetItem("Kreskówka");
-    year_item = new QTableWidgetItem("1923");
-    available_item = new QTableWidgetItem("4");
-    borrowed_item = new QTableWidgetItem("0");
-
-    ui->moviesTable->insertRow(ui->moviesTable->rowCount());
-    currentRow = ui->moviesTable->rowCount()-1;
-
-    //ui->moviesTable->setItem(currentRow, 0, new QTableWidgetItem("TempID")); //DO ZMIANY TEMP DODAWANIE ID
-    ui->moviesTable->setItem(currentRow, TYTUL, title_item);
-    ui->moviesTable->setItem(currentRow, REZYSER, director_item);
-    ui->moviesTable->setItem(currentRow, GATUNEK, genre_item);
-    ui->moviesTable->setItem(currentRow, ROK, year_item);
-    ui->moviesTable->setItem(currentRow, DOSTEPNE, available_item);
-    ui->moviesTable->setItem(currentRow, WYPOZYCZONE, borrowed_item);
-
-    // NASTEPNY FILM //
-
-    title_item = new QTableWidgetItem("Incepcja");
-    director_item = new QTableWidgetItem("Bronisław Komorowski");
-    genre_item = new QTableWidgetItem("Musical");
-    year_item = new QTableWidgetItem("1999");
-    available_item = new QTableWidgetItem("12");
-    borrowed_item = new QTableWidgetItem("0");
-
-    ui->moviesTable->insertRow(ui->moviesTable->rowCount());
-    currentRow = ui->moviesTable->rowCount()-1;
-
-    //ui->moviesTable->setItem(currentRow, 0, new QTableWidgetItem("TempID")); //DO ZMIANY TEMP DODAWANIE ID
-    ui->moviesTable->setItem(currentRow, TYTUL, title_item);
-    ui->moviesTable->setItem(currentRow, REZYSER, director_item);
-    ui->moviesTable->setItem(currentRow, GATUNEK, genre_item);
-    ui->moviesTable->setItem(currentRow, ROK, year_item);
-    ui->moviesTable->setItem(currentRow, DOSTEPNE, available_item);
-    ui->moviesTable->setItem(currentRow, WYPOZYCZONE, borrowed_item);
-
-    // NASTEPNY FILM //
-
-    title_item = new QTableWidgetItem("Mały Książe");
-    director_item = new QTableWidgetItem("Michael Bay");
-    genre_item = new QTableWidgetItem("Film Grozy");
-    year_item = new QTableWidgetItem("1233");
-    available_item = new QTableWidgetItem("1");
-    borrowed_item = new QTableWidgetItem("0");
-
-    ui->moviesTable->insertRow(ui->moviesTable->rowCount());
-    currentRow = ui->moviesTable->rowCount()-1;
-
-    //ui->moviesTable->setItem(currentRow, 0, new QTableWidgetItem("TempID")); //DO ZMIANY TEMP DODAWANIE ID
-    ui->moviesTable->setItem(currentRow, TYTUL, title_item);
-    ui->moviesTable->setItem(currentRow, REZYSER, director_item);
-    ui->moviesTable->setItem(currentRow, GATUNEK, genre_item);
-    ui->moviesTable->setItem(currentRow, ROK, year_item);
-    ui->moviesTable->setItem(currentRow, DOSTEPNE, available_item);
-    ui->moviesTable->setItem(currentRow, WYPOZYCZONE, borrowed_item);
-
-    // NASTEPNY FILM //
-
-    title_item = new QTableWidgetItem("Gambit Królowej");
-    director_item = new QTableWidgetItem("Netflix");
-    genre_item = new QTableWidgetItem("Nie wiem");
-    year_item = new QTableWidgetItem("413");
-    available_item = new QTableWidgetItem("44");
-    borrowed_item = new QTableWidgetItem("0");
-
-    ui->moviesTable->insertRow(ui->moviesTable->rowCount());
-    currentRow = ui->moviesTable->rowCount()-1;
-
-    //ui->moviesTable->setItem(currentRow, 0, new QTableWidgetItem("TempID")); //DO ZMIANY TEMP DODAWANIE ID
-    ui->moviesTable->setItem(currentRow, TYTUL, title_item);
-    ui->moviesTable->setItem(currentRow, REZYSER, director_item);
-    ui->moviesTable->setItem(currentRow, GATUNEK, genre_item);
-    ui->moviesTable->setItem(currentRow, ROK, year_item);
-    ui->moviesTable->setItem(currentRow, DOSTEPNE, available_item);
-    ui->moviesTable->setItem(currentRow, WYPOZYCZONE, borrowed_item);
-
-    // NASTEPNY KLIENT //
-
-    ui->clientsTable->insertRow(ui->clientsTable->rowCount());
-    currentRow = ui->clientsTable->rowCount()-1;
-
-    QTableWidgetItem *name_item = new QTableWidgetItem("Maciej");
-    QTableWidgetItem *surname_item = new QTableWidgetItem("Umański");
-    QTableWidgetItem *email_item = new QTableWidgetItem("maciek@buziaczek.pl");
-    QTableWidgetItem *pesel_item = new QTableWidgetItem("12345678909");
-    QTableWidgetItem *phone_item = new QTableWidgetItem("123123123");
-    QTableWidgetItem *count_item = new QTableWidgetItem("0");
-
-    //ui->clientsTable->setItem(currentRow, 0, new QTableWidgetItem("TempID")); //DO ZMIANY TEMP DODAWANIE ID
-    ui->clientsTable->setItem(currentRow, IMIE, name_item);
-    ui->clientsTable->setItem(currentRow, NAZWISKO, surname_item);
-    ui->clientsTable->setItem(currentRow, EMAIL, email_item);
-    ui->clientsTable->setItem(currentRow, PESEL, pesel_item);
-    ui->clientsTable->setItem(currentRow, TELEFON, phone_item);
-    ui->clientsTable->setItem(currentRow, POSIADANE_FILMY, count_item);
-
-    // NASTEPNY KLIENT //
-
-    ui->clientsTable->insertRow(ui->clientsTable->rowCount());
-    currentRow = ui->clientsTable->rowCount()-1;
-
-    name_item = new QTableWidgetItem("Jakub");
-    surname_item = new QTableWidgetItem("Witaś");
-    email_item = new QTableWidgetItem("lubieamine@op.pl");
-    pesel_item = new QTableWidgetItem("31231232112");
-    phone_item = new QTableWidgetItem("321321312");
-    count_item = new QTableWidgetItem("0");
-
-    //ui->clientsTable->setItem(currentRow, 0, new QTableWidgetItem("TempID")); //DO ZMIANY TEMP DODAWANIE ID
-    ui->clientsTable->setItem(currentRow, IMIE, name_item);
-    ui->clientsTable->setItem(currentRow, NAZWISKO, surname_item);
-    ui->clientsTable->setItem(currentRow, EMAIL, email_item);
-    ui->clientsTable->setItem(currentRow, PESEL, pesel_item);
-    ui->clientsTable->setItem(currentRow, TELEFON, phone_item);
-    ui->clientsTable->setItem(currentRow, POSIADANE_FILMY, count_item);
-
-    // NASTEPNY KLIENT //
-
-    ui->clientsTable->insertRow(ui->clientsTable->rowCount());
-    currentRow = ui->clientsTable->rowCount()-1;
-
-    name_item = new QTableWidgetItem("Krystian");
-    surname_item = new QTableWidgetItem("Kołomański");
-    email_item = new QTableWidgetItem("hehehaha@op.pl");
-    pesel_item = new QTableWidgetItem("11111111111");
-    phone_item = new QTableWidgetItem("321333312");
-    count_item = new QTableWidgetItem("0");
-
-    //ui->clientsTable->setItem(currentRow, 0, new QTableWidgetItem("TempID")); //DO ZMIANY TEMP DODAWANIE ID
-    ui->clientsTable->setItem(currentRow, IMIE, name_item);
-    ui->clientsTable->setItem(currentRow, NAZWISKO, surname_item);
-    ui->clientsTable->setItem(currentRow, EMAIL, email_item);
-    ui->clientsTable->setItem(currentRow, PESEL, pesel_item);
-    ui->clientsTable->setItem(currentRow, TELEFON, phone_item);
-    ui->clientsTable->setItem(currentRow, POSIADANE_FILMY, count_item);
-
-    // NASTEPNY KLIENT //
-
-    ui->clientsTable->insertRow(ui->clientsTable->rowCount());
-    currentRow = ui->clientsTable->rowCount()-1;
-
-    name_item = new QTableWidgetItem("Marcin");
-    surname_item = new QTableWidgetItem("Najman");
-    email_item = new QTableWidgetItem("xDDDDD@XD.pl");
-    pesel_item = new QTableWidgetItem("55544411323");
-    phone_item = new QTableWidgetItem("997");
-    count_item = new QTableWidgetItem("0");
-
-    //ui->clientsTable->setItem(currentRow, 0, new QTableWidgetItem("TempID")); //DO ZMIANY TEMP DODAWANIE ID
-    ui->clientsTable->setItem(currentRow, IMIE, name_item);
-    ui->clientsTable->setItem(currentRow, NAZWISKO, surname_item);
-    ui->clientsTable->setItem(currentRow, EMAIL, email_item);
-    ui->clientsTable->setItem(currentRow, PESEL, pesel_item);
-    ui->clientsTable->setItem(currentRow, TELEFON, phone_item);
-    ui->clientsTable->setItem(currentRow, POSIADANE_FILMY, count_item);
-
-    // NASTEPNY KLIENT //
-
-    ui->clientsTable->insertRow(ui->clientsTable->rowCount());
-    currentRow = ui->clientsTable->rowCount()-1;
-
-    name_item = new QTableWidgetItem("Stefan");
-    surname_item = new QTableWidgetItem("Walaszek");
-    email_item = new QTableWidgetItem("patologia@XD.pl");
-    pesel_item = new QTableWidgetItem("32332145612");
-    phone_item = new QTableWidgetItem("112");
-    count_item = new QTableWidgetItem("0");
-
-    //ui->clientsTable->setItem(currentRow, 0, new QTableWidgetItem("TempID")); //DO ZMIANY TEMP DODAWANIE ID
-    ui->clientsTable->setItem(currentRow, IMIE, name_item);
-    ui->clientsTable->setItem(currentRow, NAZWISKO, surname_item);
-    ui->clientsTable->setItem(currentRow, EMAIL, email_item);
-    ui->clientsTable->setItem(currentRow, PESEL, pesel_item);
-    ui->clientsTable->setItem(currentRow, TELEFON, phone_item);
-    ui->clientsTable->setItem(currentRow, POSIADANE_FILMY, count_item);
-
-    ui->addDefaultData->setDisabled(true);
-}
-
-
-
 void MainWindow::on_searchClientButton_clicked()
 {
     if(ui->searchClientField->text().isEmpty()){
@@ -713,6 +528,9 @@ void MainWindow::on_delBorrowButton_clicked()
         QDate borrowdate, returndate;
         borrowdate = QDate::fromString(ui->borrowsTable->item(rowToRemove, DATA_WYPOZYCZENIA)->text(), "dd.MM.yyyy");
         returndate = QDate::fromString(ui->borrowsTable->item(rowToRemove, DATA_ZWROTU)->text(), "dd.MM.yyyy");
+        unsigned long long clientID_toUpdate = ui->borrowsTable->item(rowToRemove, ID_KLIENTA_WYP)->text().toULongLong();
+        unsigned long long movieID_toUpdate = ui->borrowsTable->item(rowToRemove, ID_FILMU_WYP)->text().toULongLong();
+
         int datediff = borrowdate.daysTo(returndate);
         int datetonow = returndate.daysTo(QDate::currentDate());
         int cena = (ui->borrowsTable->item(rowToRemove, 5)->text()).split(" ")[0].toInt();
@@ -724,14 +542,32 @@ void MainWindow::on_delBorrowButton_clicked()
             msgBox.setText("Wypożyczenie oddane po terminie!\nKara zostanie doliczona do rachunku.\nNależność podstawowa: "+QString::number(naleznosc_podstawowa)+"zł.\nKara: " + QString::number(naleznosc_kara)+"zł.\nRazem do zapłaty: " + QString::number(naleznosc_kara+naleznosc_podstawowa)+"zł.");
             msgBox.exec();
             ui->borrowsTable->removeRow(rowToRemove);
-
-            // TRZEBA DOROBIĆ TUTAJ KONIECZNIE PRACE Z ID ZEBY USUWAŁO ILOSC WYPOZYCZONYCH FILMOW ORAZ USUWALO ZE KLIENT MA WYPOZYCZONY FILM
-
         }
         else {
            msgBox.setText("Należność do zapłaty: "+QString::number(naleznosc_podstawowa)+"zł.");
            msgBox.exec();
            ui->borrowsTable->removeRow(rowToRemove);
+        }
+
+        for(int i = 0; i < ui->clientsTable->rowCount(); i++){
+            if(clientID_toUpdate == ui->clientsTable->item(i, ID_KLIENTA)->text().toULongLong()){
+                int tempMovieCount = ui->clientsTable->item(i, POSIADANE_FILMY)->text().toInt();
+                tempMovieCount--;
+                ui->clientsTable->item(i, POSIADANE_FILMY)->setText(QString::number(tempMovieCount));
+                break;
+            }
+        }
+
+        for(int i = 0; i < ui->moviesTable->rowCount(); i++){
+            if(movieID_toUpdate == ui->moviesTable->item(i, ID_FILMU)->text().toULongLong()){
+                int tempFreeMovieCount = ui->moviesTable->item(i, DOSTEPNE)->text().toInt();
+                int tempBorrowedMovieCount = ui->moviesTable->item(i, WYPOZYCZONE)->text().toInt();
+                tempFreeMovieCount++;
+                tempBorrowedMovieCount--;
+                ui->moviesTable->item(i,DOSTEPNE)->setText(QString::number(tempFreeMovieCount));
+                ui->moviesTable->item(i,WYPOZYCZONE)->setText(QString::number(tempBorrowedMovieCount));
+                break;
+            }
         }
    }
 }
@@ -749,6 +585,8 @@ void MainWindow::on_actionZapisz_do_pliku_triggered()
     QFile f_movies(path + "moviesTable.db");
     QFile f_borrows(path + "borrowsTable.db");
     QFile f_penalty(path + "penalty.db");
+    QFile f_clients_lastID(path + "clients_lastID.db");
+    QFile f_movies_lastID(path + "movies_lastID.db");
 
     if(QMessageBox::No == QMessageBox::question(this, tr("Zapis baz danych"), tr("Czy chcesz zapisać bazy danych?"))){
         return;
@@ -804,6 +642,22 @@ void MainWindow::on_actionZapisz_do_pliku_triggered()
         data << strList.join("");
         f_penalty.close();
     }
+
+    if (f_clients_lastID.open(QFile::WriteOnly | QFile::Truncate)){
+        QTextStream data(&f_clients_lastID);
+        QStringList strList;
+        strList << QString::number(this->clients_lastID);
+        data << strList.join("");
+        f_clients_lastID.close();
+    }
+
+    if (f_movies_lastID.open(QFile::WriteOnly | QFile::Truncate)){
+        QTextStream data(&f_movies_lastID);
+        QStringList strList;
+        strList << QString::number(this->movies_lastID);
+        data << strList.join("");
+        f_movies_lastID.close();
+    }
 }
 
 void MainWindow::on_actionWczytaj_bazy_z_pliku_triggered()
@@ -817,12 +671,14 @@ void MainWindow::on_actionWczytaj_bazy_z_pliku_triggered()
     QFile f_movies(path + "moviesTable.db");
     QFile f_borrows(path + "borrowsTable.db");
     QFile f_penalty(path + "penalty.db");
+    QFile f_clients_lastID(path + "clients_lastID.db");
+    QFile f_movies_lastID(path + "movies_lastID.db");
 
     if(QMessageBox::No == QMessageBox::question(this, tr("Odczyt baz danych"), tr("Czy chcesz wczytać bazy danych?"))){
         return;
     }
 
-    if(!(f_clients.exists() || f_movies.exists() || f_borrows.exists())){
+    if(!(f_clients.exists() || f_movies.exists() || f_borrows.exists() || f_clients_lastID.exists() || f_movies_lastID.exists())){
         QMessageBox msgBox;
         msgBox.setWindowTitle("Błąd");
         msgBox.setText("Pliki baz danych nie istnieją lub są niekompletne!");
@@ -837,6 +693,28 @@ void MainWindow::on_actionWczytaj_bazy_z_pliku_triggered()
             float penalty_f = data.toFloat(&succes);
             if(succes){
                 this->penalty = penalty_f;
+            }
+        }
+    }
+
+    if (f_clients_lastID.open(QFile::ReadOnly)){
+        QString data = f_clients_lastID.readAll();
+        if (f_clients_lastID.size() != 0){
+            bool succes = false;
+            unsigned long long clients_lastID_f = data.toULongLong(&succes);
+            if(succes){
+                this->clients_lastID = clients_lastID_f;
+            }
+        }
+    }
+
+    if (f_movies_lastID.open(QFile::ReadOnly)){
+        QString data = f_movies_lastID.readAll();
+        if (f_movies_lastID.size() != 0){
+            bool succes = false;
+            unsigned long long movies_lastID_f = data.toULongLong(&succes);
+            if(succes){
+                this->movies_lastID = movies_lastID_f;
             }
         }
     }
@@ -968,4 +846,36 @@ void MainWindow::on_actionUstal_wysoko_kary_triggered()
     if(ret == QDialog::Rejected)
         return;
     this->penalty = setPenaltyDialog.penalty();
+}
+
+void MainWindow::on_actionShow_Last_IDs_triggered()
+{
+    QMessageBox msgBox;
+    msgBox.setWindowTitle("Ostatnie ID");
+    QString string = "Ostatnie ID filmu = " + QString::number(this->movies_lastID) + "\nOstatnie ID klienta = " + QString::number(this->clients_lastID);
+    msgBox.setText(string);
+    msgBox.exec();
+}
+
+void MainWindow::on_actionShow_penalty_triggered()
+{
+    QMessageBox msgBox;
+    msgBox.setWindowTitle("Wysokość kary");
+    QString string = "Wysokość kary = " + QString::number(this->penalty) + "zł";
+    msgBox.setText(string);
+    msgBox.exec();
+}
+
+void MainWindow::on_actionShow_IDs_toggled(bool arg1)
+{
+    ui->borrowsTable->setColumnHidden(ID_FILMU_WYP,!arg1);
+    ui->borrowsTable->setColumnHidden(ID_KLIENTA_WYP,!arg1);
+    ui->clientsTable->setColumnHidden(ID_KLIENTA,!arg1);
+    ui->moviesTable->setColumnHidden(ID_FILMU,!arg1);
+}
+
+
+void MainWindow::on_actionWyjd_triggered()
+{
+    close();
 }
