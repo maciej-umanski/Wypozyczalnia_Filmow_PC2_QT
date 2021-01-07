@@ -53,8 +53,6 @@ private slots:
 
     void on_actionWczytaj_bazy_z_pliku_triggered();
 
-    void on_showOverdueBorrowButton_clicked();
-
     void on_actionPod_wietlaj_zaleg_e_toggled(bool arg1);
 
     void on_actionUstal_wysoko_kary_triggered();
@@ -66,6 +64,14 @@ private slots:
     void on_actionShow_IDs_toggled(bool arg1);
 
     void on_actionWyjd_triggered();
+
+    void on_comboBox_currentIndexChanged(int index);
+
+    void on_actionPokazuj_Status_Zwr_cenia_toggled(bool arg1);
+
+    void on_actionPod_wietlaj_zwr_cone_toggled(bool arg1);
+
+    void on_actionPod_wietlaj_aktualne_niezaleg_e_toggled(bool arg1);
 
 private:
 
@@ -83,7 +89,7 @@ private:
     };
 
     enum BORROW_COLLUMNS{
-        IMIE_WYP, NAZWISKO_WYP, TITLE, DATA_WYPOZYCZENIA, DATA_ZWROTU, KOSZT, ID_FILMU_WYP, ID_KLIENTA_WYP
+        IMIE_WYP, NAZWISKO_WYP, TITLE, DATA_WYPOZYCZENIA, DATA_ZWROTU, KOSZT, ID_FILMU_WYP, ID_KLIENTA_WYP, ZWROCONE
     };
 
 };

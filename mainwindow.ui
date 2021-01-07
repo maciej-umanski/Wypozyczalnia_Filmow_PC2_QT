@@ -43,7 +43,7 @@
           <item>
            <widget class="QPushButton" name="delBorrowButton">
             <property name="text">
-             <string>Usuń wypożyczenie</string>
+             <string>Zwróć wypożyczenie</string>
             </property>
            </widget>
           </item>
@@ -69,10 +69,27 @@
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="showOverdueBorrowButton">
-            <property name="text">
-             <string>Pokaż zaległe</string>
-            </property>
+           <widget class="QComboBox" name="comboBox">
+            <item>
+             <property name="text">
+              <string>Pokaż aktualne</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Pokaż zaległe</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Pokaż wszystko</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Pokaż zwrócone</string>
+             </property>
+            </item>
            </widget>
           </item>
          </layout>
@@ -135,6 +152,11 @@
           <column>
            <property name="text">
             <string>ID_KLIENTA_WYP</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Zwrócone</string>
            </property>
           </column>
          </widget>
@@ -373,14 +395,23 @@
     <property name="title">
      <string>Ustawienia</string>
     </property>
-    <addaction name="actionShow_penalty"/>
     <addaction name="actionUstal_wysoko_kary"/>
     <addaction name="actionPod_wietlaj_zaleg_e"/>
-    <addaction name="actionShow_Last_IDs"/>
+    <addaction name="actionPod_wietlaj_zwr_cone"/>
+    <addaction name="actionPod_wietlaj_aktualne_niezaleg_e"/>
+    <addaction name="actionPokazuj_Status_Zwr_cenia"/>
+   </widget>
+   <widget class="QMenu" name="menuDebug">
+    <property name="title">
+     <string>Debug</string>
+    </property>
     <addaction name="actionShow_IDs"/>
+    <addaction name="actionShow_penalty"/>
+    <addaction name="actionShow_Last_IDs"/>
    </widget>
    <addaction name="menuPlik"/>
    <addaction name="menuUstawienia_2"/>
+   <addaction name="menuDebug"/>
   </widget>
   <action name="actionZapisz_do_pliku">
    <property name="text">
@@ -429,6 +460,33 @@
   <action name="actionWyjd">
    <property name="text">
     <string>Wyjdź</string>
+   </property>
+  </action>
+  <action name="actionPokazuj_Status_Zwr_cenia">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Pokazuj Status Zwrócenia</string>
+   </property>
+  </action>
+  <action name="actionPod_wietlaj_zwr_cone">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Podświetlaj zwrócone</string>
+   </property>
+  </action>
+  <action name="actionPod_wietlaj_aktualne_niezaleg_e">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Podświetlaj aktualne (niezaległe)</string>
    </property>
   </action>
  </widget>

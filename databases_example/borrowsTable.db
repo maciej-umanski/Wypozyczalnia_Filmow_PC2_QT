@@ -1,8 +1,17 @@
-Maciej;Umański;Incepcja;21.12.2020;01.01.2021;10;2;0
-Stefan;Walaszek;Harry Potter;21.12.2020;01.01.2021;10;1;4
-Marcin;Najman;Incepcja;21.12.2020;01.01.2021;10;2;3
-Krystian;Kołomański;Mały Książe;06.01.2021;10.01.2021;10;3;2
-Jakub;Witaś;Hobbit;06.01.2021;10.01.2021;10;0;1
-Maciek;Krystian;Interstellar;06.01.2021;12.01.2021;10;4;5
-Maciej;Umański;Hobbit;06.01.2021;10.01.2021;10;0;0
-Marcin;Najman;Gambit Królowej;06.01.2021;10.01.2021;12;3;3
+Jakub;Witaś;Interstellar;07.01.2021;12.01.2021;10;4;1;Nie
+Jakub;Witaś;Incepcja;07.01.2021;01.01.2021;10;2;1;Nie
+Jakub;Witaś;Hobbit;07.01.2021;12.01.2021;10;0;1;Nie
+Jakub;Witaś;Harry Potter;07.01.2021;11.01.2021;10;1;1;Nie
+Jakub;Witaś;Gambit Królowej;21.11.2020;07.01.2021;10;3;1;Tak
+Krystian;Kołomański;Hobbit;07.01.2021;13.01.2021;10;0;2;Nie
+Krystian;Kołomański;Harry Potter;07.01.2021;15.01.2021;10;1;2;Nie
+Krystian;Kołomański;Harry Potter;21.11.2020;07.01.2021;10;1;2;Tak
+Krystian;Kołomański;Gambit Królowej;07.01.2021;11.01.2021;10;2;2;Nie
+Maciej;Umański;Incepcja;07.01.2021;07.01.2021;10;2;0;Tak
+Maciej;Umański;Hobbit;21.11.2020;01.01.2021;10;0;0;Nie
+Maciej;Umański;Harry Potter;21.11.2020;07.01.2021;10;1;0;Tak
+Maciej;Umański;Gambit Królowej;07.01.2021;12.01.2021;10;3;0;Nie
+Stefan;Walaszek;Interstellar;21.11.2020;01.01.2021;10;4;4;Nie
+Stefan;Walaszek;Incepcja;07.01.2021;11.01.2021;10;2;4;Nie
+Stefan;Walaszek;Hobbit;06.01.2021;12.01.2021;10;0;4;Nie
+Stefan;Walaszek;Harry Potter;07.01.2021;11.01.2021;10;1;4;Nie

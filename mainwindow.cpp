@@ -33,9 +33,13 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     ui->actionWczytaj_bazy_z_pliku->trigger();
     ui->actionShow_IDs->toggle();
+    ui->actionPokazuj_Status_Zwr_cenia->toggle();
     ui->borrowsTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->clientsTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->moviesTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+
+    ui->actionPod_wietlaj_zaleg_e->toggle();
+    ui->actionPod_wietlaj_zwr_cone->toggle();
 
     QApplication::setAttribute(Qt::AA_DisableWindowContextHelpButton);
 
@@ -54,6 +58,12 @@ MainWindow::MainWindow(QWidget *parent)
         msgBox.setWindowTitle("Zaległe wypożyczenia");
         msgBox.setText(QString("Istnieje %1 zaległych wypożyczeń! Skontaktuj się z klientami").arg(count));
         msgBox.exec();
+    }
+
+    for(int i = 0; i < ui->borrowsTable->rowCount(); i++){
+        if(ui->borrowsTable->item(i,ZWROCONE)->text() == "Tak"){
+            ui->borrowsTable->hideRow(i);
+        }
     }
 }
 
@@ -191,7 +201,7 @@ void MainWindow::on_addBorrowButton_clicked()
             if(item->text() == search_table[j])
                 match_item++;
         }
-        if(match_item==3) {
+        if(match_item==3 && ui->borrowsTable->item(row,ZWROCONE)->text() == "Nie") {
             QMessageBox::information(this, tr("Istniejace wypożyczenie"),tr("W bazie już istnieje takie wypożyczenie!\nWybierz inny film."));
             return;
         }
@@ -205,6 +215,7 @@ void MainWindow::on_addBorrowButton_clicked()
     QTableWidgetItem *charge_item = new QTableWidgetItem(charge);
     QTableWidgetItem *movieID_item = new QTableWidgetItem(movieID);
     QTableWidgetItem *clientID_item = new QTableWidgetItem(clientID);
+    QTableWidgetItem *isReturned_item = new QTableWidgetItem("Nie");
 
     ui->borrowsTable->insertRow(ui->borrowsTable->rowCount());
     int currentRow = ui->borrowsTable->rowCount()-1;
@@ -217,6 +228,7 @@ void MainWindow::on_addBorrowButton_clicked()
     ui->borrowsTable->setItem(currentRow, KOSZT, charge_item);
     ui->borrowsTable->setItem(currentRow, ID_FILMU_WYP, movieID_item);
     ui->borrowsTable->setItem(currentRow, ID_KLIENTA_WYP, clientID_item);
+    ui->borrowsTable->setItem(currentRow, ZWROCONE, isReturned_item);
 
     //dodawanie info do tablic głównych//
     int chosenClientRow = addBorrowDialog.chosenClientRow();
@@ -232,7 +244,11 @@ void MainWindow::on_addBorrowButton_clicked()
     ui->moviesTable->item(chosenMovieRow,DOSTEPNE)->setText(QString::number(freeMoviesCount));
     ui->moviesTable->item(chosenMovieRow,WYPOZYCZONE)->setText(QString::number(borrowedMoviesCount));
 
-
+    for(int i = 0 ; i < 2; i++){
+        ui->actionPod_wietlaj_zaleg_e->toggle();
+        ui->actionPod_wietlaj_zwr_cone->toggle();
+        ui->actionPod_wietlaj_aktualne_niezaleg_e->toggle();
+    }
 
 }
 
@@ -354,25 +370,30 @@ void MainWindow::on_editBorrowButton_2_clicked()
         msgBox.setText("Żaden wiersz nie został wybrany!");
         msgBox.exec();
         return;
-    }else if (items.size() > 6) {
-        msgBox.setText("Wybrano więcej niż jeden wiersz!");
+    }else if(ui->borrowsTable->item(items[0]->row(),ZWROCONE)->text() == "Tak"){
+        msgBox.setText("Nie można edytować zwróconego wypożyczenia!");
         msgBox.exec();
-        return;
-    }
+    }else{
+        editBorrowDialog editBorrowDialog(nullptr, items[4]->text());
+        int ret = editBorrowDialog.exec();
+        if(ret == QDialog::Rejected)
+            return;
 
-    editBorrowDialog editBorrowDialog(nullptr, items[4]->text());
-    int ret = editBorrowDialog.exec();
-    if(ret == QDialog::Rejected)
-        return;
+        QString returndate = editBorrowDialog.returndate();
 
-    QString returndate = editBorrowDialog.returndate();
+        if(QDate::fromString(returndate, "dd.MM.yyyy") <= QDate::currentDate()) {
+            msgBox.setText("Wypożyczenie należy przedłużyć o conajmniej jeden dzień od dzisiaj!");
+            msgBox.exec();
+        }
+        else {
+            ui->borrowsTable->item(items[0]->row(), DATA_ZWROTU)->setText(returndate);
+        }
 
-    if(QDate::fromString(returndate, "dd.MM.yyyy") <= QDate::currentDate()) {
-        msgBox.setText("Wypożyczenie należy przedłużyć o conajmniej jeden dzień od dzisiaj!");
-        msgBox.exec();
-    }
-    else {
-        ui->borrowsTable->item(items[0]->row(), DATA_ZWROTU)->setText(returndate);
+        for(int i = 0 ; i < 2; i++){
+            ui->actionPod_wietlaj_zaleg_e->toggle();
+            ui->actionPod_wietlaj_zwr_cone->toggle();
+            ui->actionPod_wietlaj_aktualne_niezaleg_e->toggle();
+        }
     }
 }
 
@@ -519,10 +540,15 @@ void MainWindow::on_delBorrowButton_clicked()
 {
     QMessageBox msgBox;
     QList<QTableWidgetItem *> items = ui->borrowsTable->selectedItems();
+    int currentRow = items[0]->row();
     if(items.isEmpty()){
         msgBox.setWindowTitle("Błąd");
         msgBox.setText("Żadna z kolumn nie jest wybrana!");
         msgBox.exec();
+    }else if(ui->borrowsTable->item(currentRow, ZWROCONE)->text() == "Tak"){
+         msgBox.setWindowTitle("Błąd");
+         msgBox.setText("Film już jest zwrócony!");
+         msgBox.exec();
     }else{
         int rowToRemove = ui->borrowsTable->row(items[0]);
         QDate borrowdate, returndate;
@@ -541,13 +567,25 @@ void MainWindow::on_delBorrowButton_clicked()
             msgBox.setWindowTitle("Zwrot wypożyczenia");
             msgBox.setText("Wypożyczenie oddane po terminie!\nKara zostanie doliczona do rachunku.\nNależność podstawowa: "+QString::number(naleznosc_podstawowa)+"zł.\nKara: " + QString::number(naleznosc_kara)+"zł.\nRazem do zapłaty: " + QString::number(naleznosc_kara+naleznosc_podstawowa)+"zł.");
             msgBox.exec();
-            ui->borrowsTable->removeRow(rowToRemove);
         }
         else {
            msgBox.setText("Należność do zapłaty: "+QString::number(naleznosc_podstawowa)+"zł.");
            msgBox.exec();
-           ui->borrowsTable->removeRow(rowToRemove);
         }
+
+        ui->borrowsTable->item(rowToRemove,ZWROCONE)->setText("Tak");
+        ui->borrowsTable->item(rowToRemove,DATA_ZWROTU)->setText(QDate::currentDate().toString("dd.MM.yyyy"));
+
+        if(ui->comboBox->currentIndex() == 0 || ui->comboBox->currentIndex() == 1){
+           ui->borrowsTable->hideRow(rowToRemove);
+        }
+
+        for(int i = 0 ; i < 2; i++){
+            ui->actionPod_wietlaj_zaleg_e->toggle();
+            ui->actionPod_wietlaj_zwr_cone->toggle();
+            ui->actionPod_wietlaj_aktualne_niezaleg_e->toggle();
+        }
+
 
         for(int i = 0; i < ui->clientsTable->rowCount(); i++){
             if(clientID_toUpdate == ui->clientsTable->item(i, ID_KLIENTA)->text().toULongLong()){
@@ -796,47 +834,22 @@ void MainWindow::on_actionWczytaj_bazy_z_pliku_triggered()
     ui->borrowsTable->removeRow(ui->borrowsTable->rowCount()-1);
 }
 
-void MainWindow::on_showOverdueBorrowButton_clicked()
-{
-    if(ui->showOverdueBorrowButton->text() == "Pokaż zaległe"){
-        QDate currentDate = QDate::currentDate();
-        QString currentDateStr = currentDate.toString("dd.MM.yyyy");
-        for(int i = 0; i < ui->borrowsTable->rowCount(); i++){
-            int cmp = ui->borrowsTable->item(i,DATA_ZWROTU)->text().compare(currentDateStr);
-            if(cmp > 0){
-                ui->borrowsTable->hideRow(i);
-            }
-         }
-        ui->showOverdueBorrowButton->setText("Pokaż wszystkie");
-    }else{
-        for(int i = 0; i < ui->borrowsTable->rowCount(); i++){
-            ui->borrowsTable->showRow(i);
-        }
-        ui->showOverdueBorrowButton->setText("Pokaż zaległe");
-    }
-
-}
-
 void MainWindow::on_actionPod_wietlaj_zaleg_e_toggled(bool arg1)
 {
-    if(arg1){
-        QDate currentDate = QDate::currentDate();
-        QString currentDateStr = currentDate.toString("dd.MM.yyyy");
-        for(int i = 0; i < ui->borrowsTable->rowCount(); i++){
-            int cmp = ui->borrowsTable->item(i,DATA_ZWROTU)->text().compare(currentDateStr);
-            if(cmp < 0){
-                for(int j = 0; j < ui->borrowsTable->columnCount(); j++){
-                    ui->borrowsTable->item(i,j)->setBackground(Qt::red);
-                }
-            }
-         }
-    }else{
-       for(int i = 0; i < ui->borrowsTable->rowCount(); i++){
-           for(int j = 0; j < ui->borrowsTable->columnCount();j++){
-                ui->borrowsTable->item(i,j)->setBackground(Qt::white);
+    QDate currentDate = QDate::currentDate();
+    QString currentDateStr = currentDate.toString("dd.MM.yyyy");
+    for(int i = 0; i < ui->borrowsTable->rowCount(); i++){
+        int cmp = ui->borrowsTable->item(i,DATA_ZWROTU)->text().compare(currentDateStr);
+        if(cmp < 0 && ui->borrowsTable->item(i,ZWROCONE)->text() == "Nie"){
+           for(int j = 0; j < ui->borrowsTable->columnCount(); j++){\
+               if(arg1){
+                  ui->borrowsTable->item(i,j)->setBackground(QColor(255,100,100,255));
+               }else{
+                  ui->borrowsTable->item(i,j)->setBackground(Qt::white);
+               }
            }
-       }
-    }
+        }
+     }
 }
 
 void MainWindow::on_actionUstal_wysoko_kary_triggered()
@@ -878,4 +891,84 @@ void MainWindow::on_actionShow_IDs_toggled(bool arg1)
 void MainWindow::on_actionWyjd_triggered()
 {
     close();
+}
+
+void MainWindow::on_comboBox_currentIndexChanged(int index)
+{
+    for(int i = 0; i < ui->borrowsTable->rowCount(); i++){
+        ui->borrowsTable->showRow(i);
+    }
+    switch(index){
+    case 0:{
+        for(int i = 0; i < ui->borrowsTable->rowCount(); i++){
+            if(ui->borrowsTable->item(i,ZWROCONE)->text()=="Tak"){
+                ui->borrowsTable->hideRow(i);
+            }
+        }
+        break;
+    }
+    case 1:{
+        QDate currentDate = QDate::currentDate();
+        QString currentDateStr = currentDate.toString("dd.MM.yyyy");
+        for(int i = 0; i < ui->borrowsTable->rowCount(); i++){
+            int cmp = ui->borrowsTable->item(i,DATA_ZWROTU)->text().compare(currentDateStr);
+            if(cmp > 0 || ui->borrowsTable->item(i,ZWROCONE)->text() == "Tak"){
+                ui->borrowsTable->hideRow(i);
+            }
+         }
+        break;
+    }
+    case 2:{
+        for(int i = 0; i < ui->borrowsTable->rowCount(); i++){
+            ui->borrowsTable->showRow(i);
+        }
+        break;
+    }
+    case 3:{
+        for(int i = 0; i < ui->borrowsTable->rowCount(); i++){
+            if(ui->borrowsTable->item(i,ZWROCONE)->text()=="Nie"){
+                ui->borrowsTable->hideRow(i);
+            }
+        }
+    }
+    }
+}
+
+void MainWindow::on_actionPokazuj_Status_Zwr_cenia_toggled(bool arg1)
+{
+        ui->borrowsTable->setColumnHidden(ZWROCONE, !arg1);
+}
+
+void MainWindow::on_actionPod_wietlaj_zwr_cone_toggled(bool arg1)
+{
+    for(int i = 0; i < ui->borrowsTable->rowCount(); i++){
+        if(ui->borrowsTable->item(i,ZWROCONE)->text() == "Tak"){
+            for(int j = 0; j < ui->borrowsTable->columnCount(); j++){
+                if(arg1){
+                 ui->borrowsTable->item(i,j)->setBackground(Qt::lightGray);
+                }else{
+                   ui->borrowsTable->item(i,j)->setBackground(Qt::white);
+                }
+
+            }
+        }
+     }
+}
+
+void MainWindow::on_actionPod_wietlaj_aktualne_niezaleg_e_toggled(bool arg1)
+{
+    QDate currentDate = QDate::currentDate();
+    QString currentDateStr = currentDate.toString("dd.MM.yyyy");
+    for(int i = 0; i < ui->borrowsTable->rowCount(); i++){
+        int cmp = ui->borrowsTable->item(i,DATA_ZWROTU)->text().compare(currentDateStr);
+        if(cmp >= 0 && ui->borrowsTable->item(i,ZWROCONE)->text() == "Nie"){
+           for(int j = 0; j < ui->borrowsTable->columnCount(); j++){\
+               if(arg1){
+                  ui->borrowsTable->item(i,j)->setBackground(QColor(153,217,234,255));
+               }else{
+                  ui->borrowsTable->item(i,j)->setBackground(Qt::white);
+               }
+           }
+        }
+     }
 }

@@ -1,7 +1,6 @@
 #include "editclientdialog.h"
 #include "ui_editclientdialog.h"
 #include <QMessageBox>
-#include "others.h"
 
 editClientDialog::editClientDialog(QWidget *parent,  QString name, QString surname, QString pesel, QString phone, QString email) :
     QDialog(parent),
@@ -43,7 +42,12 @@ void editClientDialog::on_buttonBox_accepted()
         msgBox.setText("Wszystkie pola muszą być wypełnione!");
         msgBox.exec();
     }else{
-        if(peselConversion && phoneConversion && ui->peselClientEdit->text().length() == 11 && ui->phoneClientEdit->text().length() == 9 && Email_check(ui->emailClientEdit->text()))
+        QRegExp mailREX("(\\w+)(\\.|_)?(\\w*)@(\\w+)(\\.(\\w+))+");
+        mailREX.setCaseSensitivity(Qt::CaseInsensitive);
+        mailREX.setPatternSyntax(QRegExp::RegExp);
+        bool emailCheck = mailREX.exactMatch(ui->emailClientEdit->text());
+
+        if(peselConversion && phoneConversion && ui->peselClientEdit->text().length() == 11 && ui->phoneClientEdit->text().length() == 9 && emailCheck)
             accept();
 
         if(!peselConversion || ui->peselClientEdit->text().length() < 11){
@@ -54,7 +58,7 @@ void editClientDialog::on_buttonBox_accepted()
             msgBox.setText("Błąd!  Sprawdź poprawność numeru telefonu!");
             msgBox.exec();
         }
-        if(!Email_check(ui->emailClientEdit->text())) {
+        if(!emailCheck) {
             msgBox.setText("Błąd! Sprawdź poprawność adresu email!");
             msgBox.exec();
         }

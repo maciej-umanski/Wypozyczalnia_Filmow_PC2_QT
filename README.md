@@ -9,6 +9,8 @@
  - Ikona
 
 # ZROBIONE :
+- Historia
+- Podświetlanie
 - Zapisywanie / odczytywanie baz danych przy uruchomieniu, wyłączeniu programu
 - Cena wypożyczenia za dzień przy tworzeniu wypożyczenia
 - Usunięcie wypożyczenia (obliczenie należności i kary)
