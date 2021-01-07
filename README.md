@@ -4,11 +4,10 @@
  - dodałem databases_example z zaległymi wypożyczeniami żeby można było je szybko testować pozdro wrzuć je do /databases
 
 # DO ZROBIENIA :
- - Sprawozdanie
  - Dokumentacja DoxyGen
- - Ikona
 
 # ZROBIONE :
+- Sprawozdanie
 - Historia
 - Podświetlanie
 - Zapisywanie / odczytywanie baz danych przy uruchomieniu, wyłączeniu programu
