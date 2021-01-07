@@ -107,6 +107,7 @@ void MainWindow::on_addClientButton_clicked()
         return;
     }
 
+    ui->clientsTable->setSortingEnabled(false);
     this->clients_lastID++;
 
     ui->clientsTable->insertRow(ui->clientsTable->rowCount());
@@ -127,6 +128,8 @@ void MainWindow::on_addClientButton_clicked()
     ui->clientsTable->setItem(currentRow, TELEFON, phone_item);
     ui->clientsTable->setItem(currentRow, POSIADANE_FILMY, count_item);
     ui->clientsTable->setItem(currentRow, ID_KLIENTA, ID_item);
+
+    ui->clientsTable->setSortingEnabled(true);
 
 }
 
@@ -206,6 +209,7 @@ void MainWindow::on_addBorrowButton_clicked()
             return;
         }
     }
+    ui->borrowsTable->setSortingEnabled(false);
 
     QTableWidgetItem *title_item = new QTableWidgetItem(title);
     QTableWidgetItem *name_item = new QTableWidgetItem(name);
@@ -250,6 +254,8 @@ void MainWindow::on_addBorrowButton_clicked()
         ui->actionPod_wietlaj_aktualne_niezaleg_e->toggle();
     }
 
+    ui->borrowsTable->setSortingEnabled(true);
+
 }
 
 void MainWindow::on_addMovieButton_clicked()
@@ -289,6 +295,7 @@ void MainWindow::on_addMovieButton_clicked()
     }
 
     this->movies_lastID++;
+    ui->moviesTable->setSortingEnabled(false);
 
     QTableWidgetItem *title_item = new QTableWidgetItem(title);
     QTableWidgetItem *director_item = new QTableWidgetItem(director);
@@ -308,6 +315,7 @@ void MainWindow::on_addMovieButton_clicked()
     ui->moviesTable->setItem(currentRow, DOSTEPNE, available_item);
     ui->moviesTable->setItem(currentRow, WYPOZYCZONE, borrowed_item);
     ui->moviesTable->setItem(currentRow, ID_FILMU, ID_item);
+    ui->moviesTable->setSortingEnabled(true);
 }
 
 void MainWindow::on_editClientButton_clicked()

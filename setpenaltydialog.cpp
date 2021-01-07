@@ -24,9 +24,12 @@ void setPenaltyDialog::on_buttonBox_accepted()
         msgBox.setText("Pole nie może być puste!");
         msgBox.exec();
     }
-    ui->penaltyEdit->text().toFloat(&succes);
+    float number = ui->penaltyEdit->text().toFloat(&succes);
     if(!succes){
         msgBox.setText("Nie wpisano poprawnej wartości!");
+        msgBox.exec();
+    }else if(number < 0){
+        msgBox.setText("Wartość nie może być mniejsza niż 0");
         msgBox.exec();
     }else{
         ui->penaltyEdit->setText(QString::asprintf("%.2f", ui->penaltyEdit->text().toFloat()));
