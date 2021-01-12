@@ -1,0 +1,123 @@
+\hypertarget{classset_penalty_dialog}{}\doxysection{Dokumentacja klasy set\+Penalty\+Dialog}
+\label{classset_penalty_dialog}\index{setPenaltyDialog@{setPenaltyDialog}}
+
+
+Klasa obsługująca zmiane wysokości kary Zawartość klasy to wszystkie zmienne oraz funkcje użyte w oknie dialogowym służącym do zmiany wysokości kary za zwrócenie filmu po wyznaczonym terminie. Klasa dziedziczy publiczne właściwości z klasy QDialog, będącej zawartością biblioteki Qt o tej samej nazwie.  
+
+
+
+
+{\ttfamily \#include $<$setpenaltydialog.\+h$>$}
+
+Diagram dziedziczenia dla set\+Penalty\+Dialog\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classset_penalty_dialog}
+\end{center}
+\end{figure}
+\doxysubsection*{Metody publiczne}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classset_penalty_dialog_abd11930def6906d349ff53dabde6c14c}{set\+Penalty\+Dialog}} (QWidget $\ast$parent=nullptr, float \mbox{\hyperlink{classset_penalty_dialog_a69e4f8b303ab7c8d43a61514a77d0980}{penalty}}=0.\+00)
+\begin{DoxyCompactList}\small\item\em Konstruktor klasy ładujący dane do okna dialogowego. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classset_penalty_dialog_ae41309088fad4d235b69af397cb56bdc}{$\sim$set\+Penalty\+Dialog}} ()
+\begin{DoxyCompactList}\small\item\em Destruktor klasy. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{classset_penalty_dialog_a69e4f8b303ab7c8d43a61514a77d0980}{penalty}} () const
+\begin{DoxyCompactList}\small\item\em Zmienna przechowująca wysokość kary. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Sloty prywatne}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classset_penalty_dialog_aeb7d21bfc4c469f622b0d9674e647d67}{on\+\_\+button\+Box\+\_\+accepted}} ()
+\begin{DoxyCompactList}\small\item\em Funkcja wywoływana przy potwierdzeniu zmian dokonanych w oknie przez przycisk. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classset_penalty_dialog_a062cf7eddc3677ab95adb311c01050d7}{on\+\_\+button\+Box\+\_\+rejected}} ()
+\begin{DoxyCompactList}\small\item\em Funkcja wywoływana przy anulowaniu okna przez przycisk. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Atrybuty prywatne}
+\begin{DoxyCompactItemize}
+\item 
+Ui\+::set\+Penalty\+Dialog $\ast$ \mbox{\hyperlink{classset_penalty_dialog_aebcae051c70dffb7e1fd93fee53950c7}{ui}}
+\begin{DoxyCompactList}\small\item\em Wskaźnik na interfejs wewnątrz klasy. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Opis szczegółowy}
+Klasa obsługująca zmiane wysokości kary Zawartość klasy to wszystkie zmienne oraz funkcje użyte w oknie dialogowym służącym do zmiany wysokości kary za zwrócenie filmu po wyznaczonym terminie. Klasa dziedziczy publiczne właściwości z klasy QDialog, będącej zawartością biblioteki Qt o tej samej nazwie. 
+
+\doxysubsection{Dokumentacja konstruktora i destruktora}
+\mbox{\Hypertarget{classset_penalty_dialog_abd11930def6906d349ff53dabde6c14c}\label{classset_penalty_dialog_abd11930def6906d349ff53dabde6c14c}} 
+\index{setPenaltyDialog@{setPenaltyDialog}!setPenaltyDialog@{setPenaltyDialog}}
+\index{setPenaltyDialog@{setPenaltyDialog}!setPenaltyDialog@{setPenaltyDialog}}
+\doxysubsubsection{\texorpdfstring{setPenaltyDialog()}{setPenaltyDialog()}}
+{\footnotesize\ttfamily set\+Penalty\+Dialog\+::set\+Penalty\+Dialog (\begin{DoxyParamCaption}\item[{QWidget $\ast$}]{parent = {\ttfamily nullptr},  }\item[{float}]{penalty = {\ttfamily 0.00} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Konstruktor klasy ładujący dane do okna dialogowego. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em $\ast$parent} & wskaźnik na obiekt nadrzędny, jeśli brak to podany nullptr \\
+\hline
+{\em penalty} & wartość kary, jeśli nie wczytana, to domyślnie wynosi 0 \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classset_penalty_dialog_ae41309088fad4d235b69af397cb56bdc}\label{classset_penalty_dialog_ae41309088fad4d235b69af397cb56bdc}} 
+\index{setPenaltyDialog@{setPenaltyDialog}!````~setPenaltyDialog@{$\sim$setPenaltyDialog}}
+\index{````~setPenaltyDialog@{$\sim$setPenaltyDialog}!setPenaltyDialog@{setPenaltyDialog}}
+\doxysubsubsection{\texorpdfstring{$\sim$setPenaltyDialog()}{~setPenaltyDialog()}}
+{\footnotesize\ttfamily set\+Penalty\+Dialog\+::$\sim$set\+Penalty\+Dialog (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Destruktor klasy. 
+
+
+
+\doxysubsection{Dokumentacja funkcji składowych}
+\mbox{\Hypertarget{classset_penalty_dialog_aeb7d21bfc4c469f622b0d9674e647d67}\label{classset_penalty_dialog_aeb7d21bfc4c469f622b0d9674e647d67}} 
+\index{setPenaltyDialog@{setPenaltyDialog}!on\_buttonBox\_accepted@{on\_buttonBox\_accepted}}
+\index{on\_buttonBox\_accepted@{on\_buttonBox\_accepted}!setPenaltyDialog@{setPenaltyDialog}}
+\doxysubsubsection{\texorpdfstring{on\_buttonBox\_accepted}{on\_buttonBox\_accepted}}
+{\footnotesize\ttfamily void set\+Penalty\+Dialog\+::on\+\_\+button\+Box\+\_\+accepted (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+Funkcja wywoływana przy potwierdzeniu zmian dokonanych w oknie przez przycisk. 
+
+\mbox{\Hypertarget{classset_penalty_dialog_a062cf7eddc3677ab95adb311c01050d7}\label{classset_penalty_dialog_a062cf7eddc3677ab95adb311c01050d7}} 
+\index{setPenaltyDialog@{setPenaltyDialog}!on\_buttonBox\_rejected@{on\_buttonBox\_rejected}}
+\index{on\_buttonBox\_rejected@{on\_buttonBox\_rejected}!setPenaltyDialog@{setPenaltyDialog}}
+\doxysubsubsection{\texorpdfstring{on\_buttonBox\_rejected}{on\_buttonBox\_rejected}}
+{\footnotesize\ttfamily void set\+Penalty\+Dialog\+::on\+\_\+button\+Box\+\_\+rejected (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+Funkcja wywoływana przy anulowaniu okna przez przycisk. 
+
+\mbox{\Hypertarget{classset_penalty_dialog_a69e4f8b303ab7c8d43a61514a77d0980}\label{classset_penalty_dialog_a69e4f8b303ab7c8d43a61514a77d0980}} 
+\index{setPenaltyDialog@{setPenaltyDialog}!penalty@{penalty}}
+\index{penalty@{penalty}!setPenaltyDialog@{setPenaltyDialog}}
+\doxysubsubsection{\texorpdfstring{penalty()}{penalty()}}
+{\footnotesize\ttfamily float set\+Penalty\+Dialog\+::penalty (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Zmienna przechowująca wysokość kary. 
+
+
+
+\doxysubsection{Dokumentacja atrybutów składowych}
+\mbox{\Hypertarget{classset_penalty_dialog_aebcae051c70dffb7e1fd93fee53950c7}\label{classset_penalty_dialog_aebcae051c70dffb7e1fd93fee53950c7}} 
+\index{setPenaltyDialog@{setPenaltyDialog}!ui@{ui}}
+\index{ui@{ui}!setPenaltyDialog@{setPenaltyDialog}}
+\doxysubsubsection{\texorpdfstring{ui}{ui}}
+{\footnotesize\ttfamily Ui\+::set\+Penalty\+Dialog$\ast$ set\+Penalty\+Dialog\+::ui\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Wskaźnik na interfejs wewnątrz klasy. 
+
+
+
+Dokumentacja dla tej klasy została wygenerowana z plików\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Kuba/\+Documents/\+Git\+Hub/\+Wypozyczalnia\+\_\+\+Filmow\+\_\+\+PC2\+\_\+\+QT/kod/\mbox{\hyperlink{setpenaltydialog_8h}{setpenaltydialog.\+h}}\item 
+C\+:/\+Users/\+Kuba/\+Documents/\+Git\+Hub/\+Wypozyczalnia\+\_\+\+Filmow\+\_\+\+PC2\+\_\+\+QT/kod/\mbox{\hyperlink{setpenaltydialog_8cpp}{setpenaltydialog.\+cpp}}\end{DoxyCompactItemize}

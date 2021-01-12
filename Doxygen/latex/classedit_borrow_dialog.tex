@@ -1,0 +1,123 @@
+\hypertarget{classedit_borrow_dialog}{}\doxysection{Dokumentacja klasy edit\+Borrow\+Dialog}
+\label{classedit_borrow_dialog}\index{editBorrowDialog@{editBorrowDialog}}
+
+
+Klasa obsługująca edycje istniejącego wypożyczenia Zawartość klasy to wszystkie zmienne oraz funkcje użyte w oknie dialogowym służącym do edycji istniejącego w bazie wypożyczenia. Klasa dziedziczy publiczne właściwości z klasy QDialog, będącej zawartością biblioteki Qt o tej samej nazwie.  
+
+
+
+
+{\ttfamily \#include $<$editborrowdialog.\+h$>$}
+
+Diagram dziedziczenia dla edit\+Borrow\+Dialog\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classedit_borrow_dialog}
+\end{center}
+\end{figure}
+\doxysubsection*{Metody publiczne}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classedit_borrow_dialog_afacd1038768cf4985177f3ff3ac146c0}{edit\+Borrow\+Dialog}} (QWidget $\ast$parent=nullptr, QString \mbox{\hyperlink{classedit_borrow_dialog_a0b4081b121324796c3d885aab47bcb1c}{returndate}}=nullptr)
+\begin{DoxyCompactList}\small\item\em Konstruktor klasy ładujący dane do okna dialogowego. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classedit_borrow_dialog_a4502c32a93bf538c9ba7ca68184a15e4}{$\sim$edit\+Borrow\+Dialog}} ()
+\begin{DoxyCompactList}\small\item\em Destruktor klasy. \end{DoxyCompactList}\item 
+QString \mbox{\hyperlink{classedit_borrow_dialog_a0b4081b121324796c3d885aab47bcb1c}{returndate}} () const
+\begin{DoxyCompactList}\small\item\em Zmienna przechowująca nową date zwrotu. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Sloty prywatne}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classedit_borrow_dialog_a62505e5030ccb9a8ada2a8b60f9e2621}{on\+\_\+button\+Box\+\_\+rejected}} ()
+\begin{DoxyCompactList}\small\item\em Wydarzenie przycisku potwierdzenia danych. Sprawdza poprawność i przekazuje dane dalej. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classedit_borrow_dialog_abbf37134b225dac925f914f5532472b2}{on\+\_\+button\+Box\+\_\+accepted}} ()
+\begin{DoxyCompactList}\small\item\em Wydarzenie przycisku odrzucenia zmian. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Atrybuty prywatne}
+\begin{DoxyCompactItemize}
+\item 
+Ui\+::edit\+Borrow\+Dialog $\ast$ \mbox{\hyperlink{classedit_borrow_dialog_a4bdaace25c79a319d39745572314fedb}{ui}}
+\begin{DoxyCompactList}\small\item\em Wskaźnik na interfejs, umożliwia dostęp do elementów wewnątrz interfejsu. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Opis szczegółowy}
+Klasa obsługująca edycje istniejącego wypożyczenia Zawartość klasy to wszystkie zmienne oraz funkcje użyte w oknie dialogowym służącym do edycji istniejącego w bazie wypożyczenia. Klasa dziedziczy publiczne właściwości z klasy QDialog, będącej zawartością biblioteki Qt o tej samej nazwie. 
+
+\doxysubsection{Dokumentacja konstruktora i destruktora}
+\mbox{\Hypertarget{classedit_borrow_dialog_afacd1038768cf4985177f3ff3ac146c0}\label{classedit_borrow_dialog_afacd1038768cf4985177f3ff3ac146c0}} 
+\index{editBorrowDialog@{editBorrowDialog}!editBorrowDialog@{editBorrowDialog}}
+\index{editBorrowDialog@{editBorrowDialog}!editBorrowDialog@{editBorrowDialog}}
+\doxysubsubsection{\texorpdfstring{editBorrowDialog()}{editBorrowDialog()}}
+{\footnotesize\ttfamily edit\+Borrow\+Dialog\+::edit\+Borrow\+Dialog (\begin{DoxyParamCaption}\item[{QWidget $\ast$}]{parent = {\ttfamily nullptr},  }\item[{QString}]{returndate = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Konstruktor klasy ładujący dane do okna dialogowego. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em $\ast$parent} & wskaźnik na obiekt nadrzędny, jeśli brak to podany nullptr \\
+\hline
+{\em returndate} & data zwrotu pobrana z istniejącego wypożyczenia, domyślnie nullptr \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classedit_borrow_dialog_a4502c32a93bf538c9ba7ca68184a15e4}\label{classedit_borrow_dialog_a4502c32a93bf538c9ba7ca68184a15e4}} 
+\index{editBorrowDialog@{editBorrowDialog}!````~editBorrowDialog@{$\sim$editBorrowDialog}}
+\index{````~editBorrowDialog@{$\sim$editBorrowDialog}!editBorrowDialog@{editBorrowDialog}}
+\doxysubsubsection{\texorpdfstring{$\sim$editBorrowDialog()}{~editBorrowDialog()}}
+{\footnotesize\ttfamily edit\+Borrow\+Dialog\+::$\sim$edit\+Borrow\+Dialog (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Destruktor klasy. 
+
+
+
+\doxysubsection{Dokumentacja funkcji składowych}
+\mbox{\Hypertarget{classedit_borrow_dialog_abbf37134b225dac925f914f5532472b2}\label{classedit_borrow_dialog_abbf37134b225dac925f914f5532472b2}} 
+\index{editBorrowDialog@{editBorrowDialog}!on\_buttonBox\_accepted@{on\_buttonBox\_accepted}}
+\index{on\_buttonBox\_accepted@{on\_buttonBox\_accepted}!editBorrowDialog@{editBorrowDialog}}
+\doxysubsubsection{\texorpdfstring{on\_buttonBox\_accepted}{on\_buttonBox\_accepted}}
+{\footnotesize\ttfamily void edit\+Borrow\+Dialog\+::on\+\_\+button\+Box\+\_\+accepted (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+Wydarzenie przycisku odrzucenia zmian. 
+
+\mbox{\Hypertarget{classedit_borrow_dialog_a62505e5030ccb9a8ada2a8b60f9e2621}\label{classedit_borrow_dialog_a62505e5030ccb9a8ada2a8b60f9e2621}} 
+\index{editBorrowDialog@{editBorrowDialog}!on\_buttonBox\_rejected@{on\_buttonBox\_rejected}}
+\index{on\_buttonBox\_rejected@{on\_buttonBox\_rejected}!editBorrowDialog@{editBorrowDialog}}
+\doxysubsubsection{\texorpdfstring{on\_buttonBox\_rejected}{on\_buttonBox\_rejected}}
+{\footnotesize\ttfamily void edit\+Borrow\+Dialog\+::on\+\_\+button\+Box\+\_\+rejected (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+Wydarzenie przycisku potwierdzenia danych. Sprawdza poprawność i przekazuje dane dalej. 
+
+\mbox{\Hypertarget{classedit_borrow_dialog_a0b4081b121324796c3d885aab47bcb1c}\label{classedit_borrow_dialog_a0b4081b121324796c3d885aab47bcb1c}} 
+\index{editBorrowDialog@{editBorrowDialog}!returndate@{returndate}}
+\index{returndate@{returndate}!editBorrowDialog@{editBorrowDialog}}
+\doxysubsubsection{\texorpdfstring{returndate()}{returndate()}}
+{\footnotesize\ttfamily QString edit\+Borrow\+Dialog\+::returndate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Zmienna przechowująca nową date zwrotu. 
+
+
+
+\doxysubsection{Dokumentacja atrybutów składowych}
+\mbox{\Hypertarget{classedit_borrow_dialog_a4bdaace25c79a319d39745572314fedb}\label{classedit_borrow_dialog_a4bdaace25c79a319d39745572314fedb}} 
+\index{editBorrowDialog@{editBorrowDialog}!ui@{ui}}
+\index{ui@{ui}!editBorrowDialog@{editBorrowDialog}}
+\doxysubsubsection{\texorpdfstring{ui}{ui}}
+{\footnotesize\ttfamily Ui\+::edit\+Borrow\+Dialog$\ast$ edit\+Borrow\+Dialog\+::ui\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Wskaźnik na interfejs, umożliwia dostęp do elementów wewnątrz interfejsu. 
+
+
+
+Dokumentacja dla tej klasy została wygenerowana z plików\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Kuba/\+Documents/\+Git\+Hub/\+Wypozyczalnia\+\_\+\+Filmow\+\_\+\+PC2\+\_\+\+QT/kod/\mbox{\hyperlink{editborrowdialog_8h}{editborrowdialog.\+h}}\item 
+C\+:/\+Users/\+Kuba/\+Documents/\+Git\+Hub/\+Wypozyczalnia\+\_\+\+Filmow\+\_\+\+PC2\+\_\+\+QT/kod/\mbox{\hyperlink{editborrowdialog_8cpp}{editborrowdialog.\+cpp}}\end{DoxyCompactItemize}

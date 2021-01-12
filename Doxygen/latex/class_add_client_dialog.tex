@@ -1,0 +1,169 @@
+\hypertarget{class_add_client_dialog}{}\doxysection{Dokumentacja klasy Add\+Client\+Dialog}
+\label{class_add_client_dialog}\index{AddClientDialog@{AddClientDialog}}
+
+
+Klasa obsługująca dodawanie klienta do bazy Zawartość klasy to wszystkie zmienne oraz funkcje użyte w oknie dialogowym służącym do dodania nowego klienta do programu. Klasa dziedziczy publiczne właściwości z klasy QDialog, będącej zawartością biblioteki Qt o tej samej nazwie.  
+
+
+
+
+{\ttfamily \#include $<$addclientdialog.\+h$>$}
+
+Diagram dziedziczenia dla Add\+Client\+Dialog\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_add_client_dialog}
+\end{center}
+\end{figure}
+\doxysubsection*{Metody publiczne}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_add_client_dialog_a38f5116e4da870f412a946277c101415}{Add\+Client\+Dialog}} (QWidget $\ast$parent=nullptr)
+\begin{DoxyCompactList}\small\item\em Konstruktor klasy ładujący dane do okna dialogowego. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_add_client_dialog_a72732935cb55b3613963315fe9867db6}{$\sim$\+Add\+Client\+Dialog}} ()
+\begin{DoxyCompactList}\small\item\em Destruktor klasy. \end{DoxyCompactList}\item 
+QString \mbox{\hyperlink{class_add_client_dialog_ae94ad74cc5b5df37d1182203456381fb}{name}} () const
+\begin{DoxyCompactList}\small\item\em Zmienna przechowująca imię klienta. \end{DoxyCompactList}\item 
+QString \mbox{\hyperlink{class_add_client_dialog_ac68d366271ae3969edf5259b2016ef60}{surname}} () const
+\begin{DoxyCompactList}\small\item\em Zmienna przechowująca nazwisko klienta. \end{DoxyCompactList}\item 
+QString \mbox{\hyperlink{class_add_client_dialog_aa881ee6523e795c63e9d90e1e53982a1}{pesel}} () const
+\begin{DoxyCompactList}\small\item\em Zmienna przechowująca numer pesel klienta. \end{DoxyCompactList}\item 
+QString \mbox{\hyperlink{class_add_client_dialog_a7e828a9fc28e4fc2c9cbf02d3399698e}{phone}} () const
+\begin{DoxyCompactList}\small\item\em Zmienna przechowująca numer telefonu klienta. \end{DoxyCompactList}\item 
+QString \mbox{\hyperlink{class_add_client_dialog_a4b4450dc20511f022653c9959eac97a8}{email}} () const
+\begin{DoxyCompactList}\small\item\em Zmienna przechowująca adres mailowy klienta. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Sloty prywatne}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_add_client_dialog_aa96349d73e1311bde42f7deb87bd914b}{on\+\_\+button\+Box\+\_\+accepted}} ()
+\begin{DoxyCompactList}\small\item\em Wydarzenie przycisku potwierdzenia danych. Sprawdza poprawność i przekazuje dane dalej. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_add_client_dialog_a05c3ef04b5a77d41e4e51e95465b69e2}{on\+\_\+button\+Box\+\_\+rejected}} ()
+\begin{DoxyCompactList}\small\item\em Wydarzenie przycisku odrzucenia zmian. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Atrybuty prywatne}
+\begin{DoxyCompactItemize}
+\item 
+Ui\+::\+Add\+Client\+Dialog $\ast$ \mbox{\hyperlink{class_add_client_dialog_a2344e419e90bbe8ea54fdc6a22c928e2}{ui}}
+\begin{DoxyCompactList}\small\item\em Wskaźnik na interfejs, umożliwia dostęp do elementów wewnątrz interfejsu. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Opis szczegółowy}
+Klasa obsługująca dodawanie klienta do bazy Zawartość klasy to wszystkie zmienne oraz funkcje użyte w oknie dialogowym służącym do dodania nowego klienta do programu. Klasa dziedziczy publiczne właściwości z klasy QDialog, będącej zawartością biblioteki Qt o tej samej nazwie. 
+
+\doxysubsection{Dokumentacja konstruktora i destruktora}
+\mbox{\Hypertarget{class_add_client_dialog_a38f5116e4da870f412a946277c101415}\label{class_add_client_dialog_a38f5116e4da870f412a946277c101415}} 
+\index{AddClientDialog@{AddClientDialog}!AddClientDialog@{AddClientDialog}}
+\index{AddClientDialog@{AddClientDialog}!AddClientDialog@{AddClientDialog}}
+\doxysubsubsection{\texorpdfstring{AddClientDialog()}{AddClientDialog()}}
+{\footnotesize\ttfamily Add\+Client\+Dialog\+::\+Add\+Client\+Dialog (\begin{DoxyParamCaption}\item[{QWidget $\ast$}]{parent = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Konstruktor klasy ładujący dane do okna dialogowego. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em $\ast$parent} & wskaźnik na obiekt nadrzędny, jeśli brak to podany nullptr \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_add_client_dialog_a72732935cb55b3613963315fe9867db6}\label{class_add_client_dialog_a72732935cb55b3613963315fe9867db6}} 
+\index{AddClientDialog@{AddClientDialog}!````~AddClientDialog@{$\sim$AddClientDialog}}
+\index{````~AddClientDialog@{$\sim$AddClientDialog}!AddClientDialog@{AddClientDialog}}
+\doxysubsubsection{\texorpdfstring{$\sim$AddClientDialog()}{~AddClientDialog()}}
+{\footnotesize\ttfamily Add\+Client\+Dialog\+::$\sim$\+Add\+Client\+Dialog (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Destruktor klasy. 
+
+
+
+\doxysubsection{Dokumentacja funkcji składowych}
+\mbox{\Hypertarget{class_add_client_dialog_a4b4450dc20511f022653c9959eac97a8}\label{class_add_client_dialog_a4b4450dc20511f022653c9959eac97a8}} 
+\index{AddClientDialog@{AddClientDialog}!email@{email}}
+\index{email@{email}!AddClientDialog@{AddClientDialog}}
+\doxysubsubsection{\texorpdfstring{email()}{email()}}
+{\footnotesize\ttfamily QString Add\+Client\+Dialog\+::email (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Zmienna przechowująca adres mailowy klienta. 
+
+\mbox{\Hypertarget{class_add_client_dialog_ae94ad74cc5b5df37d1182203456381fb}\label{class_add_client_dialog_ae94ad74cc5b5df37d1182203456381fb}} 
+\index{AddClientDialog@{AddClientDialog}!name@{name}}
+\index{name@{name}!AddClientDialog@{AddClientDialog}}
+\doxysubsubsection{\texorpdfstring{name()}{name()}}
+{\footnotesize\ttfamily QString Add\+Client\+Dialog\+::name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Zmienna przechowująca imię klienta. 
+
+\mbox{\Hypertarget{class_add_client_dialog_aa96349d73e1311bde42f7deb87bd914b}\label{class_add_client_dialog_aa96349d73e1311bde42f7deb87bd914b}} 
+\index{AddClientDialog@{AddClientDialog}!on\_buttonBox\_accepted@{on\_buttonBox\_accepted}}
+\index{on\_buttonBox\_accepted@{on\_buttonBox\_accepted}!AddClientDialog@{AddClientDialog}}
+\doxysubsubsection{\texorpdfstring{on\_buttonBox\_accepted}{on\_buttonBox\_accepted}}
+{\footnotesize\ttfamily void Add\+Client\+Dialog\+::on\+\_\+button\+Box\+\_\+accepted (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+Wydarzenie przycisku potwierdzenia danych. Sprawdza poprawność i przekazuje dane dalej. 
+
+\mbox{\Hypertarget{class_add_client_dialog_a05c3ef04b5a77d41e4e51e95465b69e2}\label{class_add_client_dialog_a05c3ef04b5a77d41e4e51e95465b69e2}} 
+\index{AddClientDialog@{AddClientDialog}!on\_buttonBox\_rejected@{on\_buttonBox\_rejected}}
+\index{on\_buttonBox\_rejected@{on\_buttonBox\_rejected}!AddClientDialog@{AddClientDialog}}
+\doxysubsubsection{\texorpdfstring{on\_buttonBox\_rejected}{on\_buttonBox\_rejected}}
+{\footnotesize\ttfamily void Add\+Client\+Dialog\+::on\+\_\+button\+Box\+\_\+rejected (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+Wydarzenie przycisku odrzucenia zmian. 
+
+\mbox{\Hypertarget{class_add_client_dialog_aa881ee6523e795c63e9d90e1e53982a1}\label{class_add_client_dialog_aa881ee6523e795c63e9d90e1e53982a1}} 
+\index{AddClientDialog@{AddClientDialog}!pesel@{pesel}}
+\index{pesel@{pesel}!AddClientDialog@{AddClientDialog}}
+\doxysubsubsection{\texorpdfstring{pesel()}{pesel()}}
+{\footnotesize\ttfamily QString Add\+Client\+Dialog\+::pesel (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Zmienna przechowująca numer pesel klienta. 
+
+\mbox{\Hypertarget{class_add_client_dialog_a7e828a9fc28e4fc2c9cbf02d3399698e}\label{class_add_client_dialog_a7e828a9fc28e4fc2c9cbf02d3399698e}} 
+\index{AddClientDialog@{AddClientDialog}!phone@{phone}}
+\index{phone@{phone}!AddClientDialog@{AddClientDialog}}
+\doxysubsubsection{\texorpdfstring{phone()}{phone()}}
+{\footnotesize\ttfamily QString Add\+Client\+Dialog\+::phone (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Zmienna przechowująca numer telefonu klienta. 
+
+\mbox{\Hypertarget{class_add_client_dialog_ac68d366271ae3969edf5259b2016ef60}\label{class_add_client_dialog_ac68d366271ae3969edf5259b2016ef60}} 
+\index{AddClientDialog@{AddClientDialog}!surname@{surname}}
+\index{surname@{surname}!AddClientDialog@{AddClientDialog}}
+\doxysubsubsection{\texorpdfstring{surname()}{surname()}}
+{\footnotesize\ttfamily QString Add\+Client\+Dialog\+::surname (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Zmienna przechowująca nazwisko klienta. 
+
+
+
+\doxysubsection{Dokumentacja atrybutów składowych}
+\mbox{\Hypertarget{class_add_client_dialog_a2344e419e90bbe8ea54fdc6a22c928e2}\label{class_add_client_dialog_a2344e419e90bbe8ea54fdc6a22c928e2}} 
+\index{AddClientDialog@{AddClientDialog}!ui@{ui}}
+\index{ui@{ui}!AddClientDialog@{AddClientDialog}}
+\doxysubsubsection{\texorpdfstring{ui}{ui}}
+{\footnotesize\ttfamily Ui\+::\+Add\+Client\+Dialog$\ast$ Add\+Client\+Dialog\+::ui\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Wskaźnik na interfejs, umożliwia dostęp do elementów wewnątrz interfejsu. 
+
+
+
+Dokumentacja dla tej klasy została wygenerowana z plików\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Kuba/\+Documents/\+Git\+Hub/\+Wypozyczalnia\+\_\+\+Filmow\+\_\+\+PC2\+\_\+\+QT/kod/\mbox{\hyperlink{addclientdialog_8h}{addclientdialog.\+h}}\item 
+C\+:/\+Users/\+Kuba/\+Documents/\+Git\+Hub/\+Wypozyczalnia\+\_\+\+Filmow\+\_\+\+PC2\+\_\+\+QT/kod/\mbox{\hyperlink{addclientdialog_8cpp}{addclientdialog.\+cpp}}\end{DoxyCompactItemize}

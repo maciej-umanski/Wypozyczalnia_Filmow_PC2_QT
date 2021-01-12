@@ -1,0 +1,179 @@
+\hypertarget{classedit_client_dialog}{}\doxysection{Dokumentacja klasy edit\+Client\+Dialog}
+\label{classedit_client_dialog}\index{editClientDialog@{editClientDialog}}
+
+
+Klasa obsługująca edycje istniejącego klienta Zawartość klasy to wszystkie zmienne oraz funkcje użyte w oknie dialogowym służącym do edycji istniejącego w bazie klienta. Klasa dziedziczy publiczne właściwości z klasy QDialog, będącej zawartością biblioteki Qt o tej samej nazwie.  
+
+
+
+
+{\ttfamily \#include $<$editclientdialog.\+h$>$}
+
+Diagram dziedziczenia dla edit\+Client\+Dialog\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classedit_client_dialog}
+\end{center}
+\end{figure}
+\doxysubsection*{Metody publiczne}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classedit_client_dialog_a99baa1a8afa6157a0ae70fd81254892f}{edit\+Client\+Dialog}} (QWidget $\ast$parent=nullptr, QString \mbox{\hyperlink{classedit_client_dialog_ab590f2e9433a285b889a509f8b0ab257}{name}}=nullptr, QString \mbox{\hyperlink{classedit_client_dialog_ab898d2248a9aa210d25bbd0e5cdb4c84}{surname}}=nullptr, QString \mbox{\hyperlink{classedit_client_dialog_a47b4d543ca965ebbd84f4b069ff3c99a}{pesel}}=nullptr, QString \mbox{\hyperlink{classedit_client_dialog_acbe453a1af3dcf8f72f0727b3a675729}{phone}}=nullptr, QString \mbox{\hyperlink{classedit_client_dialog_aba96a0775a7ec45a6ff3c6b5f14b7474}{email}}=nullptr)
+\begin{DoxyCompactList}\small\item\em Konstruktor klasy ładujący dane do okna dialogowego. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classedit_client_dialog_a94b8409045dc9fb49e49b7c784f02b50}{$\sim$edit\+Client\+Dialog}} ()
+\begin{DoxyCompactList}\small\item\em Destruktor klasy. \end{DoxyCompactList}\item 
+QString \mbox{\hyperlink{classedit_client_dialog_ab590f2e9433a285b889a509f8b0ab257}{name}} () const
+\begin{DoxyCompactList}\small\item\em Zmienna przechowująca nowe imie klienta. \end{DoxyCompactList}\item 
+QString \mbox{\hyperlink{classedit_client_dialog_ab898d2248a9aa210d25bbd0e5cdb4c84}{surname}} () const
+\begin{DoxyCompactList}\small\item\em Zmienna przechowująca nowe nazwisko klienta. \end{DoxyCompactList}\item 
+QString \mbox{\hyperlink{classedit_client_dialog_a47b4d543ca965ebbd84f4b069ff3c99a}{pesel}} () const
+\begin{DoxyCompactList}\small\item\em Zmienna przechowująca nowy numer pesel klienta. \end{DoxyCompactList}\item 
+QString \mbox{\hyperlink{classedit_client_dialog_acbe453a1af3dcf8f72f0727b3a675729}{phone}} () const
+\begin{DoxyCompactList}\small\item\em Zmienna przechowująca nowy numer telefonu klienta. \end{DoxyCompactList}\item 
+QString \mbox{\hyperlink{classedit_client_dialog_aba96a0775a7ec45a6ff3c6b5f14b7474}{email}} () const
+\begin{DoxyCompactList}\small\item\em Zmienna przechowująca nowy adres mailowy klienta. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Sloty prywatne}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classedit_client_dialog_a610b507033679f452695c8ae8ad17a9c}{on\+\_\+button\+Box\+\_\+accepted}} ()
+\begin{DoxyCompactList}\small\item\em Wydarzenie przycisku potwierdzenia danych. Sprawdza poprawność i przekazuje dane dalej. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classedit_client_dialog_a0299174d8f5c1c7a6f848e2820143c86}{on\+\_\+button\+Box\+\_\+rejected}} ()
+\begin{DoxyCompactList}\small\item\em Wydarzenie przycisku odrzucenia zmian. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Atrybuty prywatne}
+\begin{DoxyCompactItemize}
+\item 
+Ui\+::edit\+Client\+Dialog $\ast$ \mbox{\hyperlink{classedit_client_dialog_a8c33fb2f7193e0f72b8f87a7e4a02be6}{ui}}
+\begin{DoxyCompactList}\small\item\em Wskaźnik na interfejs, umożliwia dostęp do elementów wewnątrz interfejsu. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Opis szczegółowy}
+Klasa obsługująca edycje istniejącego klienta Zawartość klasy to wszystkie zmienne oraz funkcje użyte w oknie dialogowym służącym do edycji istniejącego w bazie klienta. Klasa dziedziczy publiczne właściwości z klasy QDialog, będącej zawartością biblioteki Qt o tej samej nazwie. 
+
+\doxysubsection{Dokumentacja konstruktora i destruktora}
+\mbox{\Hypertarget{classedit_client_dialog_a99baa1a8afa6157a0ae70fd81254892f}\label{classedit_client_dialog_a99baa1a8afa6157a0ae70fd81254892f}} 
+\index{editClientDialog@{editClientDialog}!editClientDialog@{editClientDialog}}
+\index{editClientDialog@{editClientDialog}!editClientDialog@{editClientDialog}}
+\doxysubsubsection{\texorpdfstring{editClientDialog()}{editClientDialog()}}
+{\footnotesize\ttfamily edit\+Client\+Dialog\+::edit\+Client\+Dialog (\begin{DoxyParamCaption}\item[{QWidget $\ast$}]{parent = {\ttfamily nullptr},  }\item[{QString}]{name = {\ttfamily nullptr},  }\item[{QString}]{surname = {\ttfamily nullptr},  }\item[{QString}]{pesel = {\ttfamily nullptr},  }\item[{QString}]{phone = {\ttfamily nullptr},  }\item[{QString}]{email = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Konstruktor klasy ładujący dane do okna dialogowego. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em $\ast$parent} & wskaźnik na obiekt nadrzędny, jeśli brak to podany nullptr \\
+\hline
+{\em name} & imie klienta, domyślnie nullptr \\
+\hline
+{\em surname} & nazwisko klienta, domyślnie nullptr \\
+\hline
+{\em pesel} & numer pesel klienta, domyślnie nullptr \\
+\hline
+{\em phone} & numer telefonu klienta, domyślnie nullptr \\
+\hline
+{\em email} & adres mailowy klienta, domyślnie nullptr \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classedit_client_dialog_a94b8409045dc9fb49e49b7c784f02b50}\label{classedit_client_dialog_a94b8409045dc9fb49e49b7c784f02b50}} 
+\index{editClientDialog@{editClientDialog}!````~editClientDialog@{$\sim$editClientDialog}}
+\index{````~editClientDialog@{$\sim$editClientDialog}!editClientDialog@{editClientDialog}}
+\doxysubsubsection{\texorpdfstring{$\sim$editClientDialog()}{~editClientDialog()}}
+{\footnotesize\ttfamily edit\+Client\+Dialog\+::$\sim$edit\+Client\+Dialog (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Destruktor klasy. 
+
+
+
+\doxysubsection{Dokumentacja funkcji składowych}
+\mbox{\Hypertarget{classedit_client_dialog_aba96a0775a7ec45a6ff3c6b5f14b7474}\label{classedit_client_dialog_aba96a0775a7ec45a6ff3c6b5f14b7474}} 
+\index{editClientDialog@{editClientDialog}!email@{email}}
+\index{email@{email}!editClientDialog@{editClientDialog}}
+\doxysubsubsection{\texorpdfstring{email()}{email()}}
+{\footnotesize\ttfamily QString edit\+Client\+Dialog\+::email (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Zmienna przechowująca nowy adres mailowy klienta. 
+
+\mbox{\Hypertarget{classedit_client_dialog_ab590f2e9433a285b889a509f8b0ab257}\label{classedit_client_dialog_ab590f2e9433a285b889a509f8b0ab257}} 
+\index{editClientDialog@{editClientDialog}!name@{name}}
+\index{name@{name}!editClientDialog@{editClientDialog}}
+\doxysubsubsection{\texorpdfstring{name()}{name()}}
+{\footnotesize\ttfamily QString edit\+Client\+Dialog\+::name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Zmienna przechowująca nowe imie klienta. 
+
+\mbox{\Hypertarget{classedit_client_dialog_a610b507033679f452695c8ae8ad17a9c}\label{classedit_client_dialog_a610b507033679f452695c8ae8ad17a9c}} 
+\index{editClientDialog@{editClientDialog}!on\_buttonBox\_accepted@{on\_buttonBox\_accepted}}
+\index{on\_buttonBox\_accepted@{on\_buttonBox\_accepted}!editClientDialog@{editClientDialog}}
+\doxysubsubsection{\texorpdfstring{on\_buttonBox\_accepted}{on\_buttonBox\_accepted}}
+{\footnotesize\ttfamily void edit\+Client\+Dialog\+::on\+\_\+button\+Box\+\_\+accepted (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+Wydarzenie przycisku potwierdzenia danych. Sprawdza poprawność i przekazuje dane dalej. 
+
+\mbox{\Hypertarget{classedit_client_dialog_a0299174d8f5c1c7a6f848e2820143c86}\label{classedit_client_dialog_a0299174d8f5c1c7a6f848e2820143c86}} 
+\index{editClientDialog@{editClientDialog}!on\_buttonBox\_rejected@{on\_buttonBox\_rejected}}
+\index{on\_buttonBox\_rejected@{on\_buttonBox\_rejected}!editClientDialog@{editClientDialog}}
+\doxysubsubsection{\texorpdfstring{on\_buttonBox\_rejected}{on\_buttonBox\_rejected}}
+{\footnotesize\ttfamily void edit\+Client\+Dialog\+::on\+\_\+button\+Box\+\_\+rejected (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+Wydarzenie przycisku odrzucenia zmian. 
+
+\mbox{\Hypertarget{classedit_client_dialog_a47b4d543ca965ebbd84f4b069ff3c99a}\label{classedit_client_dialog_a47b4d543ca965ebbd84f4b069ff3c99a}} 
+\index{editClientDialog@{editClientDialog}!pesel@{pesel}}
+\index{pesel@{pesel}!editClientDialog@{editClientDialog}}
+\doxysubsubsection{\texorpdfstring{pesel()}{pesel()}}
+{\footnotesize\ttfamily QString edit\+Client\+Dialog\+::pesel (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Zmienna przechowująca nowy numer pesel klienta. 
+
+\mbox{\Hypertarget{classedit_client_dialog_acbe453a1af3dcf8f72f0727b3a675729}\label{classedit_client_dialog_acbe453a1af3dcf8f72f0727b3a675729}} 
+\index{editClientDialog@{editClientDialog}!phone@{phone}}
+\index{phone@{phone}!editClientDialog@{editClientDialog}}
+\doxysubsubsection{\texorpdfstring{phone()}{phone()}}
+{\footnotesize\ttfamily QString edit\+Client\+Dialog\+::phone (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Zmienna przechowująca nowy numer telefonu klienta. 
+
+\mbox{\Hypertarget{classedit_client_dialog_ab898d2248a9aa210d25bbd0e5cdb4c84}\label{classedit_client_dialog_ab898d2248a9aa210d25bbd0e5cdb4c84}} 
+\index{editClientDialog@{editClientDialog}!surname@{surname}}
+\index{surname@{surname}!editClientDialog@{editClientDialog}}
+\doxysubsubsection{\texorpdfstring{surname()}{surname()}}
+{\footnotesize\ttfamily QString edit\+Client\+Dialog\+::surname (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Zmienna przechowująca nowe nazwisko klienta. 
+
+
+
+\doxysubsection{Dokumentacja atrybutów składowych}
+\mbox{\Hypertarget{classedit_client_dialog_a8c33fb2f7193e0f72b8f87a7e4a02be6}\label{classedit_client_dialog_a8c33fb2f7193e0f72b8f87a7e4a02be6}} 
+\index{editClientDialog@{editClientDialog}!ui@{ui}}
+\index{ui@{ui}!editClientDialog@{editClientDialog}}
+\doxysubsubsection{\texorpdfstring{ui}{ui}}
+{\footnotesize\ttfamily Ui\+::edit\+Client\+Dialog$\ast$ edit\+Client\+Dialog\+::ui\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Wskaźnik na interfejs, umożliwia dostęp do elementów wewnątrz interfejsu. 
+
+
+
+Dokumentacja dla tej klasy została wygenerowana z plików\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Kuba/\+Documents/\+Git\+Hub/\+Wypozyczalnia\+\_\+\+Filmow\+\_\+\+PC2\+\_\+\+QT/kod/\mbox{\hyperlink{editclientdialog_8h}{editclientdialog.\+h}}\item 
+C\+:/\+Users/\+Kuba/\+Documents/\+Git\+Hub/\+Wypozyczalnia\+\_\+\+Filmow\+\_\+\+PC2\+\_\+\+QT/kod/\mbox{\hyperlink{editclientdialog_8cpp}{editclientdialog.\+cpp}}\end{DoxyCompactItemize}

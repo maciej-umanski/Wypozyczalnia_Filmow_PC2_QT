@@ -1,0 +1,179 @@
+\hypertarget{classedit_movie_dialog}{}\doxysection{Dokumentacja klasy edit\+Movie\+Dialog}
+\label{classedit_movie_dialog}\index{editMovieDialog@{editMovieDialog}}
+
+
+Klasa obsługująca edycje istniejącego filmu Zawartość klasy to wszystkie zmienne oraz funkcje użyte w oknie dialogowym służącym do edycji istniejącego w bazie filmu. Klasa dziedziczy publiczne właściwości z klasy QDialog, będącej zawartością biblioteki Qt o tej samej nazwie.  
+
+
+
+
+{\ttfamily \#include $<$editmoviedialog.\+h$>$}
+
+Diagram dziedziczenia dla edit\+Movie\+Dialog\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classedit_movie_dialog}
+\end{center}
+\end{figure}
+\doxysubsection*{Metody publiczne}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classedit_movie_dialog_ad5d89a237979473851967d4d8d407a06}{edit\+Movie\+Dialog}} (QWidget $\ast$parent=nullptr, QString \mbox{\hyperlink{classedit_movie_dialog_ad30acb3776fcbff7ac55bf2d8a39d258}{title}}=nullptr, QString \mbox{\hyperlink{classedit_movie_dialog_a429666c3060cf611a0a23aa0d974eb67}{director}}=nullptr, QString \mbox{\hyperlink{classedit_movie_dialog_afe9c92d610886c196b5b8f1b14484d70}{genre}}=nullptr, QString \mbox{\hyperlink{classedit_movie_dialog_a442442e1ba4b89ea7b0e26bad8ccb16e}{year}}=nullptr, QString \mbox{\hyperlink{classedit_movie_dialog_a27b4e64518b44bd98b0774428c6e1883}{available}}=nullptr)
+\begin{DoxyCompactList}\small\item\em Konstruktor klasy ładujący dane do okna dialogowego. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classedit_movie_dialog_ae9e10ad450a0bc643202e826ec7d8b2e}{$\sim$edit\+Movie\+Dialog}} ()
+\begin{DoxyCompactList}\small\item\em Destruktor klasy. \end{DoxyCompactList}\item 
+QString \mbox{\hyperlink{classedit_movie_dialog_ad30acb3776fcbff7ac55bf2d8a39d258}{title}} () const
+\begin{DoxyCompactList}\small\item\em Zmienna przechowująca nowy tytuł filmu. \end{DoxyCompactList}\item 
+QString \mbox{\hyperlink{classedit_movie_dialog_a429666c3060cf611a0a23aa0d974eb67}{director}} () const
+\begin{DoxyCompactList}\small\item\em Zmienna przechowująca nowego reżysera filmu. \end{DoxyCompactList}\item 
+QString \mbox{\hyperlink{classedit_movie_dialog_afe9c92d610886c196b5b8f1b14484d70}{genre}} () const
+\begin{DoxyCompactList}\small\item\em Zmienna przechowująca nowy gatunek filmu. \end{DoxyCompactList}\item 
+QString \mbox{\hyperlink{classedit_movie_dialog_a442442e1ba4b89ea7b0e26bad8ccb16e}{year}} () const
+\begin{DoxyCompactList}\small\item\em Zmienna przechowująca nowy rok produkcji filmu. \end{DoxyCompactList}\item 
+QString \mbox{\hyperlink{classedit_movie_dialog_a27b4e64518b44bd98b0774428c6e1883}{available}} () const
+\begin{DoxyCompactList}\small\item\em Zmienna przechowująca nową ilość dostępnych sztuk filmu. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Sloty prywatne}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classedit_movie_dialog_a019cbfb9ed32faa43d44ad0552cd1ebe}{on\+\_\+button\+Box\+\_\+accepted}} ()
+\begin{DoxyCompactList}\small\item\em Wydarzenie przycisku potwierdzenia danych. Sprawdza poprawność i przekazuje dane dalej. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classedit_movie_dialog_ad69e1eafa0574955c1a0b885e2abf241}{on\+\_\+button\+Box\+\_\+rejected}} ()
+\begin{DoxyCompactList}\small\item\em Wydarzenie przycisku odrzucenia zmian. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Atrybuty prywatne}
+\begin{DoxyCompactItemize}
+\item 
+Ui\+::edit\+Movie\+Dialog $\ast$ \mbox{\hyperlink{classedit_movie_dialog_aa20abdac7360b79fa86bc77e7c9e1c3d}{ui}}
+\begin{DoxyCompactList}\small\item\em Wskaźnik na interfejs, umożliwia dostęp do elementów wewnątrz interfejsu. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Opis szczegółowy}
+Klasa obsługująca edycje istniejącego filmu Zawartość klasy to wszystkie zmienne oraz funkcje użyte w oknie dialogowym służącym do edycji istniejącego w bazie filmu. Klasa dziedziczy publiczne właściwości z klasy QDialog, będącej zawartością biblioteki Qt o tej samej nazwie. 
+
+\doxysubsection{Dokumentacja konstruktora i destruktora}
+\mbox{\Hypertarget{classedit_movie_dialog_ad5d89a237979473851967d4d8d407a06}\label{classedit_movie_dialog_ad5d89a237979473851967d4d8d407a06}} 
+\index{editMovieDialog@{editMovieDialog}!editMovieDialog@{editMovieDialog}}
+\index{editMovieDialog@{editMovieDialog}!editMovieDialog@{editMovieDialog}}
+\doxysubsubsection{\texorpdfstring{editMovieDialog()}{editMovieDialog()}}
+{\footnotesize\ttfamily edit\+Movie\+Dialog\+::edit\+Movie\+Dialog (\begin{DoxyParamCaption}\item[{QWidget $\ast$}]{parent = {\ttfamily nullptr},  }\item[{QString}]{title = {\ttfamily nullptr},  }\item[{QString}]{director = {\ttfamily nullptr},  }\item[{QString}]{genre = {\ttfamily nullptr},  }\item[{QString}]{year = {\ttfamily nullptr},  }\item[{QString}]{available = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Konstruktor klasy ładujący dane do okna dialogowego. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em $\ast$parent} & wskaźnik na obiekt nadrzędny, jeśli brak to podany nullptr \\
+\hline
+{\em title} & tytuł filmu, domyślnie nullptr \\
+\hline
+{\em director} & reżyser filmu, domyślnie nullptr \\
+\hline
+{\em genre} & gatunek filmu, domyślnie nullptr \\
+\hline
+{\em year} & rok produkcji filmu, domyślnie nullptr \\
+\hline
+{\em available} & dostępne sztuki filmu, domyślnie nullptr \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classedit_movie_dialog_ae9e10ad450a0bc643202e826ec7d8b2e}\label{classedit_movie_dialog_ae9e10ad450a0bc643202e826ec7d8b2e}} 
+\index{editMovieDialog@{editMovieDialog}!````~editMovieDialog@{$\sim$editMovieDialog}}
+\index{````~editMovieDialog@{$\sim$editMovieDialog}!editMovieDialog@{editMovieDialog}}
+\doxysubsubsection{\texorpdfstring{$\sim$editMovieDialog()}{~editMovieDialog()}}
+{\footnotesize\ttfamily edit\+Movie\+Dialog\+::$\sim$edit\+Movie\+Dialog (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Destruktor klasy. 
+
+
+
+\doxysubsection{Dokumentacja funkcji składowych}
+\mbox{\Hypertarget{classedit_movie_dialog_a27b4e64518b44bd98b0774428c6e1883}\label{classedit_movie_dialog_a27b4e64518b44bd98b0774428c6e1883}} 
+\index{editMovieDialog@{editMovieDialog}!available@{available}}
+\index{available@{available}!editMovieDialog@{editMovieDialog}}
+\doxysubsubsection{\texorpdfstring{available()}{available()}}
+{\footnotesize\ttfamily QString edit\+Movie\+Dialog\+::available (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Zmienna przechowująca nową ilość dostępnych sztuk filmu. 
+
+\mbox{\Hypertarget{classedit_movie_dialog_a429666c3060cf611a0a23aa0d974eb67}\label{classedit_movie_dialog_a429666c3060cf611a0a23aa0d974eb67}} 
+\index{editMovieDialog@{editMovieDialog}!director@{director}}
+\index{director@{director}!editMovieDialog@{editMovieDialog}}
+\doxysubsubsection{\texorpdfstring{director()}{director()}}
+{\footnotesize\ttfamily QString edit\+Movie\+Dialog\+::director (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Zmienna przechowująca nowego reżysera filmu. 
+
+\mbox{\Hypertarget{classedit_movie_dialog_afe9c92d610886c196b5b8f1b14484d70}\label{classedit_movie_dialog_afe9c92d610886c196b5b8f1b14484d70}} 
+\index{editMovieDialog@{editMovieDialog}!genre@{genre}}
+\index{genre@{genre}!editMovieDialog@{editMovieDialog}}
+\doxysubsubsection{\texorpdfstring{genre()}{genre()}}
+{\footnotesize\ttfamily QString edit\+Movie\+Dialog\+::genre (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Zmienna przechowująca nowy gatunek filmu. 
+
+\mbox{\Hypertarget{classedit_movie_dialog_a019cbfb9ed32faa43d44ad0552cd1ebe}\label{classedit_movie_dialog_a019cbfb9ed32faa43d44ad0552cd1ebe}} 
+\index{editMovieDialog@{editMovieDialog}!on\_buttonBox\_accepted@{on\_buttonBox\_accepted}}
+\index{on\_buttonBox\_accepted@{on\_buttonBox\_accepted}!editMovieDialog@{editMovieDialog}}
+\doxysubsubsection{\texorpdfstring{on\_buttonBox\_accepted}{on\_buttonBox\_accepted}}
+{\footnotesize\ttfamily void edit\+Movie\+Dialog\+::on\+\_\+button\+Box\+\_\+accepted (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+Wydarzenie przycisku potwierdzenia danych. Sprawdza poprawność i przekazuje dane dalej. 
+
+\mbox{\Hypertarget{classedit_movie_dialog_ad69e1eafa0574955c1a0b885e2abf241}\label{classedit_movie_dialog_ad69e1eafa0574955c1a0b885e2abf241}} 
+\index{editMovieDialog@{editMovieDialog}!on\_buttonBox\_rejected@{on\_buttonBox\_rejected}}
+\index{on\_buttonBox\_rejected@{on\_buttonBox\_rejected}!editMovieDialog@{editMovieDialog}}
+\doxysubsubsection{\texorpdfstring{on\_buttonBox\_rejected}{on\_buttonBox\_rejected}}
+{\footnotesize\ttfamily void edit\+Movie\+Dialog\+::on\+\_\+button\+Box\+\_\+rejected (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+Wydarzenie przycisku odrzucenia zmian. 
+
+\mbox{\Hypertarget{classedit_movie_dialog_ad30acb3776fcbff7ac55bf2d8a39d258}\label{classedit_movie_dialog_ad30acb3776fcbff7ac55bf2d8a39d258}} 
+\index{editMovieDialog@{editMovieDialog}!title@{title}}
+\index{title@{title}!editMovieDialog@{editMovieDialog}}
+\doxysubsubsection{\texorpdfstring{title()}{title()}}
+{\footnotesize\ttfamily QString edit\+Movie\+Dialog\+::title (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Zmienna przechowująca nowy tytuł filmu. 
+
+\mbox{\Hypertarget{classedit_movie_dialog_a442442e1ba4b89ea7b0e26bad8ccb16e}\label{classedit_movie_dialog_a442442e1ba4b89ea7b0e26bad8ccb16e}} 
+\index{editMovieDialog@{editMovieDialog}!year@{year}}
+\index{year@{year}!editMovieDialog@{editMovieDialog}}
+\doxysubsubsection{\texorpdfstring{year()}{year()}}
+{\footnotesize\ttfamily QString edit\+Movie\+Dialog\+::year (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Zmienna przechowująca nowy rok produkcji filmu. 
+
+
+
+\doxysubsection{Dokumentacja atrybutów składowych}
+\mbox{\Hypertarget{classedit_movie_dialog_aa20abdac7360b79fa86bc77e7c9e1c3d}\label{classedit_movie_dialog_aa20abdac7360b79fa86bc77e7c9e1c3d}} 
+\index{editMovieDialog@{editMovieDialog}!ui@{ui}}
+\index{ui@{ui}!editMovieDialog@{editMovieDialog}}
+\doxysubsubsection{\texorpdfstring{ui}{ui}}
+{\footnotesize\ttfamily Ui\+::edit\+Movie\+Dialog$\ast$ edit\+Movie\+Dialog\+::ui\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Wskaźnik na interfejs, umożliwia dostęp do elementów wewnątrz interfejsu. 
+
+
+
+Dokumentacja dla tej klasy została wygenerowana z plików\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Kuba/\+Documents/\+Git\+Hub/\+Wypozyczalnia\+\_\+\+Filmow\+\_\+\+PC2\+\_\+\+QT/kod/\mbox{\hyperlink{editmoviedialog_8h}{editmoviedialog.\+h}}\item 
+C\+:/\+Users/\+Kuba/\+Documents/\+Git\+Hub/\+Wypozyczalnia\+\_\+\+Filmow\+\_\+\+PC2\+\_\+\+QT/kod/\mbox{\hyperlink{editmoviedialog_8cpp}{editmoviedialog.\+cpp}}\end{DoxyCompactItemize}

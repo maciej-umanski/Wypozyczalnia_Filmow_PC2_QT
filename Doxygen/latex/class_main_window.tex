@@ -1,0 +1,662 @@
+\hypertarget{class_main_window}{}\doxysection{Dokumentacja klasy Main\+Window}
+\label{class_main_window}\index{MainWindow@{MainWindow}}
+
+
+Klasa obsługująca główne okno programu Zawartość klasy to wszystkie zmienne oraz funkcje użyte w głównym oknie programu. Klasa dziedziczy publiczne właściwości z klasy QMain\+Window, będącej zawartością biblioteki Qt o tej samej nazwie.  
+
+
+
+
+{\ttfamily \#include $<$mainwindow.\+h$>$}
+
+Diagram dziedziczenia dla Main\+Window\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_main_window}
+\end{center}
+\end{figure}
+\doxysubsection*{Metody publiczne}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_main_window_a996c5a2b6f77944776856f08ec30858d}{Main\+Window}} (QWidget $\ast$parent=nullptr)
+\begin{DoxyCompactList}\small\item\em Konstruktor klasy ładujący dane do okna programu. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_main_window_ae98d00a93bc118200eeef9f9bba1dba7}{$\sim$\+Main\+Window}} ()
+\begin{DoxyCompactList}\small\item\em Destruktor klasy. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Typy prywatne}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{class_main_window_ad54231efed75dff513a2ffa398468f4c}{CLIENT\+\_\+\+COLLUMNS}} \{ \newline
+\mbox{\hyperlink{class_main_window_ad54231efed75dff513a2ffa398468f4ca8a1b5cbe4ebe9a0d526283da7c77e169}{IMIE}}
+, \mbox{\hyperlink{class_main_window_ad54231efed75dff513a2ffa398468f4caea9baf9b97b6785ec7226d7e10679833}{NAZWISKO}}
+, \mbox{\hyperlink{class_main_window_ad54231efed75dff513a2ffa398468f4ca1523671a7e87d50661127f82e06bde1b}{PESEL}}
+, \mbox{\hyperlink{class_main_window_ad54231efed75dff513a2ffa398468f4ca9010accf92145d0a8d9f9249abeed458}{TELEFON}}
+, \newline
+\mbox{\hyperlink{class_main_window_ad54231efed75dff513a2ffa398468f4ca406da1d05c98917ffb4eb4278a4df146}{EMAIL}}
+, \mbox{\hyperlink{class_main_window_ad54231efed75dff513a2ffa398468f4cac89640a4e8296ffa79ba14215beddda5}{POSIADANE\+\_\+\+FILMY}}
+, \mbox{\hyperlink{class_main_window_ad54231efed75dff513a2ffa398468f4cad8a21a83564c83a9afb5ce3a351e1cf6}{ID\+\_\+\+KLIENTA}}
+ \}
+\begin{DoxyCompactList}\small\item\em Enum tabeli klientów. \end{DoxyCompactList}\item 
+enum \mbox{\hyperlink{class_main_window_a618c11c585e4064c62226a10c18dadae}{MOVIE\+\_\+\+COLLUMNS}} \{ \newline
+\mbox{\hyperlink{class_main_window_a618c11c585e4064c62226a10c18dadaeab74372cca768ba6b5153b3263ef35075}{TYTUL}}
+, \mbox{\hyperlink{class_main_window_a618c11c585e4064c62226a10c18dadaea146db676bb517ee346b19fbcc64339e6}{REZYSER}}
+, \mbox{\hyperlink{class_main_window_a618c11c585e4064c62226a10c18dadaeaf60847aa1cbee9d67ea0d0d653f5c120}{GATUNEK}}
+, \mbox{\hyperlink{class_main_window_a618c11c585e4064c62226a10c18dadaea204a817807254a3989b5ff4bcc25e615}{ROK}}
+, \newline
+\mbox{\hyperlink{class_main_window_a618c11c585e4064c62226a10c18dadaea8d275c1cac238225aa350d7a9e2efcbc}{DOSTEPNE}}
+, \mbox{\hyperlink{class_main_window_a618c11c585e4064c62226a10c18dadaead47df2763b73cb02f9b1e11fc3c56888}{WYPOZYCZONE}}
+, \mbox{\hyperlink{class_main_window_a618c11c585e4064c62226a10c18dadaea5d63b9d620f0f5d8071c2a8f40023a35}{ID\+\_\+\+FILMU}}
+ \}
+\begin{DoxyCompactList}\small\item\em Enum tabeli filmów. \end{DoxyCompactList}\item 
+enum \mbox{\hyperlink{class_main_window_a59daa8398d5c7fa3abbc9b4c45ccc33d}{BORROW\+\_\+\+COLLUMNS}} \{ \newline
+\mbox{\hyperlink{class_main_window_a59daa8398d5c7fa3abbc9b4c45ccc33da83b1dfb5aae823b330073db44cfbeb21}{IMIE\+\_\+\+WYP}}
+, \mbox{\hyperlink{class_main_window_a59daa8398d5c7fa3abbc9b4c45ccc33da62ae5ddc0326c3d46455a0440741785c}{NAZWISKO\+\_\+\+WYP}}
+, \mbox{\hyperlink{class_main_window_a59daa8398d5c7fa3abbc9b4c45ccc33da8605f172dd0e4051675707dba0d3e5a6}{TITLE}}
+, \mbox{\hyperlink{class_main_window_a59daa8398d5c7fa3abbc9b4c45ccc33dabb3cd91e793f5bd187e090bd3f9b7d3e}{DATA\+\_\+\+WYPOZYCZENIA}}
+, \newline
+\mbox{\hyperlink{class_main_window_a59daa8398d5c7fa3abbc9b4c45ccc33da32421e530596ac3275dfeb62f07873cb}{DATA\+\_\+\+ZWROTU}}
+, \mbox{\hyperlink{class_main_window_a59daa8398d5c7fa3abbc9b4c45ccc33dab9010da485fc1414f3a33a5ff5873da2}{KOSZT}}
+, \mbox{\hyperlink{class_main_window_a59daa8398d5c7fa3abbc9b4c45ccc33da8ba8b08d5d4c5655eb0bfdaeca3ec728}{ID\+\_\+\+FILMU\+\_\+\+WYP}}
+, \mbox{\hyperlink{class_main_window_a59daa8398d5c7fa3abbc9b4c45ccc33da7153180b42c1186048fac18fcf7be799}{ID\+\_\+\+KLIENTA\+\_\+\+WYP}}
+, \newline
+\mbox{\hyperlink{class_main_window_a59daa8398d5c7fa3abbc9b4c45ccc33da86d10c4764f0cde8cd335ac97ee959e7}{ZWROCONE}}
+ \}
+\begin{DoxyCompactList}\small\item\em Enum tabeli wypożyczeń \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Sloty prywatne}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_main_window_a4e20a4a065fbb0e4d3532a45a0a91425}{close\+Event}} (QClose\+Event $\ast$event)
+\begin{DoxyCompactList}\small\item\em Funkcja zamykająca program. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_main_window_a67934448f304d204807b8b74b090c1ca}{on\+\_\+add\+Client\+Button\+\_\+clicked}} ()
+\begin{DoxyCompactList}\small\item\em Funkcja wydarzenia przycisku dodania klienta. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_main_window_acf2d27a6de5bdbb39fd0a37cbd412ae1}{on\+\_\+del\+Client\+Button\+\_\+clicked}} ()
+\begin{DoxyCompactList}\small\item\em Funkcja wydarzenia przycisku usunięcia klienta. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_main_window_aea14696b8bb95f912178b86966157e04}{on\+\_\+del\+Movie\+Button\+\_\+clicked}} ()
+\begin{DoxyCompactList}\small\item\em Funkcja wydarzenia przycisku usunięcia filmu. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_main_window_ab81561cd076fd893cd4fd1c649dc0153}{on\+\_\+add\+Movie\+Button\+\_\+clicked}} ()
+\begin{DoxyCompactList}\small\item\em Funkcja wydarzenia przycisku dodania filmu. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_main_window_ae6a864e35c7c4b7cef4b8f97a47cc125}{on\+\_\+edit\+Client\+Button\+\_\+clicked}} ()
+\begin{DoxyCompactList}\small\item\em Funkcja wydarzenia przycisku edycji klienta. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_main_window_ab6743ab99536c3db58062f7ccfec0af0}{on\+\_\+edit\+Movie\+Button\+\_\+clicked}} ()
+\begin{DoxyCompactList}\small\item\em Funkcja wydarzenia przycisku edycji filmu. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_main_window_a9a99786bca1df8f2705dd819d59fb632}{on\+\_\+add\+Borrow\+Button\+\_\+clicked}} ()
+\begin{DoxyCompactList}\small\item\em Funkcja wydarzenia przycisku dodania wypożyczenia. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_main_window_af9fc2caf9287ee9e659497b2da3fce96}{on\+\_\+search\+Client\+Button\+\_\+clicked}} ()
+\begin{DoxyCompactList}\small\item\em Funkcja wydarzenia przycisku wyszukania klienta. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_main_window_a5f6f88fd052f48771bdedca241582afd}{on\+\_\+search\+Borrows\+Button\+\_\+clicked}} ()
+\begin{DoxyCompactList}\small\item\em Funkcja wydarzenia przycisku wyszukania wypożyczenia. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_main_window_ae4797dfec6357dcd9d139d117b5a50f0}{on\+\_\+search\+Movie\+Button\+\_\+clicked}} ()
+\begin{DoxyCompactList}\small\item\em Funkcja wydarzenia przycisku wyszukania filmu. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_main_window_a1e47a8489240e1cbd7ef987d28debfe6}{on\+\_\+search\+Borrow\+Field\+\_\+return\+Pressed}} ()
+\begin{DoxyCompactList}\small\item\em Funkcja wydarzenia pola wyszukiwania wypożyczenia przy wciśnięciu klawisza Enter. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_main_window_aace7f003f8fbf4f19bd85e4261d11cfb}{on\+\_\+search\+Client\+Field\+\_\+return\+Pressed}} ()
+\begin{DoxyCompactList}\small\item\em Funkcja wydarzenia pola wyszukiwania klienta przy wciśnięciu klawisza Enter. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_main_window_ac72dfbf6888aa222c13657444b6ef156}{on\+\_\+search\+Movie\+Field\+\_\+return\+Pressed}} ()
+\begin{DoxyCompactList}\small\item\em Funkcja wydarzenia pola wyszukiwania filmu przy wciśnięciu klawisza Enter. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_main_window_a4be4ddbe841a6eeb7748d7eb5ff194b1}{on\+\_\+del\+Borrow\+Button\+\_\+clicked}} ()
+\begin{DoxyCompactList}\small\item\em Funkcja wydarzenia przycisku usunięcia wypożyczenia. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_main_window_aa5fab869f10ba27e4bb219560330defe}{on\+\_\+edit\+Borrow\+Button\+\_\+2\+\_\+clicked}} ()
+\begin{DoxyCompactList}\small\item\em Funkcja wydarzenia przycisku edycji wypożyczenia. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_main_window_a05e9fef79840f3a0c00d53b89a6365f4}{on\+\_\+action\+Zapisz\+\_\+do\+\_\+pliku\+\_\+triggered}} ()
+\begin{DoxyCompactList}\small\item\em Funkcja wywoływana przez opcję zapisu baz do pliku z menu. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_main_window_a43884116e0cfb874f1282cb2d60fc42f}{on\+\_\+action\+Wczytaj\+\_\+bazy\+\_\+z\+\_\+pliku\+\_\+triggered}} ()
+\begin{DoxyCompactList}\small\item\em Funkcja wywoływana przez opcję wczytania baz z pliku z menu. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_main_window_a695dc9c2ef69fab7d1da341da9a2b3aa}{on\+\_\+action\+Pod\+\_\+wietlaj\+\_\+zaleg\+\_\+e\+\_\+toggled}} (bool arg1)
+\begin{DoxyCompactList}\small\item\em Funkcja podświetlająca zaległe wypożyczenia innym kolorem. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_main_window_a959a5362902d37772edfaa85e0b03428}{on\+\_\+action\+Ustal\+\_\+wysoko\+\_\+kary\+\_\+triggered}} ()
+\begin{DoxyCompactList}\small\item\em Funkcja obsługująca opcje z menu odnośnie ustalenia wysokości kary za poterminowy zwrot wypożyczenia. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_main_window_a492512a1fa2911a653a927e231a585da}{on\+\_\+action\+Show\+\_\+\+Last\+\_\+\+IDs\+\_\+triggered}} ()
+\begin{DoxyCompactList}\small\item\em Funkcja obsługująca opcje wyświetlającą ostatnie użyte ID w bazie. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_main_window_a5f185f33ed635e69f123251e7d7c6a86}{on\+\_\+action\+Show\+\_\+penalty\+\_\+triggered}} ()
+\begin{DoxyCompactList}\small\item\em Funkcja obsługująca opcje wyświetlającą aktualną wysokość kary za dzień zwłoki. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_main_window_a63193a2d2187d98e6b80db1e7c66b1e6}{on\+\_\+action\+Show\+\_\+\+IDs\+\_\+toggled}} (bool arg1)
+\begin{DoxyCompactList}\small\item\em Funkcja wyświetlająca ukryte kolumny z ID wpisów bazy. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_main_window_aac458777200f16af20a6b8c4e7b7ba5b}{on\+\_\+action\+Wyjd\+\_\+triggered}} ()
+\begin{DoxyCompactList}\small\item\em Funkcja wywołująca akcje zamknięcia okna w menu. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_main_window_af2e76f27a59209309604dc1e04c81f49}{on\+\_\+combo\+Box\+\_\+current\+Index\+Changed}} (int index)
+\begin{DoxyCompactList}\small\item\em Funkcja obsługująca typ wyświetlanych wypożyczeń (wyszystkie/zaległe/aktualne). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_main_window_a1a9246827faf432316637061fa97d01c}{on\+\_\+action\+Pokazuj\+\_\+\+Status\+\_\+\+Zwr\+\_\+cenia\+\_\+toggled}} (bool arg1)
+\begin{DoxyCompactList}\small\item\em Funkcja obsługująca opcje menu wyświetlającą kolumne ze statusem zwrócenia wypożyczenia (zwrócone/aktywne) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_main_window_ad0c36b65c157f89b03752388b5dcb6bc}{on\+\_\+action\+Pod\+\_\+wietlaj\+\_\+zwr\+\_\+cone\+\_\+toggled}} (bool arg1)
+\begin{DoxyCompactList}\small\item\em Funkcja podświetlająca zwrócone wypożyczenia. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_main_window_a7257a380368851ab0c9105fef4d9cad8}{on\+\_\+action\+Pod\+\_\+wietlaj\+\_\+aktualne\+\_\+niezaleg\+\_\+e\+\_\+toggled}} (bool arg1)
+\begin{DoxyCompactList}\small\item\em Funkcja podświetlająca aktualne (niezaległe) wypożyczenia kolorem. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Atrybuty prywatne}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{class_main_window_ae578dc2b17436c616d5607a054ac7c9a}{penalty}}
+\begin{DoxyCompactList}\small\item\em Zmienna przechowująca wartość kary za poterminowy zwrot. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_main_window_a0058d307a2c1be678f66a098251b2725}{clients\+\_\+last\+ID}}
+\begin{DoxyCompactList}\small\item\em Zmienna przechowująca ostatnie użyte ID w tabeli klientów. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_main_window_ab5f91bac687d2034aa19ac4c4bfa05a9}{movies\+\_\+last\+ID}}
+\begin{DoxyCompactList}\small\item\em Zmienna przechowująca ostatnie użyte ID w tabeli filmów. \end{DoxyCompactList}\item 
+Ui\+::\+Main\+Window $\ast$ \mbox{\hyperlink{class_main_window_a35466a70ed47252a0191168126a352a5}{ui}}
+\begin{DoxyCompactList}\small\item\em Wskaźnik na interfejs, umożliwia dostęp do elementów wewnątrz interfejsu. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Opis szczegółowy}
+Klasa obsługująca główne okno programu Zawartość klasy to wszystkie zmienne oraz funkcje użyte w głównym oknie programu. Klasa dziedziczy publiczne właściwości z klasy QMain\+Window, będącej zawartością biblioteki Qt o tej samej nazwie. 
+
+\doxysubsection{Dokumentacja składowych wyliczanych}
+\mbox{\Hypertarget{class_main_window_a59daa8398d5c7fa3abbc9b4c45ccc33d}\label{class_main_window_a59daa8398d5c7fa3abbc9b4c45ccc33d}} 
+\index{MainWindow@{MainWindow}!BORROW\_COLLUMNS@{BORROW\_COLLUMNS}}
+\index{BORROW\_COLLUMNS@{BORROW\_COLLUMNS}!MainWindow@{MainWindow}}
+\doxysubsubsection{\texorpdfstring{BORROW\_COLLUMNS}{BORROW\_COLLUMNS}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{class_main_window_a59daa8398d5c7fa3abbc9b4c45ccc33d}{Main\+Window\+::\+BORROW\+\_\+\+COLLUMNS}}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Enum tabeli wypożyczeń 
+
+\begin{DoxyEnumFields}{Wartości wyliczeń}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{IMIE\_WYP@{IMIE\_WYP}!MainWindow@{MainWindow}}\index{MainWindow@{MainWindow}!IMIE\_WYP@{IMIE\_WYP}}}\mbox{\Hypertarget{class_main_window_a59daa8398d5c7fa3abbc9b4c45ccc33da83b1dfb5aae823b330073db44cfbeb21}\label{class_main_window_a59daa8398d5c7fa3abbc9b4c45ccc33da83b1dfb5aae823b330073db44cfbeb21}} 
+IMIE\+\_\+\+WYP&Enum dla imienia klienta wypożyczającego film \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{NAZWISKO\_WYP@{NAZWISKO\_WYP}!MainWindow@{MainWindow}}\index{MainWindow@{MainWindow}!NAZWISKO\_WYP@{NAZWISKO\_WYP}}}\mbox{\Hypertarget{class_main_window_a59daa8398d5c7fa3abbc9b4c45ccc33da62ae5ddc0326c3d46455a0440741785c}\label{class_main_window_a59daa8398d5c7fa3abbc9b4c45ccc33da62ae5ddc0326c3d46455a0440741785c}} 
+NAZWISKO\+\_\+\+WYP&Enum dla nazwiska klienta wypożyczającego film \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TITLE@{TITLE}!MainWindow@{MainWindow}}\index{MainWindow@{MainWindow}!TITLE@{TITLE}}}\mbox{\Hypertarget{class_main_window_a59daa8398d5c7fa3abbc9b4c45ccc33da8605f172dd0e4051675707dba0d3e5a6}\label{class_main_window_a59daa8398d5c7fa3abbc9b4c45ccc33da8605f172dd0e4051675707dba0d3e5a6}} 
+TITLE&Enum dla tytułu wypożyczonego filmu \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DATA\_WYPOZYCZENIA@{DATA\_WYPOZYCZENIA}!MainWindow@{MainWindow}}\index{MainWindow@{MainWindow}!DATA\_WYPOZYCZENIA@{DATA\_WYPOZYCZENIA}}}\mbox{\Hypertarget{class_main_window_a59daa8398d5c7fa3abbc9b4c45ccc33dabb3cd91e793f5bd187e090bd3f9b7d3e}\label{class_main_window_a59daa8398d5c7fa3abbc9b4c45ccc33dabb3cd91e793f5bd187e090bd3f9b7d3e}} 
+DATA\+\_\+\+WYPOZYCZENIA&Enum dla daty wypożyczenia filmu \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DATA\_ZWROTU@{DATA\_ZWROTU}!MainWindow@{MainWindow}}\index{MainWindow@{MainWindow}!DATA\_ZWROTU@{DATA\_ZWROTU}}}\mbox{\Hypertarget{class_main_window_a59daa8398d5c7fa3abbc9b4c45ccc33da32421e530596ac3275dfeb62f07873cb}\label{class_main_window_a59daa8398d5c7fa3abbc9b4c45ccc33da32421e530596ac3275dfeb62f07873cb}} 
+DATA\+\_\+\+ZWROTU&Enum dla daty zwrotu filmu \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{KOSZT@{KOSZT}!MainWindow@{MainWindow}}\index{MainWindow@{MainWindow}!KOSZT@{KOSZT}}}\mbox{\Hypertarget{class_main_window_a59daa8398d5c7fa3abbc9b4c45ccc33dab9010da485fc1414f3a33a5ff5873da2}\label{class_main_window_a59daa8398d5c7fa3abbc9b4c45ccc33dab9010da485fc1414f3a33a5ff5873da2}} 
+KOSZT&Enum dla kosztu wypożyczenia filmu \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ID\_FILMU\_WYP@{ID\_FILMU\_WYP}!MainWindow@{MainWindow}}\index{MainWindow@{MainWindow}!ID\_FILMU\_WYP@{ID\_FILMU\_WYP}}}\mbox{\Hypertarget{class_main_window_a59daa8398d5c7fa3abbc9b4c45ccc33da8ba8b08d5d4c5655eb0bfdaeca3ec728}\label{class_main_window_a59daa8398d5c7fa3abbc9b4c45ccc33da8ba8b08d5d4c5655eb0bfdaeca3ec728}} 
+ID\+\_\+\+FILMU\+\_\+\+WYP&Enum dla ID wypożyczonego filmu \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ID\_KLIENTA\_WYP@{ID\_KLIENTA\_WYP}!MainWindow@{MainWindow}}\index{MainWindow@{MainWindow}!ID\_KLIENTA\_WYP@{ID\_KLIENTA\_WYP}}}\mbox{\Hypertarget{class_main_window_a59daa8398d5c7fa3abbc9b4c45ccc33da7153180b42c1186048fac18fcf7be799}\label{class_main_window_a59daa8398d5c7fa3abbc9b4c45ccc33da7153180b42c1186048fac18fcf7be799}} 
+ID\+\_\+\+KLIENTA\+\_\+\+WYP&Enum dla ID wypożyczającego klienta \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ZWROCONE@{ZWROCONE}!MainWindow@{MainWindow}}\index{MainWindow@{MainWindow}!ZWROCONE@{ZWROCONE}}}\mbox{\Hypertarget{class_main_window_a59daa8398d5c7fa3abbc9b4c45ccc33da86d10c4764f0cde8cd335ac97ee959e7}\label{class_main_window_a59daa8398d5c7fa3abbc9b4c45ccc33da86d10c4764f0cde8cd335ac97ee959e7}} 
+ZWROCONE&Enum dla informacji, czy dany film został zwrócony \\
+\hline
+
+\end{DoxyEnumFields}
+\mbox{\Hypertarget{class_main_window_ad54231efed75dff513a2ffa398468f4c}\label{class_main_window_ad54231efed75dff513a2ffa398468f4c}} 
+\index{MainWindow@{MainWindow}!CLIENT\_COLLUMNS@{CLIENT\_COLLUMNS}}
+\index{CLIENT\_COLLUMNS@{CLIENT\_COLLUMNS}!MainWindow@{MainWindow}}
+\doxysubsubsection{\texorpdfstring{CLIENT\_COLLUMNS}{CLIENT\_COLLUMNS}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{class_main_window_ad54231efed75dff513a2ffa398468f4c}{Main\+Window\+::\+CLIENT\+\_\+\+COLLUMNS}}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Enum tabeli klientów. 
+
+\begin{DoxyEnumFields}{Wartości wyliczeń}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{IMIE@{IMIE}!MainWindow@{MainWindow}}\index{MainWindow@{MainWindow}!IMIE@{IMIE}}}\mbox{\Hypertarget{class_main_window_ad54231efed75dff513a2ffa398468f4ca8a1b5cbe4ebe9a0d526283da7c77e169}\label{class_main_window_ad54231efed75dff513a2ffa398468f4ca8a1b5cbe4ebe9a0d526283da7c77e169}} 
+IMIE&Enum dla imienia klienta \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{NAZWISKO@{NAZWISKO}!MainWindow@{MainWindow}}\index{MainWindow@{MainWindow}!NAZWISKO@{NAZWISKO}}}\mbox{\Hypertarget{class_main_window_ad54231efed75dff513a2ffa398468f4caea9baf9b97b6785ec7226d7e10679833}\label{class_main_window_ad54231efed75dff513a2ffa398468f4caea9baf9b97b6785ec7226d7e10679833}} 
+NAZWISKO&Enum dla nazwiska klienta \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PESEL@{PESEL}!MainWindow@{MainWindow}}\index{MainWindow@{MainWindow}!PESEL@{PESEL}}}\mbox{\Hypertarget{class_main_window_ad54231efed75dff513a2ffa398468f4ca1523671a7e87d50661127f82e06bde1b}\label{class_main_window_ad54231efed75dff513a2ffa398468f4ca1523671a7e87d50661127f82e06bde1b}} 
+PESEL&Enum dla numeru pesel klienta \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TELEFON@{TELEFON}!MainWindow@{MainWindow}}\index{MainWindow@{MainWindow}!TELEFON@{TELEFON}}}\mbox{\Hypertarget{class_main_window_ad54231efed75dff513a2ffa398468f4ca9010accf92145d0a8d9f9249abeed458}\label{class_main_window_ad54231efed75dff513a2ffa398468f4ca9010accf92145d0a8d9f9249abeed458}} 
+TELEFON&Enum dla numeru telefonu klienta \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{EMAIL@{EMAIL}!MainWindow@{MainWindow}}\index{MainWindow@{MainWindow}!EMAIL@{EMAIL}}}\mbox{\Hypertarget{class_main_window_ad54231efed75dff513a2ffa398468f4ca406da1d05c98917ffb4eb4278a4df146}\label{class_main_window_ad54231efed75dff513a2ffa398468f4ca406da1d05c98917ffb4eb4278a4df146}} 
+EMAIL&Enum dla adresu mailowego klienta \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{POSIADANE\_FILMY@{POSIADANE\_FILMY}!MainWindow@{MainWindow}}\index{MainWindow@{MainWindow}!POSIADANE\_FILMY@{POSIADANE\_FILMY}}}\mbox{\Hypertarget{class_main_window_ad54231efed75dff513a2ffa398468f4cac89640a4e8296ffa79ba14215beddda5}\label{class_main_window_ad54231efed75dff513a2ffa398468f4cac89640a4e8296ffa79ba14215beddda5}} 
+POSIADANE\+\_\+\+FILMY&Enum dla ilosci filmow posiadanych przez klienta \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ID\_KLIENTA@{ID\_KLIENTA}!MainWindow@{MainWindow}}\index{MainWindow@{MainWindow}!ID\_KLIENTA@{ID\_KLIENTA}}}\mbox{\Hypertarget{class_main_window_ad54231efed75dff513a2ffa398468f4cad8a21a83564c83a9afb5ce3a351e1cf6}\label{class_main_window_ad54231efed75dff513a2ffa398468f4cad8a21a83564c83a9afb5ce3a351e1cf6}} 
+ID\+\_\+\+KLIENTA&Enum dla identyfikatora klienta \\
+\hline
+
+\end{DoxyEnumFields}
+\mbox{\Hypertarget{class_main_window_a618c11c585e4064c62226a10c18dadae}\label{class_main_window_a618c11c585e4064c62226a10c18dadae}} 
+\index{MainWindow@{MainWindow}!MOVIE\_COLLUMNS@{MOVIE\_COLLUMNS}}
+\index{MOVIE\_COLLUMNS@{MOVIE\_COLLUMNS}!MainWindow@{MainWindow}}
+\doxysubsubsection{\texorpdfstring{MOVIE\_COLLUMNS}{MOVIE\_COLLUMNS}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{class_main_window_a618c11c585e4064c62226a10c18dadae}{Main\+Window\+::\+MOVIE\+\_\+\+COLLUMNS}}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Enum tabeli filmów. 
+
+\begin{DoxyEnumFields}{Wartości wyliczeń}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TYTUL@{TYTUL}!MainWindow@{MainWindow}}\index{MainWindow@{MainWindow}!TYTUL@{TYTUL}}}\mbox{\Hypertarget{class_main_window_a618c11c585e4064c62226a10c18dadaeab74372cca768ba6b5153b3263ef35075}\label{class_main_window_a618c11c585e4064c62226a10c18dadaeab74372cca768ba6b5153b3263ef35075}} 
+TYTUL&Enum dla tytułu filmu \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{REZYSER@{REZYSER}!MainWindow@{MainWindow}}\index{MainWindow@{MainWindow}!REZYSER@{REZYSER}}}\mbox{\Hypertarget{class_main_window_a618c11c585e4064c62226a10c18dadaea146db676bb517ee346b19fbcc64339e6}\label{class_main_window_a618c11c585e4064c62226a10c18dadaea146db676bb517ee346b19fbcc64339e6}} 
+REZYSER&Enum dla reżysera filmu \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{GATUNEK@{GATUNEK}!MainWindow@{MainWindow}}\index{MainWindow@{MainWindow}!GATUNEK@{GATUNEK}}}\mbox{\Hypertarget{class_main_window_a618c11c585e4064c62226a10c18dadaeaf60847aa1cbee9d67ea0d0d653f5c120}\label{class_main_window_a618c11c585e4064c62226a10c18dadaeaf60847aa1cbee9d67ea0d0d653f5c120}} 
+GATUNEK&Enum dla gatunku filmu \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ROK@{ROK}!MainWindow@{MainWindow}}\index{MainWindow@{MainWindow}!ROK@{ROK}}}\mbox{\Hypertarget{class_main_window_a618c11c585e4064c62226a10c18dadaea204a817807254a3989b5ff4bcc25e615}\label{class_main_window_a618c11c585e4064c62226a10c18dadaea204a817807254a3989b5ff4bcc25e615}} 
+ROK&Enum dla roku produkcji filmu \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DOSTEPNE@{DOSTEPNE}!MainWindow@{MainWindow}}\index{MainWindow@{MainWindow}!DOSTEPNE@{DOSTEPNE}}}\mbox{\Hypertarget{class_main_window_a618c11c585e4064c62226a10c18dadaea8d275c1cac238225aa350d7a9e2efcbc}\label{class_main_window_a618c11c585e4064c62226a10c18dadaea8d275c1cac238225aa350d7a9e2efcbc}} 
+DOSTEPNE&Enum dla ilości dostępnych sztuk filmu \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{WYPOZYCZONE@{WYPOZYCZONE}!MainWindow@{MainWindow}}\index{MainWindow@{MainWindow}!WYPOZYCZONE@{WYPOZYCZONE}}}\mbox{\Hypertarget{class_main_window_a618c11c585e4064c62226a10c18dadaead47df2763b73cb02f9b1e11fc3c56888}\label{class_main_window_a618c11c585e4064c62226a10c18dadaead47df2763b73cb02f9b1e11fc3c56888}} 
+WYPOZYCZONE&Enum dla ilości wypożyczonych sztuk filmu \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ID\_FILMU@{ID\_FILMU}!MainWindow@{MainWindow}}\index{MainWindow@{MainWindow}!ID\_FILMU@{ID\_FILMU}}}\mbox{\Hypertarget{class_main_window_a618c11c585e4064c62226a10c18dadaea5d63b9d620f0f5d8071c2a8f40023a35}\label{class_main_window_a618c11c585e4064c62226a10c18dadaea5d63b9d620f0f5d8071c2a8f40023a35}} 
+ID\+\_\+\+FILMU&Enum dla identyfikatora filmu \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Dokumentacja konstruktora i destruktora}
+\mbox{\Hypertarget{class_main_window_a996c5a2b6f77944776856f08ec30858d}\label{class_main_window_a996c5a2b6f77944776856f08ec30858d}} 
+\index{MainWindow@{MainWindow}!MainWindow@{MainWindow}}
+\index{MainWindow@{MainWindow}!MainWindow@{MainWindow}}
+\doxysubsubsection{\texorpdfstring{MainWindow()}{MainWindow()}}
+{\footnotesize\ttfamily Main\+Window\+::\+Main\+Window (\begin{DoxyParamCaption}\item[{QWidget $\ast$}]{parent = {\ttfamily nullptr} }\end{DoxyParamCaption})}
+
+
+
+Konstruktor klasy ładujący dane do okna programu. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em $\ast$parent} & wskaźnik na obiekt nadrzędny, jeśli brak to podany nullptr \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_main_window_ae98d00a93bc118200eeef9f9bba1dba7}\label{class_main_window_ae98d00a93bc118200eeef9f9bba1dba7}} 
+\index{MainWindow@{MainWindow}!````~MainWindow@{$\sim$MainWindow}}
+\index{````~MainWindow@{$\sim$MainWindow}!MainWindow@{MainWindow}}
+\doxysubsubsection{\texorpdfstring{$\sim$MainWindow()}{~MainWindow()}}
+{\footnotesize\ttfamily Main\+Window\+::$\sim$\+Main\+Window (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Destruktor klasy. 
+
+
+
+\doxysubsection{Dokumentacja funkcji składowych}
+\mbox{\Hypertarget{class_main_window_a4e20a4a065fbb0e4d3532a45a0a91425}\label{class_main_window_a4e20a4a065fbb0e4d3532a45a0a91425}} 
+\index{MainWindow@{MainWindow}!closeEvent@{closeEvent}}
+\index{closeEvent@{closeEvent}!MainWindow@{MainWindow}}
+\doxysubsubsection{\texorpdfstring{closeEvent}{closeEvent}}
+{\footnotesize\ttfamily void Main\+Window\+::close\+Event (\begin{DoxyParamCaption}\item[{QClose\+Event $\ast$}]{event }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+Funkcja zamykająca program. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em event} & wydarzenie zamknięcia aplikacji \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_main_window_a7257a380368851ab0c9105fef4d9cad8}\label{class_main_window_a7257a380368851ab0c9105fef4d9cad8}} 
+\index{MainWindow@{MainWindow}!on\_actionPod\_wietlaj\_aktualne\_niezaleg\_e\_toggled@{on\_actionPod\_wietlaj\_aktualne\_niezaleg\_e\_toggled}}
+\index{on\_actionPod\_wietlaj\_aktualne\_niezaleg\_e\_toggled@{on\_actionPod\_wietlaj\_aktualne\_niezaleg\_e\_toggled}!MainWindow@{MainWindow}}
+\doxysubsubsection{\texorpdfstring{on\_actionPod\_wietlaj\_aktualne\_niezaleg\_e\_toggled}{on\_actionPod\_wietlaj\_aktualne\_niezaleg\_e\_toggled}}
+{\footnotesize\ttfamily void Main\+Window\+::on\+\_\+action\+Pod\+\_\+wietlaj\+\_\+aktualne\+\_\+niezaleg\+\_\+e\+\_\+toggled (\begin{DoxyParamCaption}\item[{bool}]{arg1 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+Funkcja podświetlająca aktualne (niezaległe) wypożyczenia kolorem. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em arg1} & zmienna typu bool do sprawdzenia, czy opcja w menu jest zaznaczona. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_main_window_a695dc9c2ef69fab7d1da341da9a2b3aa}\label{class_main_window_a695dc9c2ef69fab7d1da341da9a2b3aa}} 
+\index{MainWindow@{MainWindow}!on\_actionPod\_wietlaj\_zaleg\_e\_toggled@{on\_actionPod\_wietlaj\_zaleg\_e\_toggled}}
+\index{on\_actionPod\_wietlaj\_zaleg\_e\_toggled@{on\_actionPod\_wietlaj\_zaleg\_e\_toggled}!MainWindow@{MainWindow}}
+\doxysubsubsection{\texorpdfstring{on\_actionPod\_wietlaj\_zaleg\_e\_toggled}{on\_actionPod\_wietlaj\_zaleg\_e\_toggled}}
+{\footnotesize\ttfamily void Main\+Window\+::on\+\_\+action\+Pod\+\_\+wietlaj\+\_\+zaleg\+\_\+e\+\_\+toggled (\begin{DoxyParamCaption}\item[{bool}]{arg1 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+Funkcja podświetlająca zaległe wypożyczenia innym kolorem. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em arg1} & zmienna typu bool do sprawdzenia, czy opcja w menu jest zaznaczona. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_main_window_ad0c36b65c157f89b03752388b5dcb6bc}\label{class_main_window_ad0c36b65c157f89b03752388b5dcb6bc}} 
+\index{MainWindow@{MainWindow}!on\_actionPod\_wietlaj\_zwr\_cone\_toggled@{on\_actionPod\_wietlaj\_zwr\_cone\_toggled}}
+\index{on\_actionPod\_wietlaj\_zwr\_cone\_toggled@{on\_actionPod\_wietlaj\_zwr\_cone\_toggled}!MainWindow@{MainWindow}}
+\doxysubsubsection{\texorpdfstring{on\_actionPod\_wietlaj\_zwr\_cone\_toggled}{on\_actionPod\_wietlaj\_zwr\_cone\_toggled}}
+{\footnotesize\ttfamily void Main\+Window\+::on\+\_\+action\+Pod\+\_\+wietlaj\+\_\+zwr\+\_\+cone\+\_\+toggled (\begin{DoxyParamCaption}\item[{bool}]{arg1 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+Funkcja podświetlająca zwrócone wypożyczenia. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em arg1} & zmienna typu bool do sprawdzenia, czy opcja w menu jest zaznaczona. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_main_window_a1a9246827faf432316637061fa97d01c}\label{class_main_window_a1a9246827faf432316637061fa97d01c}} 
+\index{MainWindow@{MainWindow}!on\_actionPokazuj\_Status\_Zwr\_cenia\_toggled@{on\_actionPokazuj\_Status\_Zwr\_cenia\_toggled}}
+\index{on\_actionPokazuj\_Status\_Zwr\_cenia\_toggled@{on\_actionPokazuj\_Status\_Zwr\_cenia\_toggled}!MainWindow@{MainWindow}}
+\doxysubsubsection{\texorpdfstring{on\_actionPokazuj\_Status\_Zwr\_cenia\_toggled}{on\_actionPokazuj\_Status\_Zwr\_cenia\_toggled}}
+{\footnotesize\ttfamily void Main\+Window\+::on\+\_\+action\+Pokazuj\+\_\+\+Status\+\_\+\+Zwr\+\_\+cenia\+\_\+toggled (\begin{DoxyParamCaption}\item[{bool}]{arg1 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+Funkcja obsługująca opcje menu wyświetlającą kolumne ze statusem zwrócenia wypożyczenia (zwrócone/aktywne) 
+
+
+\begin{DoxyParams}{Parametry}
+{\em arg1} & zmienna typu bool do sprawdzenia, czy opcja w menu jest zaznaczona. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_main_window_a63193a2d2187d98e6b80db1e7c66b1e6}\label{class_main_window_a63193a2d2187d98e6b80db1e7c66b1e6}} 
+\index{MainWindow@{MainWindow}!on\_actionShow\_IDs\_toggled@{on\_actionShow\_IDs\_toggled}}
+\index{on\_actionShow\_IDs\_toggled@{on\_actionShow\_IDs\_toggled}!MainWindow@{MainWindow}}
+\doxysubsubsection{\texorpdfstring{on\_actionShow\_IDs\_toggled}{on\_actionShow\_IDs\_toggled}}
+{\footnotesize\ttfamily void Main\+Window\+::on\+\_\+action\+Show\+\_\+\+IDs\+\_\+toggled (\begin{DoxyParamCaption}\item[{bool}]{arg1 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+Funkcja wyświetlająca ukryte kolumny z ID wpisów bazy. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em arg1} & zmienna typu bool do sprawdzenia, czy opcja w menu jest zaznaczona. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_main_window_a492512a1fa2911a653a927e231a585da}\label{class_main_window_a492512a1fa2911a653a927e231a585da}} 
+\index{MainWindow@{MainWindow}!on\_actionShow\_Last\_IDs\_triggered@{on\_actionShow\_Last\_IDs\_triggered}}
+\index{on\_actionShow\_Last\_IDs\_triggered@{on\_actionShow\_Last\_IDs\_triggered}!MainWindow@{MainWindow}}
+\doxysubsubsection{\texorpdfstring{on\_actionShow\_Last\_IDs\_triggered}{on\_actionShow\_Last\_IDs\_triggered}}
+{\footnotesize\ttfamily void Main\+Window\+::on\+\_\+action\+Show\+\_\+\+Last\+\_\+\+IDs\+\_\+triggered (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+Funkcja obsługująca opcje wyświetlającą ostatnie użyte ID w bazie. 
+
+\mbox{\Hypertarget{class_main_window_a5f185f33ed635e69f123251e7d7c6a86}\label{class_main_window_a5f185f33ed635e69f123251e7d7c6a86}} 
+\index{MainWindow@{MainWindow}!on\_actionShow\_penalty\_triggered@{on\_actionShow\_penalty\_triggered}}
+\index{on\_actionShow\_penalty\_triggered@{on\_actionShow\_penalty\_triggered}!MainWindow@{MainWindow}}
+\doxysubsubsection{\texorpdfstring{on\_actionShow\_penalty\_triggered}{on\_actionShow\_penalty\_triggered}}
+{\footnotesize\ttfamily void Main\+Window\+::on\+\_\+action\+Show\+\_\+penalty\+\_\+triggered (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+Funkcja obsługująca opcje wyświetlającą aktualną wysokość kary za dzień zwłoki. 
+
+\mbox{\Hypertarget{class_main_window_a959a5362902d37772edfaa85e0b03428}\label{class_main_window_a959a5362902d37772edfaa85e0b03428}} 
+\index{MainWindow@{MainWindow}!on\_actionUstal\_wysoko\_kary\_triggered@{on\_actionUstal\_wysoko\_kary\_triggered}}
+\index{on\_actionUstal\_wysoko\_kary\_triggered@{on\_actionUstal\_wysoko\_kary\_triggered}!MainWindow@{MainWindow}}
+\doxysubsubsection{\texorpdfstring{on\_actionUstal\_wysoko\_kary\_triggered}{on\_actionUstal\_wysoko\_kary\_triggered}}
+{\footnotesize\ttfamily void Main\+Window\+::on\+\_\+action\+Ustal\+\_\+wysoko\+\_\+kary\+\_\+triggered (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+Funkcja obsługująca opcje z menu odnośnie ustalenia wysokości kary za poterminowy zwrot wypożyczenia. 
+
+\mbox{\Hypertarget{class_main_window_a43884116e0cfb874f1282cb2d60fc42f}\label{class_main_window_a43884116e0cfb874f1282cb2d60fc42f}} 
+\index{MainWindow@{MainWindow}!on\_actionWczytaj\_bazy\_z\_pliku\_triggered@{on\_actionWczytaj\_bazy\_z\_pliku\_triggered}}
+\index{on\_actionWczytaj\_bazy\_z\_pliku\_triggered@{on\_actionWczytaj\_bazy\_z\_pliku\_triggered}!MainWindow@{MainWindow}}
+\doxysubsubsection{\texorpdfstring{on\_actionWczytaj\_bazy\_z\_pliku\_triggered}{on\_actionWczytaj\_bazy\_z\_pliku\_triggered}}
+{\footnotesize\ttfamily void Main\+Window\+::on\+\_\+action\+Wczytaj\+\_\+bazy\+\_\+z\+\_\+pliku\+\_\+triggered (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+Funkcja wywoływana przez opcję wczytania baz z pliku z menu. 
+
+\mbox{\Hypertarget{class_main_window_aac458777200f16af20a6b8c4e7b7ba5b}\label{class_main_window_aac458777200f16af20a6b8c4e7b7ba5b}} 
+\index{MainWindow@{MainWindow}!on\_actionWyjd\_triggered@{on\_actionWyjd\_triggered}}
+\index{on\_actionWyjd\_triggered@{on\_actionWyjd\_triggered}!MainWindow@{MainWindow}}
+\doxysubsubsection{\texorpdfstring{on\_actionWyjd\_triggered}{on\_actionWyjd\_triggered}}
+{\footnotesize\ttfamily void Main\+Window\+::on\+\_\+action\+Wyjd\+\_\+triggered (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+Funkcja wywołująca akcje zamknięcia okna w menu. 
+
+\mbox{\Hypertarget{class_main_window_a05e9fef79840f3a0c00d53b89a6365f4}\label{class_main_window_a05e9fef79840f3a0c00d53b89a6365f4}} 
+\index{MainWindow@{MainWindow}!on\_actionZapisz\_do\_pliku\_triggered@{on\_actionZapisz\_do\_pliku\_triggered}}
+\index{on\_actionZapisz\_do\_pliku\_triggered@{on\_actionZapisz\_do\_pliku\_triggered}!MainWindow@{MainWindow}}
+\doxysubsubsection{\texorpdfstring{on\_actionZapisz\_do\_pliku\_triggered}{on\_actionZapisz\_do\_pliku\_triggered}}
+{\footnotesize\ttfamily void Main\+Window\+::on\+\_\+action\+Zapisz\+\_\+do\+\_\+pliku\+\_\+triggered (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+Funkcja wywoływana przez opcję zapisu baz do pliku z menu. 
+
+\mbox{\Hypertarget{class_main_window_a9a99786bca1df8f2705dd819d59fb632}\label{class_main_window_a9a99786bca1df8f2705dd819d59fb632}} 
+\index{MainWindow@{MainWindow}!on\_addBorrowButton\_clicked@{on\_addBorrowButton\_clicked}}
+\index{on\_addBorrowButton\_clicked@{on\_addBorrowButton\_clicked}!MainWindow@{MainWindow}}
+\doxysubsubsection{\texorpdfstring{on\_addBorrowButton\_clicked}{on\_addBorrowButton\_clicked}}
+{\footnotesize\ttfamily void Main\+Window\+::on\+\_\+add\+Borrow\+Button\+\_\+clicked (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+Funkcja wydarzenia przycisku dodania wypożyczenia. 
+
+\mbox{\Hypertarget{class_main_window_a67934448f304d204807b8b74b090c1ca}\label{class_main_window_a67934448f304d204807b8b74b090c1ca}} 
+\index{MainWindow@{MainWindow}!on\_addClientButton\_clicked@{on\_addClientButton\_clicked}}
+\index{on\_addClientButton\_clicked@{on\_addClientButton\_clicked}!MainWindow@{MainWindow}}
+\doxysubsubsection{\texorpdfstring{on\_addClientButton\_clicked}{on\_addClientButton\_clicked}}
+{\footnotesize\ttfamily void Main\+Window\+::on\+\_\+add\+Client\+Button\+\_\+clicked (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+Funkcja wydarzenia przycisku dodania klienta. 
+
+\mbox{\Hypertarget{class_main_window_ab81561cd076fd893cd4fd1c649dc0153}\label{class_main_window_ab81561cd076fd893cd4fd1c649dc0153}} 
+\index{MainWindow@{MainWindow}!on\_addMovieButton\_clicked@{on\_addMovieButton\_clicked}}
+\index{on\_addMovieButton\_clicked@{on\_addMovieButton\_clicked}!MainWindow@{MainWindow}}
+\doxysubsubsection{\texorpdfstring{on\_addMovieButton\_clicked}{on\_addMovieButton\_clicked}}
+{\footnotesize\ttfamily void Main\+Window\+::on\+\_\+add\+Movie\+Button\+\_\+clicked (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+Funkcja wydarzenia przycisku dodania filmu. 
+
+\mbox{\Hypertarget{class_main_window_af2e76f27a59209309604dc1e04c81f49}\label{class_main_window_af2e76f27a59209309604dc1e04c81f49}} 
+\index{MainWindow@{MainWindow}!on\_comboBox\_currentIndexChanged@{on\_comboBox\_currentIndexChanged}}
+\index{on\_comboBox\_currentIndexChanged@{on\_comboBox\_currentIndexChanged}!MainWindow@{MainWindow}}
+\doxysubsubsection{\texorpdfstring{on\_comboBox\_currentIndexChanged}{on\_comboBox\_currentIndexChanged}}
+{\footnotesize\ttfamily void Main\+Window\+::on\+\_\+combo\+Box\+\_\+current\+Index\+Changed (\begin{DoxyParamCaption}\item[{int}]{index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+Funkcja obsługująca typ wyświetlanych wypożyczeń (wyszystkie/zaległe/aktualne). 
+
+
+\begin{DoxyParams}{Parametry}
+{\em index} & numer pola combobox \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_main_window_a4be4ddbe841a6eeb7748d7eb5ff194b1}\label{class_main_window_a4be4ddbe841a6eeb7748d7eb5ff194b1}} 
+\index{MainWindow@{MainWindow}!on\_delBorrowButton\_clicked@{on\_delBorrowButton\_clicked}}
+\index{on\_delBorrowButton\_clicked@{on\_delBorrowButton\_clicked}!MainWindow@{MainWindow}}
+\doxysubsubsection{\texorpdfstring{on\_delBorrowButton\_clicked}{on\_delBorrowButton\_clicked}}
+{\footnotesize\ttfamily void Main\+Window\+::on\+\_\+del\+Borrow\+Button\+\_\+clicked (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+Funkcja wydarzenia przycisku usunięcia wypożyczenia. 
+
+\mbox{\Hypertarget{class_main_window_acf2d27a6de5bdbb39fd0a37cbd412ae1}\label{class_main_window_acf2d27a6de5bdbb39fd0a37cbd412ae1}} 
+\index{MainWindow@{MainWindow}!on\_delClientButton\_clicked@{on\_delClientButton\_clicked}}
+\index{on\_delClientButton\_clicked@{on\_delClientButton\_clicked}!MainWindow@{MainWindow}}
+\doxysubsubsection{\texorpdfstring{on\_delClientButton\_clicked}{on\_delClientButton\_clicked}}
+{\footnotesize\ttfamily void Main\+Window\+::on\+\_\+del\+Client\+Button\+\_\+clicked (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+Funkcja wydarzenia przycisku usunięcia klienta. 
+
+\mbox{\Hypertarget{class_main_window_aea14696b8bb95f912178b86966157e04}\label{class_main_window_aea14696b8bb95f912178b86966157e04}} 
+\index{MainWindow@{MainWindow}!on\_delMovieButton\_clicked@{on\_delMovieButton\_clicked}}
+\index{on\_delMovieButton\_clicked@{on\_delMovieButton\_clicked}!MainWindow@{MainWindow}}
+\doxysubsubsection{\texorpdfstring{on\_delMovieButton\_clicked}{on\_delMovieButton\_clicked}}
+{\footnotesize\ttfamily void Main\+Window\+::on\+\_\+del\+Movie\+Button\+\_\+clicked (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+Funkcja wydarzenia przycisku usunięcia filmu. 
+
+\mbox{\Hypertarget{class_main_window_aa5fab869f10ba27e4bb219560330defe}\label{class_main_window_aa5fab869f10ba27e4bb219560330defe}} 
+\index{MainWindow@{MainWindow}!on\_editBorrowButton\_2\_clicked@{on\_editBorrowButton\_2\_clicked}}
+\index{on\_editBorrowButton\_2\_clicked@{on\_editBorrowButton\_2\_clicked}!MainWindow@{MainWindow}}
+\doxysubsubsection{\texorpdfstring{on\_editBorrowButton\_2\_clicked}{on\_editBorrowButton\_2\_clicked}}
+{\footnotesize\ttfamily void Main\+Window\+::on\+\_\+edit\+Borrow\+Button\+\_\+2\+\_\+clicked (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+Funkcja wydarzenia przycisku edycji wypożyczenia. 
+
+\mbox{\Hypertarget{class_main_window_ae6a864e35c7c4b7cef4b8f97a47cc125}\label{class_main_window_ae6a864e35c7c4b7cef4b8f97a47cc125}} 
+\index{MainWindow@{MainWindow}!on\_editClientButton\_clicked@{on\_editClientButton\_clicked}}
+\index{on\_editClientButton\_clicked@{on\_editClientButton\_clicked}!MainWindow@{MainWindow}}
+\doxysubsubsection{\texorpdfstring{on\_editClientButton\_clicked}{on\_editClientButton\_clicked}}
+{\footnotesize\ttfamily void Main\+Window\+::on\+\_\+edit\+Client\+Button\+\_\+clicked (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+Funkcja wydarzenia przycisku edycji klienta. 
+
+\mbox{\Hypertarget{class_main_window_ab6743ab99536c3db58062f7ccfec0af0}\label{class_main_window_ab6743ab99536c3db58062f7ccfec0af0}} 
+\index{MainWindow@{MainWindow}!on\_editMovieButton\_clicked@{on\_editMovieButton\_clicked}}
+\index{on\_editMovieButton\_clicked@{on\_editMovieButton\_clicked}!MainWindow@{MainWindow}}
+\doxysubsubsection{\texorpdfstring{on\_editMovieButton\_clicked}{on\_editMovieButton\_clicked}}
+{\footnotesize\ttfamily void Main\+Window\+::on\+\_\+edit\+Movie\+Button\+\_\+clicked (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+Funkcja wydarzenia przycisku edycji filmu. 
+
+\mbox{\Hypertarget{class_main_window_a1e47a8489240e1cbd7ef987d28debfe6}\label{class_main_window_a1e47a8489240e1cbd7ef987d28debfe6}} 
+\index{MainWindow@{MainWindow}!on\_searchBorrowField\_returnPressed@{on\_searchBorrowField\_returnPressed}}
+\index{on\_searchBorrowField\_returnPressed@{on\_searchBorrowField\_returnPressed}!MainWindow@{MainWindow}}
+\doxysubsubsection{\texorpdfstring{on\_searchBorrowField\_returnPressed}{on\_searchBorrowField\_returnPressed}}
+{\footnotesize\ttfamily void Main\+Window\+::on\+\_\+search\+Borrow\+Field\+\_\+return\+Pressed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+Funkcja wydarzenia pola wyszukiwania wypożyczenia przy wciśnięciu klawisza Enter. 
+
+\mbox{\Hypertarget{class_main_window_a5f6f88fd052f48771bdedca241582afd}\label{class_main_window_a5f6f88fd052f48771bdedca241582afd}} 
+\index{MainWindow@{MainWindow}!on\_searchBorrowsButton\_clicked@{on\_searchBorrowsButton\_clicked}}
+\index{on\_searchBorrowsButton\_clicked@{on\_searchBorrowsButton\_clicked}!MainWindow@{MainWindow}}
+\doxysubsubsection{\texorpdfstring{on\_searchBorrowsButton\_clicked}{on\_searchBorrowsButton\_clicked}}
+{\footnotesize\ttfamily void Main\+Window\+::on\+\_\+search\+Borrows\+Button\+\_\+clicked (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+Funkcja wydarzenia przycisku wyszukania wypożyczenia. 
+
+\mbox{\Hypertarget{class_main_window_af9fc2caf9287ee9e659497b2da3fce96}\label{class_main_window_af9fc2caf9287ee9e659497b2da3fce96}} 
+\index{MainWindow@{MainWindow}!on\_searchClientButton\_clicked@{on\_searchClientButton\_clicked}}
+\index{on\_searchClientButton\_clicked@{on\_searchClientButton\_clicked}!MainWindow@{MainWindow}}
+\doxysubsubsection{\texorpdfstring{on\_searchClientButton\_clicked}{on\_searchClientButton\_clicked}}
+{\footnotesize\ttfamily void Main\+Window\+::on\+\_\+search\+Client\+Button\+\_\+clicked (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+Funkcja wydarzenia przycisku wyszukania klienta. 
+
+\mbox{\Hypertarget{class_main_window_aace7f003f8fbf4f19bd85e4261d11cfb}\label{class_main_window_aace7f003f8fbf4f19bd85e4261d11cfb}} 
+\index{MainWindow@{MainWindow}!on\_searchClientField\_returnPressed@{on\_searchClientField\_returnPressed}}
+\index{on\_searchClientField\_returnPressed@{on\_searchClientField\_returnPressed}!MainWindow@{MainWindow}}
+\doxysubsubsection{\texorpdfstring{on\_searchClientField\_returnPressed}{on\_searchClientField\_returnPressed}}
+{\footnotesize\ttfamily void Main\+Window\+::on\+\_\+search\+Client\+Field\+\_\+return\+Pressed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+Funkcja wydarzenia pola wyszukiwania klienta przy wciśnięciu klawisza Enter. 
+
+\mbox{\Hypertarget{class_main_window_ae4797dfec6357dcd9d139d117b5a50f0}\label{class_main_window_ae4797dfec6357dcd9d139d117b5a50f0}} 
+\index{MainWindow@{MainWindow}!on\_searchMovieButton\_clicked@{on\_searchMovieButton\_clicked}}
+\index{on\_searchMovieButton\_clicked@{on\_searchMovieButton\_clicked}!MainWindow@{MainWindow}}
+\doxysubsubsection{\texorpdfstring{on\_searchMovieButton\_clicked}{on\_searchMovieButton\_clicked}}
+{\footnotesize\ttfamily void Main\+Window\+::on\+\_\+search\+Movie\+Button\+\_\+clicked (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+Funkcja wydarzenia przycisku wyszukania filmu. 
+
+\mbox{\Hypertarget{class_main_window_ac72dfbf6888aa222c13657444b6ef156}\label{class_main_window_ac72dfbf6888aa222c13657444b6ef156}} 
+\index{MainWindow@{MainWindow}!on\_searchMovieField\_returnPressed@{on\_searchMovieField\_returnPressed}}
+\index{on\_searchMovieField\_returnPressed@{on\_searchMovieField\_returnPressed}!MainWindow@{MainWindow}}
+\doxysubsubsection{\texorpdfstring{on\_searchMovieField\_returnPressed}{on\_searchMovieField\_returnPressed}}
+{\footnotesize\ttfamily void Main\+Window\+::on\+\_\+search\+Movie\+Field\+\_\+return\+Pressed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+Funkcja wydarzenia pola wyszukiwania filmu przy wciśnięciu klawisza Enter. 
+
+
+
+\doxysubsection{Dokumentacja atrybutów składowych}
+\mbox{\Hypertarget{class_main_window_a0058d307a2c1be678f66a098251b2725}\label{class_main_window_a0058d307a2c1be678f66a098251b2725}} 
+\index{MainWindow@{MainWindow}!clients\_lastID@{clients\_lastID}}
+\index{clients\_lastID@{clients\_lastID}!MainWindow@{MainWindow}}
+\doxysubsubsection{\texorpdfstring{clients\_lastID}{clients\_lastID}}
+{\footnotesize\ttfamily int Main\+Window\+::clients\+\_\+last\+ID\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Zmienna przechowująca ostatnie użyte ID w tabeli klientów. 
+
+\mbox{\Hypertarget{class_main_window_ab5f91bac687d2034aa19ac4c4bfa05a9}\label{class_main_window_ab5f91bac687d2034aa19ac4c4bfa05a9}} 
+\index{MainWindow@{MainWindow}!movies\_lastID@{movies\_lastID}}
+\index{movies\_lastID@{movies\_lastID}!MainWindow@{MainWindow}}
+\doxysubsubsection{\texorpdfstring{movies\_lastID}{movies\_lastID}}
+{\footnotesize\ttfamily int Main\+Window\+::movies\+\_\+last\+ID\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Zmienna przechowująca ostatnie użyte ID w tabeli filmów. 
+
+\mbox{\Hypertarget{class_main_window_ae578dc2b17436c616d5607a054ac7c9a}\label{class_main_window_ae578dc2b17436c616d5607a054ac7c9a}} 
+\index{MainWindow@{MainWindow}!penalty@{penalty}}
+\index{penalty@{penalty}!MainWindow@{MainWindow}}
+\doxysubsubsection{\texorpdfstring{penalty}{penalty}}
+{\footnotesize\ttfamily float Main\+Window\+::penalty\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Zmienna przechowująca wartość kary za poterminowy zwrot. 
+
+\mbox{\Hypertarget{class_main_window_a35466a70ed47252a0191168126a352a5}\label{class_main_window_a35466a70ed47252a0191168126a352a5}} 
+\index{MainWindow@{MainWindow}!ui@{ui}}
+\index{ui@{ui}!MainWindow@{MainWindow}}
+\doxysubsubsection{\texorpdfstring{ui}{ui}}
+{\footnotesize\ttfamily Ui\+::\+Main\+Window$\ast$ Main\+Window\+::ui\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Wskaźnik na interfejs, umożliwia dostęp do elementów wewnątrz interfejsu. 
+
+
+
+Dokumentacja dla tej klasy została wygenerowana z plików\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Kuba/\+Documents/\+Git\+Hub/\+Wypozyczalnia\+\_\+\+Filmow\+\_\+\+PC2\+\_\+\+QT/kod/\mbox{\hyperlink{mainwindow_8h}{mainwindow.\+h}}\item 
+C\+:/\+Users/\+Kuba/\+Documents/\+Git\+Hub/\+Wypozyczalnia\+\_\+\+Filmow\+\_\+\+PC2\+\_\+\+QT/kod/\mbox{\hyperlink{mainwindow_8cpp}{mainwindow.\+cpp}}\end{DoxyCompactItemize}

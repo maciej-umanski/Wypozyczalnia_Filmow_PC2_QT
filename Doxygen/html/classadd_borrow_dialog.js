@@ -1,0 +1,48 @@
+var classadd_borrow_dialog =
+[
+    [ "\u202ACLIENT_COLLUMNS", "classadd_borrow_dialog.html#a2d64f8511318abd5baedd350fca9f181", [
+      [ "\u202AIMIE", "classadd_borrow_dialog.html#a2d64f8511318abd5baedd350fca9f181a546c46dd9b87d5ef3a76ebd4e96e77a2", null ],
+      [ "\u202ANAZWISKO", "classadd_borrow_dialog.html#a2d64f8511318abd5baedd350fca9f181a465189609b0e530ce92e77f948bd3c60", null ],
+      [ "\u202APESEL", "classadd_borrow_dialog.html#a2d64f8511318abd5baedd350fca9f181afceafefccf6afde3fb5f8b0a80ae7083", null ],
+      [ "\u202ATELEFON", "classadd_borrow_dialog.html#a2d64f8511318abd5baedd350fca9f181a8cf6c8f597b882180bdf9706e8c6c6ff", null ],
+      [ "\u202AEMAIL", "classadd_borrow_dialog.html#a2d64f8511318abd5baedd350fca9f181ad727b55aa5e48e8e36941ce23f6b20fd", null ],
+      [ "\u202APOSIADANE_FILMY", "classadd_borrow_dialog.html#a2d64f8511318abd5baedd350fca9f181ae27db3db34d55072a1c0ecea388f1f10", null ],
+      [ "\u202AID_KLIENTA", "classadd_borrow_dialog.html#a2d64f8511318abd5baedd350fca9f181a74ee385d0384991862f3145af6b17eaa", null ]
+    ] ],
+    [ "\u202AMOVIE_COLLUMNS", "classadd_borrow_dialog.html#a7421d30c734dc1ede8c00e48bae54c6a", [
+      [ "\u202ATYTUL", "classadd_borrow_dialog.html#a7421d30c734dc1ede8c00e48bae54c6aae3868bd30fce4285faa4457c3dc362e0", null ],
+      [ "\u202AREZYSER", "classadd_borrow_dialog.html#a7421d30c734dc1ede8c00e48bae54c6aa20a8e4a4b5f15b8f14f7c6b12932d5a7", null ],
+      [ "\u202AGATUNEK", "classadd_borrow_dialog.html#a7421d30c734dc1ede8c00e48bae54c6aa85968f32846b1f1e9ed7e7ed584b932e", null ],
+      [ "\u202AROK", "classadd_borrow_dialog.html#a7421d30c734dc1ede8c00e48bae54c6aa530218d25e9cb6ebeb9fcc449dcb6b47", null ],
+      [ "\u202ADOSTEPNE", "classadd_borrow_dialog.html#a7421d30c734dc1ede8c00e48bae54c6aa4b8ac16ef6b3fe9b18e0499e23ed80c7", null ],
+      [ "\u202AWYPOZYCZONE", "classadd_borrow_dialog.html#a7421d30c734dc1ede8c00e48bae54c6aad86d8ccafcae3316af56ecd720c3d147", null ],
+      [ "\u202AID_FILMU", "classadd_borrow_dialog.html#a7421d30c734dc1ede8c00e48bae54c6aa58ce1a0e495d4cc77b95920be5b2ac31", null ]
+    ] ],
+    [ "\u202AaddBorrowDialog", "classadd_borrow_dialog.html#a5b92f30099c9388b3fc37a1861eef39c", null ],
+    [ "\u202A~addBorrowDialog", "classadd_borrow_dialog.html#a62c3111b14ff0bf03d45d73013ffa499", null ],
+    [ "\u202Aborrow_date", "classadd_borrow_dialog.html#acd955719857935fe535d5342849c2a24", null ],
+    [ "\u202Acharge", "classadd_borrow_dialog.html#adbbce4a63c0d729433ec10468439cd0d", null ],
+    [ "\u202AchosenClientID", "classadd_borrow_dialog.html#a1aca783ea7bb4bd6e7531a7696f6f062", null ],
+    [ "\u202AchosenClientRow", "classadd_borrow_dialog.html#a4995f3722b3ef62acf207a5249122a64", null ],
+    [ "\u202AchosenMovie", "classadd_borrow_dialog.html#a3fdcdf386b03e33c604d7f87c9d92436", null ],
+    [ "\u202AchosenMovieID", "classadd_borrow_dialog.html#a45a7d81cf6bce07f982daf41318668a0", null ],
+    [ "\u202AchosenMovieRow", "classadd_borrow_dialog.html#a1a80438d4d1f5021e8c5726f167f3b02", null ],
+    [ "\u202Aname", "classadd_borrow_dialog.html#a2f53d68b6c8f62f52fa150f42ae0555f", null ],
+    [ "\u202Aon_borrowsClientsTable_currentCellChanged", "classadd_borrow_dialog.html#a974c695068e1707778173a4a93e6e9ea", null ],
+    [ "\u202Aon_borrowsMoviesTable_currentCellChanged", "classadd_borrow_dialog.html#ab4b9b21c8874cc5a4de3709de5bfb14d", null ],
+    [ "\u202Aon_buttonBox_accepted", "classadd_borrow_dialog.html#a14a8dc10994e4f1e3ee4e2b079e23337", null ],
+    [ "\u202Aon_buttonBox_rejected", "classadd_borrow_dialog.html#a7a5a2f9584a777ec9ede785ff9776860", null ],
+    [ "\u202Aon_searchClientButton_clicked", "classadd_borrow_dialog.html#ad3f478e11be9ce8f91d81881bd7f9f14", null ],
+    [ "\u202Aon_searchClientField_returnPressed", "classadd_borrow_dialog.html#afcd56e72bb42c5398fbab8d244009781", null ],
+    [ "\u202Aon_searchMovieButton_clicked", "classadd_borrow_dialog.html#a5f4dfa9771fabfc54396435a475e5b99", null ],
+    [ "\u202Aon_searchMovieField_returnPressed", "classadd_borrow_dialog.html#ab9367ed7185949fa24847394737058ce", null ],
+    [ "\u202Areturn_date", "classadd_borrow_dialog.html#a942d3359ee7a101c86cf38863785d3e6", null ],
+    [ "\u202Asurname", "classadd_borrow_dialog.html#a5ef10241c9d0f609de8da7566956c68b", null ],
+    [ "\u202Atitle", "classadd_borrow_dialog.html#a190ebe79fc90a770018e424d76ceb8b2", null ],
+    [ "\u202AclientID", "classadd_borrow_dialog.html#aa25a9a4b9f0e0fed9894ed7d0e1bd010", null ],
+    [ "\u202AclientRow", "classadd_borrow_dialog.html#aa7ed60409bca3356433cb7e531aa7ea7", null ],
+    [ "\u202AmovieID", "classadd_borrow_dialog.html#a20894b895f900222cbc1ca4fdcdd6ed6", null ],
+    [ "\u202AmovieRow", "classadd_borrow_dialog.html#aee88a04733a0252ff76656ea13d63917", null ],
+    [ "\u202AmoviesTableTemp", "classadd_borrow_dialog.html#a3c1964f7aa71c92d4a3e8ef05a24b73c", null ],
+    [ "\u202Aui", "classadd_borrow_dialog.html#adabe07944fbd646ed3910c4b7c3aa8a4", null ]
+];

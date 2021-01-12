@@ -4,9 +4,10 @@
  - dodałem databases_example z zaległymi wypożyczeniami żeby można było je szybko testować pozdro wrzuć je do /databases
 
 # DO ZROBIENIA :
- - Dokumentacja DoxyGen
+ ALL DONE
 
 # ZROBIONE :
+- Dokumentacja DoxyGen
 - Sprawozdanie
 - Historia
 - Podświetlanie

@@ -1,0 +1,497 @@
+\hypertarget{classadd_borrow_dialog}{}\doxysection{Dokumentacja klasy add\+Borrow\+Dialog}
+\label{classadd_borrow_dialog}\index{addBorrowDialog@{addBorrowDialog}}
+
+
+Klasa obsługująca dodawanie wypożyczenia Zawartość klasy to wszystkie zmienne oraz funkcje użyte w oknie dialogowym służącym do dodania nowego wypożyczenia do programu. Klasa dziedziczy publiczne właściwości z klasy QDialog, będącej zawartością biblioteki Qt o tej samej nazwie.  
+
+
+
+
+{\ttfamily \#include $<$addborrowdialog.\+h$>$}
+
+Diagram dziedziczenia dla add\+Borrow\+Dialog\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classadd_borrow_dialog}
+\end{center}
+\end{figure}
+\doxysubsection*{Metody publiczne}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classadd_borrow_dialog_a5b92f30099c9388b3fc37a1861eef39c}{add\+Borrow\+Dialog}} (QWidget $\ast$parent=nullptr, QTable\+Widget $\ast$clients\+Table=nullptr, QTable\+Widget $\ast$movies\+Table=nullptr, bool id\+\_\+setting=false)
+\begin{DoxyCompactList}\small\item\em Konstruktor klasy ładujący dane do okna dialogowego. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classadd_borrow_dialog_a62c3111b14ff0bf03d45d73013ffa499}{$\sim$add\+Borrow\+Dialog}} ()
+\begin{DoxyCompactList}\small\item\em Destruktor klasy. \end{DoxyCompactList}\item 
+QString \mbox{\hyperlink{classadd_borrow_dialog_acd955719857935fe535d5342849c2a24}{borrow\+\_\+date}} () const
+\begin{DoxyCompactList}\small\item\em Zmienna przechowująca date wypożyczenia. \end{DoxyCompactList}\item 
+QString \mbox{\hyperlink{classadd_borrow_dialog_a942d3359ee7a101c86cf38863785d3e6}{return\+\_\+date}} () const
+\begin{DoxyCompactList}\small\item\em Zmienna przechowująca date zwrotu. \end{DoxyCompactList}\item 
+QString \mbox{\hyperlink{classadd_borrow_dialog_adbbce4a63c0d729433ec10468439cd0d}{charge}} () const
+\begin{DoxyCompactList}\small\item\em Zmienna przechowująca dzienny koszt wypożyczenia. \end{DoxyCompactList}\item 
+QString \mbox{\hyperlink{classadd_borrow_dialog_a2f53d68b6c8f62f52fa150f42ae0555f}{name}} () const
+\begin{DoxyCompactList}\small\item\em Zmienna przechowująca imie klienta. \end{DoxyCompactList}\item 
+QString \mbox{\hyperlink{classadd_borrow_dialog_a5ef10241c9d0f609de8da7566956c68b}{surname}} () const
+\begin{DoxyCompactList}\small\item\em Zmienna przechowująca nazwisko klienta. \end{DoxyCompactList}\item 
+QString \mbox{\hyperlink{classadd_borrow_dialog_a190ebe79fc90a770018e424d76ceb8b2}{title}} () const
+\begin{DoxyCompactList}\small\item\em Zmienna przechowująca tytuł wypożyczanego filmu. \end{DoxyCompactList}\item 
+QString \mbox{\hyperlink{classadd_borrow_dialog_a1aca783ea7bb4bd6e7531a7696f6f062}{chosen\+Client\+ID}} () const
+\begin{DoxyCompactList}\small\item\em Zmienna przechowująca ID klienta. \end{DoxyCompactList}\item 
+QString \mbox{\hyperlink{classadd_borrow_dialog_a45a7d81cf6bce07f982daf41318668a0}{chosen\+Movie\+ID}} () const
+\begin{DoxyCompactList}\small\item\em Zmienna przechowująca ID filmu. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classadd_borrow_dialog_a4995f3722b3ef62acf207a5249122a64}{chosen\+Client\+Row}} () const
+\begin{DoxyCompactList}\small\item\em Zmienna przechowująca numer aktualnie zaznaczonego wiersza w tabeli klientów. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classadd_borrow_dialog_a1a80438d4d1f5021e8c5726f167f3b02}{chosen\+Movie\+Row}} () const
+\begin{DoxyCompactList}\small\item\em Zmienna przechowująca numer aktualnie zaznaczonego wiersza w tabeli filmów. \end{DoxyCompactList}\item 
+std\+::pair$<$ int, int $>$ \mbox{\hyperlink{classadd_borrow_dialog_a3fdcdf386b03e33c604d7f87c9d92436}{chosen\+Movie}} () const
+\begin{DoxyCompactList}\small\item\em Obiekt przechowujący pozycje wypożyczanego filmu. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Typy prywatne}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{classadd_borrow_dialog_a2d64f8511318abd5baedd350fca9f181}{CLIENT\+\_\+\+COLLUMNS}} \{ \newline
+\mbox{\hyperlink{classadd_borrow_dialog_a2d64f8511318abd5baedd350fca9f181a546c46dd9b87d5ef3a76ebd4e96e77a2}{IMIE}}
+, \mbox{\hyperlink{classadd_borrow_dialog_a2d64f8511318abd5baedd350fca9f181a465189609b0e530ce92e77f948bd3c60}{NAZWISKO}}
+, \mbox{\hyperlink{classadd_borrow_dialog_a2d64f8511318abd5baedd350fca9f181afceafefccf6afde3fb5f8b0a80ae7083}{PESEL}}
+, \mbox{\hyperlink{classadd_borrow_dialog_a2d64f8511318abd5baedd350fca9f181a8cf6c8f597b882180bdf9706e8c6c6ff}{TELEFON}}
+, \newline
+\mbox{\hyperlink{classadd_borrow_dialog_a2d64f8511318abd5baedd350fca9f181ad727b55aa5e48e8e36941ce23f6b20fd}{EMAIL}}
+, \mbox{\hyperlink{classadd_borrow_dialog_a2d64f8511318abd5baedd350fca9f181ae27db3db34d55072a1c0ecea388f1f10}{POSIADANE\+\_\+\+FILMY}}
+, \mbox{\hyperlink{classadd_borrow_dialog_a2d64f8511318abd5baedd350fca9f181a74ee385d0384991862f3145af6b17eaa}{ID\+\_\+\+KLIENTA}}
+ \}
+\begin{DoxyCompactList}\small\item\em Enum tabeli klientów. \end{DoxyCompactList}\item 
+enum \mbox{\hyperlink{classadd_borrow_dialog_a7421d30c734dc1ede8c00e48bae54c6a}{MOVIE\+\_\+\+COLLUMNS}} \{ \newline
+\mbox{\hyperlink{classadd_borrow_dialog_a7421d30c734dc1ede8c00e48bae54c6aae3868bd30fce4285faa4457c3dc362e0}{TYTUL}}
+, \mbox{\hyperlink{classadd_borrow_dialog_a7421d30c734dc1ede8c00e48bae54c6aa20a8e4a4b5f15b8f14f7c6b12932d5a7}{REZYSER}}
+, \mbox{\hyperlink{classadd_borrow_dialog_a7421d30c734dc1ede8c00e48bae54c6aa85968f32846b1f1e9ed7e7ed584b932e}{GATUNEK}}
+, \mbox{\hyperlink{classadd_borrow_dialog_a7421d30c734dc1ede8c00e48bae54c6aa530218d25e9cb6ebeb9fcc449dcb6b47}{ROK}}
+, \newline
+\mbox{\hyperlink{classadd_borrow_dialog_a7421d30c734dc1ede8c00e48bae54c6aa4b8ac16ef6b3fe9b18e0499e23ed80c7}{DOSTEPNE}}
+, \mbox{\hyperlink{classadd_borrow_dialog_a7421d30c734dc1ede8c00e48bae54c6aad86d8ccafcae3316af56ecd720c3d147}{WYPOZYCZONE}}
+, \mbox{\hyperlink{classadd_borrow_dialog_a7421d30c734dc1ede8c00e48bae54c6aa58ce1a0e495d4cc77b95920be5b2ac31}{ID\+\_\+\+FILMU}}
+ \}
+\begin{DoxyCompactList}\small\item\em Enum tabeli filmów. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Sloty prywatne}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classadd_borrow_dialog_a7a5a2f9584a777ec9ede785ff9776860}{on\+\_\+button\+Box\+\_\+rejected}} ()
+\begin{DoxyCompactList}\small\item\em Funkcja wywoływana przy anulowaniu okna przez przycisk. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classadd_borrow_dialog_ab4b9b21c8874cc5a4de3709de5bfb14d}{on\+\_\+borrows\+Movies\+Table\+\_\+current\+Cell\+Changed}} (int current\+Row)
+\begin{DoxyCompactList}\small\item\em Funkcja do zaznaczenia całego rzędu w tabeli po kliknięciu na przynależącą do niego komórkę w tabeli filmów. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classadd_borrow_dialog_a974c695068e1707778173a4a93e6e9ea}{on\+\_\+borrows\+Clients\+Table\+\_\+current\+Cell\+Changed}} (int current\+Row)
+\begin{DoxyCompactList}\small\item\em Funkcja do zaznaczenia całego rzędu w tabeli po kliknięciu na przynależącą do niego komórkę w tabeli klientów. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classadd_borrow_dialog_a14a8dc10994e4f1e3ee4e2b079e23337}{on\+\_\+button\+Box\+\_\+accepted}} ()
+\begin{DoxyCompactList}\small\item\em Funkcja wywoływana przy potwierdzeniu zmian dokonanych w oknie przez przycisk. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classadd_borrow_dialog_ad3f478e11be9ce8f91d81881bd7f9f14}{on\+\_\+search\+Client\+Button\+\_\+clicked}} ()
+\begin{DoxyCompactList}\small\item\em Funkcja obsługująca kliknięcie przycisku wyszukania przy tabeli klientów. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classadd_borrow_dialog_a5f4dfa9771fabfc54396435a475e5b99}{on\+\_\+search\+Movie\+Button\+\_\+clicked}} ()
+\begin{DoxyCompactList}\small\item\em Funkcja obsługująca kliknięcie przycisku wyszukania przy tabeli filmów. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classadd_borrow_dialog_afcd56e72bb42c5398fbab8d244009781}{on\+\_\+search\+Client\+Field\+\_\+return\+Pressed}} ()
+\begin{DoxyCompactList}\small\item\em Funkcja wywołuje zdarzenie przycisku wyszukania przy tabeli klientów po wciśnięciu klawisza Enter. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classadd_borrow_dialog_ab9367ed7185949fa24847394737058ce}{on\+\_\+search\+Movie\+Field\+\_\+return\+Pressed}} ()
+\begin{DoxyCompactList}\small\item\em Funkcja wywołuje zdarzenie przycisku wyszukania przy tabeli filmów po wciśnięciu klawisza Enter. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Atrybuty prywatne}
+\begin{DoxyCompactItemize}
+\item 
+Ui\+::add\+Borrow\+Dialog $\ast$ \mbox{\hyperlink{classadd_borrow_dialog_adabe07944fbd646ed3910c4b7c3aa8a4}{ui}}
+\begin{DoxyCompactList}\small\item\em Wskaźnik na interfejs wewnątrz klasy. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classadd_borrow_dialog_aa7ed60409bca3356433cb7e531aa7ea7}{client\+Row}}
+\begin{DoxyCompactList}\small\item\em zmienna zawierająca numer zaznaczonego wiersza tabeli klientów \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classadd_borrow_dialog_aee88a04733a0252ff76656ea13d63917}{movie\+Row}}
+\begin{DoxyCompactList}\small\item\em zmienna zawierająca numer zaznaczonego wiersza tabeli filmów \end{DoxyCompactList}\item 
+QString \mbox{\hyperlink{classadd_borrow_dialog_aa25a9a4b9f0e0fed9894ed7d0e1bd010}{client\+ID}}
+\begin{DoxyCompactList}\small\item\em zmienna zawierająca ID zaznaczonego klienta \end{DoxyCompactList}\item 
+QString \mbox{\hyperlink{classadd_borrow_dialog_a20894b895f900222cbc1ca4fdcdd6ed6}{movie\+ID}}
+\begin{DoxyCompactList}\small\item\em zmienna zawierająca ID zaznaczonego filmu \end{DoxyCompactList}\item 
+QTable\+Widget $\ast$ \mbox{\hyperlink{classadd_borrow_dialog_a3c1964f7aa71c92d4a3e8ef05a24b73c}{movies\+Table\+Temp}}
+\begin{DoxyCompactList}\small\item\em wskaźnik na tymczasową tabele filmów \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Opis szczegółowy}
+Klasa obsługująca dodawanie wypożyczenia Zawartość klasy to wszystkie zmienne oraz funkcje użyte w oknie dialogowym służącym do dodania nowego wypożyczenia do programu. Klasa dziedziczy publiczne właściwości z klasy QDialog, będącej zawartością biblioteki Qt o tej samej nazwie. 
+
+\doxysubsection{Dokumentacja składowych wyliczanych}
+\mbox{\Hypertarget{classadd_borrow_dialog_a2d64f8511318abd5baedd350fca9f181}\label{classadd_borrow_dialog_a2d64f8511318abd5baedd350fca9f181}} 
+\index{addBorrowDialog@{addBorrowDialog}!CLIENT\_COLLUMNS@{CLIENT\_COLLUMNS}}
+\index{CLIENT\_COLLUMNS@{CLIENT\_COLLUMNS}!addBorrowDialog@{addBorrowDialog}}
+\doxysubsubsection{\texorpdfstring{CLIENT\_COLLUMNS}{CLIENT\_COLLUMNS}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{classadd_borrow_dialog_a2d64f8511318abd5baedd350fca9f181}{add\+Borrow\+Dialog\+::\+CLIENT\+\_\+\+COLLUMNS}}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Enum tabeli klientów. 
+
+\begin{DoxyEnumFields}{Wartości wyliczeń}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{IMIE@{IMIE}!addBorrowDialog@{addBorrowDialog}}\index{addBorrowDialog@{addBorrowDialog}!IMIE@{IMIE}}}\mbox{\Hypertarget{classadd_borrow_dialog_a2d64f8511318abd5baedd350fca9f181a546c46dd9b87d5ef3a76ebd4e96e77a2}\label{classadd_borrow_dialog_a2d64f8511318abd5baedd350fca9f181a546c46dd9b87d5ef3a76ebd4e96e77a2}} 
+IMIE&Enum dla imienia klienta \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{NAZWISKO@{NAZWISKO}!addBorrowDialog@{addBorrowDialog}}\index{addBorrowDialog@{addBorrowDialog}!NAZWISKO@{NAZWISKO}}}\mbox{\Hypertarget{classadd_borrow_dialog_a2d64f8511318abd5baedd350fca9f181a465189609b0e530ce92e77f948bd3c60}\label{classadd_borrow_dialog_a2d64f8511318abd5baedd350fca9f181a465189609b0e530ce92e77f948bd3c60}} 
+NAZWISKO&Enum dla nazwiska klienta \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PESEL@{PESEL}!addBorrowDialog@{addBorrowDialog}}\index{addBorrowDialog@{addBorrowDialog}!PESEL@{PESEL}}}\mbox{\Hypertarget{classadd_borrow_dialog_a2d64f8511318abd5baedd350fca9f181afceafefccf6afde3fb5f8b0a80ae7083}\label{classadd_borrow_dialog_a2d64f8511318abd5baedd350fca9f181afceafefccf6afde3fb5f8b0a80ae7083}} 
+PESEL&Enum dla numeru pesel klienta \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TELEFON@{TELEFON}!addBorrowDialog@{addBorrowDialog}}\index{addBorrowDialog@{addBorrowDialog}!TELEFON@{TELEFON}}}\mbox{\Hypertarget{classadd_borrow_dialog_a2d64f8511318abd5baedd350fca9f181a8cf6c8f597b882180bdf9706e8c6c6ff}\label{classadd_borrow_dialog_a2d64f8511318abd5baedd350fca9f181a8cf6c8f597b882180bdf9706e8c6c6ff}} 
+TELEFON&Enum dla numeru telefonu klienta \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{EMAIL@{EMAIL}!addBorrowDialog@{addBorrowDialog}}\index{addBorrowDialog@{addBorrowDialog}!EMAIL@{EMAIL}}}\mbox{\Hypertarget{classadd_borrow_dialog_a2d64f8511318abd5baedd350fca9f181ad727b55aa5e48e8e36941ce23f6b20fd}\label{classadd_borrow_dialog_a2d64f8511318abd5baedd350fca9f181ad727b55aa5e48e8e36941ce23f6b20fd}} 
+EMAIL&Enum dla adresu mailowego klienta \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{POSIADANE\_FILMY@{POSIADANE\_FILMY}!addBorrowDialog@{addBorrowDialog}}\index{addBorrowDialog@{addBorrowDialog}!POSIADANE\_FILMY@{POSIADANE\_FILMY}}}\mbox{\Hypertarget{classadd_borrow_dialog_a2d64f8511318abd5baedd350fca9f181ae27db3db34d55072a1c0ecea388f1f10}\label{classadd_borrow_dialog_a2d64f8511318abd5baedd350fca9f181ae27db3db34d55072a1c0ecea388f1f10}} 
+POSIADANE\+\_\+\+FILMY&Enum dla ilosci filmow posiadanych przez klienta \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ID\_KLIENTA@{ID\_KLIENTA}!addBorrowDialog@{addBorrowDialog}}\index{addBorrowDialog@{addBorrowDialog}!ID\_KLIENTA@{ID\_KLIENTA}}}\mbox{\Hypertarget{classadd_borrow_dialog_a2d64f8511318abd5baedd350fca9f181a74ee385d0384991862f3145af6b17eaa}\label{classadd_borrow_dialog_a2d64f8511318abd5baedd350fca9f181a74ee385d0384991862f3145af6b17eaa}} 
+ID\+\_\+\+KLIENTA&Enum dla identyfikatora klienta \\
+\hline
+
+\end{DoxyEnumFields}
+\mbox{\Hypertarget{classadd_borrow_dialog_a7421d30c734dc1ede8c00e48bae54c6a}\label{classadd_borrow_dialog_a7421d30c734dc1ede8c00e48bae54c6a}} 
+\index{addBorrowDialog@{addBorrowDialog}!MOVIE\_COLLUMNS@{MOVIE\_COLLUMNS}}
+\index{MOVIE\_COLLUMNS@{MOVIE\_COLLUMNS}!addBorrowDialog@{addBorrowDialog}}
+\doxysubsubsection{\texorpdfstring{MOVIE\_COLLUMNS}{MOVIE\_COLLUMNS}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{classadd_borrow_dialog_a7421d30c734dc1ede8c00e48bae54c6a}{add\+Borrow\+Dialog\+::\+MOVIE\+\_\+\+COLLUMNS}}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Enum tabeli filmów. 
+
+\begin{DoxyEnumFields}{Wartości wyliczeń}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TYTUL@{TYTUL}!addBorrowDialog@{addBorrowDialog}}\index{addBorrowDialog@{addBorrowDialog}!TYTUL@{TYTUL}}}\mbox{\Hypertarget{classadd_borrow_dialog_a7421d30c734dc1ede8c00e48bae54c6aae3868bd30fce4285faa4457c3dc362e0}\label{classadd_borrow_dialog_a7421d30c734dc1ede8c00e48bae54c6aae3868bd30fce4285faa4457c3dc362e0}} 
+TYTUL&Enum dla tytułu filmu \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{REZYSER@{REZYSER}!addBorrowDialog@{addBorrowDialog}}\index{addBorrowDialog@{addBorrowDialog}!REZYSER@{REZYSER}}}\mbox{\Hypertarget{classadd_borrow_dialog_a7421d30c734dc1ede8c00e48bae54c6aa20a8e4a4b5f15b8f14f7c6b12932d5a7}\label{classadd_borrow_dialog_a7421d30c734dc1ede8c00e48bae54c6aa20a8e4a4b5f15b8f14f7c6b12932d5a7}} 
+REZYSER&Enum dla reżysera filmu \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{GATUNEK@{GATUNEK}!addBorrowDialog@{addBorrowDialog}}\index{addBorrowDialog@{addBorrowDialog}!GATUNEK@{GATUNEK}}}\mbox{\Hypertarget{classadd_borrow_dialog_a7421d30c734dc1ede8c00e48bae54c6aa85968f32846b1f1e9ed7e7ed584b932e}\label{classadd_borrow_dialog_a7421d30c734dc1ede8c00e48bae54c6aa85968f32846b1f1e9ed7e7ed584b932e}} 
+GATUNEK&Enum dla gatunku filmu \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ROK@{ROK}!addBorrowDialog@{addBorrowDialog}}\index{addBorrowDialog@{addBorrowDialog}!ROK@{ROK}}}\mbox{\Hypertarget{classadd_borrow_dialog_a7421d30c734dc1ede8c00e48bae54c6aa530218d25e9cb6ebeb9fcc449dcb6b47}\label{classadd_borrow_dialog_a7421d30c734dc1ede8c00e48bae54c6aa530218d25e9cb6ebeb9fcc449dcb6b47}} 
+ROK&Enum dla roku produkcji filmu \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DOSTEPNE@{DOSTEPNE}!addBorrowDialog@{addBorrowDialog}}\index{addBorrowDialog@{addBorrowDialog}!DOSTEPNE@{DOSTEPNE}}}\mbox{\Hypertarget{classadd_borrow_dialog_a7421d30c734dc1ede8c00e48bae54c6aa4b8ac16ef6b3fe9b18e0499e23ed80c7}\label{classadd_borrow_dialog_a7421d30c734dc1ede8c00e48bae54c6aa4b8ac16ef6b3fe9b18e0499e23ed80c7}} 
+DOSTEPNE&Enum dla ilości dostępnych sztuk filmu \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{WYPOZYCZONE@{WYPOZYCZONE}!addBorrowDialog@{addBorrowDialog}}\index{addBorrowDialog@{addBorrowDialog}!WYPOZYCZONE@{WYPOZYCZONE}}}\mbox{\Hypertarget{classadd_borrow_dialog_a7421d30c734dc1ede8c00e48bae54c6aad86d8ccafcae3316af56ecd720c3d147}\label{classadd_borrow_dialog_a7421d30c734dc1ede8c00e48bae54c6aad86d8ccafcae3316af56ecd720c3d147}} 
+WYPOZYCZONE&Enum dla ilości wypożyczonych sztuk filmu \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ID\_FILMU@{ID\_FILMU}!addBorrowDialog@{addBorrowDialog}}\index{addBorrowDialog@{addBorrowDialog}!ID\_FILMU@{ID\_FILMU}}}\mbox{\Hypertarget{classadd_borrow_dialog_a7421d30c734dc1ede8c00e48bae54c6aa58ce1a0e495d4cc77b95920be5b2ac31}\label{classadd_borrow_dialog_a7421d30c734dc1ede8c00e48bae54c6aa58ce1a0e495d4cc77b95920be5b2ac31}} 
+ID\+\_\+\+FILMU&Enum dla identyfikatora filmu \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Dokumentacja konstruktora i destruktora}
+\mbox{\Hypertarget{classadd_borrow_dialog_a5b92f30099c9388b3fc37a1861eef39c}\label{classadd_borrow_dialog_a5b92f30099c9388b3fc37a1861eef39c}} 
+\index{addBorrowDialog@{addBorrowDialog}!addBorrowDialog@{addBorrowDialog}}
+\index{addBorrowDialog@{addBorrowDialog}!addBorrowDialog@{addBorrowDialog}}
+\doxysubsubsection{\texorpdfstring{addBorrowDialog()}{addBorrowDialog()}}
+{\footnotesize\ttfamily add\+Borrow\+Dialog\+::add\+Borrow\+Dialog (\begin{DoxyParamCaption}\item[{QWidget $\ast$}]{parent = {\ttfamily nullptr},  }\item[{QTable\+Widget $\ast$}]{clients\+Table = {\ttfamily nullptr},  }\item[{QTable\+Widget $\ast$}]{movies\+Table = {\ttfamily nullptr},  }\item[{bool}]{id\+\_\+setting = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Konstruktor klasy ładujący dane do okna dialogowego. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em $\ast$parent} & wskaźnik na obiekt nadrzędny, jeśli brak to podany nullptr \\
+\hline
+{\em $\ast$clients\+Table} & wskaźnik na tabele zawierającą klientów, w przypadku braku ustawiany na nullptr \\
+\hline
+{\em $\ast$movies\+Table} & wskaźnik na tabele zawierającą filmy, w przypadku braku ustawiany na nullptr \\
+\hline
+{\em id\+\_\+setting} & zmienna bool sprawdzająca, czy opcja wyświetlania ID jest zaznaczona. Domyślnie odznaczona \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classadd_borrow_dialog_a62c3111b14ff0bf03d45d73013ffa499}\label{classadd_borrow_dialog_a62c3111b14ff0bf03d45d73013ffa499}} 
+\index{addBorrowDialog@{addBorrowDialog}!````~addBorrowDialog@{$\sim$addBorrowDialog}}
+\index{````~addBorrowDialog@{$\sim$addBorrowDialog}!addBorrowDialog@{addBorrowDialog}}
+\doxysubsubsection{\texorpdfstring{$\sim$addBorrowDialog()}{~addBorrowDialog()}}
+{\footnotesize\ttfamily add\+Borrow\+Dialog\+::$\sim$add\+Borrow\+Dialog (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Destruktor klasy. 
+
+
+
+\doxysubsection{Dokumentacja funkcji składowych}
+\mbox{\Hypertarget{classadd_borrow_dialog_acd955719857935fe535d5342849c2a24}\label{classadd_borrow_dialog_acd955719857935fe535d5342849c2a24}} 
+\index{addBorrowDialog@{addBorrowDialog}!borrow\_date@{borrow\_date}}
+\index{borrow\_date@{borrow\_date}!addBorrowDialog@{addBorrowDialog}}
+\doxysubsubsection{\texorpdfstring{borrow\_date()}{borrow\_date()}}
+{\footnotesize\ttfamily QString add\+Borrow\+Dialog\+::borrow\+\_\+date (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Zmienna przechowująca date wypożyczenia. 
+
+\mbox{\Hypertarget{classadd_borrow_dialog_adbbce4a63c0d729433ec10468439cd0d}\label{classadd_borrow_dialog_adbbce4a63c0d729433ec10468439cd0d}} 
+\index{addBorrowDialog@{addBorrowDialog}!charge@{charge}}
+\index{charge@{charge}!addBorrowDialog@{addBorrowDialog}}
+\doxysubsubsection{\texorpdfstring{charge()}{charge()}}
+{\footnotesize\ttfamily QString add\+Borrow\+Dialog\+::charge (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Zmienna przechowująca dzienny koszt wypożyczenia. 
+
+\mbox{\Hypertarget{classadd_borrow_dialog_a1aca783ea7bb4bd6e7531a7696f6f062}\label{classadd_borrow_dialog_a1aca783ea7bb4bd6e7531a7696f6f062}} 
+\index{addBorrowDialog@{addBorrowDialog}!chosenClientID@{chosenClientID}}
+\index{chosenClientID@{chosenClientID}!addBorrowDialog@{addBorrowDialog}}
+\doxysubsubsection{\texorpdfstring{chosenClientID()}{chosenClientID()}}
+{\footnotesize\ttfamily QString add\+Borrow\+Dialog\+::chosen\+Client\+ID (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Zmienna przechowująca ID klienta. 
+
+\mbox{\Hypertarget{classadd_borrow_dialog_a4995f3722b3ef62acf207a5249122a64}\label{classadd_borrow_dialog_a4995f3722b3ef62acf207a5249122a64}} 
+\index{addBorrowDialog@{addBorrowDialog}!chosenClientRow@{chosenClientRow}}
+\index{chosenClientRow@{chosenClientRow}!addBorrowDialog@{addBorrowDialog}}
+\doxysubsubsection{\texorpdfstring{chosenClientRow()}{chosenClientRow()}}
+{\footnotesize\ttfamily int add\+Borrow\+Dialog\+::chosen\+Client\+Row (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Zmienna przechowująca numer aktualnie zaznaczonego wiersza w tabeli klientów. 
+
+\mbox{\Hypertarget{classadd_borrow_dialog_a3fdcdf386b03e33c604d7f87c9d92436}\label{classadd_borrow_dialog_a3fdcdf386b03e33c604d7f87c9d92436}} 
+\index{addBorrowDialog@{addBorrowDialog}!chosenMovie@{chosenMovie}}
+\index{chosenMovie@{chosenMovie}!addBorrowDialog@{addBorrowDialog}}
+\doxysubsubsection{\texorpdfstring{chosenMovie()}{chosenMovie()}}
+{\footnotesize\ttfamily std\+::pair$<$int,int$>$ add\+Borrow\+Dialog\+::chosen\+Movie (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Obiekt przechowujący pozycje wypożyczanego filmu. 
+
+\mbox{\Hypertarget{classadd_borrow_dialog_a45a7d81cf6bce07f982daf41318668a0}\label{classadd_borrow_dialog_a45a7d81cf6bce07f982daf41318668a0}} 
+\index{addBorrowDialog@{addBorrowDialog}!chosenMovieID@{chosenMovieID}}
+\index{chosenMovieID@{chosenMovieID}!addBorrowDialog@{addBorrowDialog}}
+\doxysubsubsection{\texorpdfstring{chosenMovieID()}{chosenMovieID()}}
+{\footnotesize\ttfamily QString add\+Borrow\+Dialog\+::chosen\+Movie\+ID (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Zmienna przechowująca ID filmu. 
+
+\mbox{\Hypertarget{classadd_borrow_dialog_a1a80438d4d1f5021e8c5726f167f3b02}\label{classadd_borrow_dialog_a1a80438d4d1f5021e8c5726f167f3b02}} 
+\index{addBorrowDialog@{addBorrowDialog}!chosenMovieRow@{chosenMovieRow}}
+\index{chosenMovieRow@{chosenMovieRow}!addBorrowDialog@{addBorrowDialog}}
+\doxysubsubsection{\texorpdfstring{chosenMovieRow()}{chosenMovieRow()}}
+{\footnotesize\ttfamily int add\+Borrow\+Dialog\+::chosen\+Movie\+Row (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Zmienna przechowująca numer aktualnie zaznaczonego wiersza w tabeli filmów. 
+
+\mbox{\Hypertarget{classadd_borrow_dialog_a2f53d68b6c8f62f52fa150f42ae0555f}\label{classadd_borrow_dialog_a2f53d68b6c8f62f52fa150f42ae0555f}} 
+\index{addBorrowDialog@{addBorrowDialog}!name@{name}}
+\index{name@{name}!addBorrowDialog@{addBorrowDialog}}
+\doxysubsubsection{\texorpdfstring{name()}{name()}}
+{\footnotesize\ttfamily QString add\+Borrow\+Dialog\+::name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Zmienna przechowująca imie klienta. 
+
+\mbox{\Hypertarget{classadd_borrow_dialog_a974c695068e1707778173a4a93e6e9ea}\label{classadd_borrow_dialog_a974c695068e1707778173a4a93e6e9ea}} 
+\index{addBorrowDialog@{addBorrowDialog}!on\_borrowsClientsTable\_currentCellChanged@{on\_borrowsClientsTable\_currentCellChanged}}
+\index{on\_borrowsClientsTable\_currentCellChanged@{on\_borrowsClientsTable\_currentCellChanged}!addBorrowDialog@{addBorrowDialog}}
+\doxysubsubsection{\texorpdfstring{on\_borrowsClientsTable\_currentCellChanged}{on\_borrowsClientsTable\_currentCellChanged}}
+{\footnotesize\ttfamily void add\+Borrow\+Dialog\+::on\+\_\+borrows\+Clients\+Table\+\_\+current\+Cell\+Changed (\begin{DoxyParamCaption}\item[{int}]{current\+Row }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+Funkcja do zaznaczenia całego rzędu w tabeli po kliknięciu na przynależącą do niego komórkę w tabeli klientów. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em current\+Row} & numer wiersza, którego komórka została zaznaczona \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classadd_borrow_dialog_ab4b9b21c8874cc5a4de3709de5bfb14d}\label{classadd_borrow_dialog_ab4b9b21c8874cc5a4de3709de5bfb14d}} 
+\index{addBorrowDialog@{addBorrowDialog}!on\_borrowsMoviesTable\_currentCellChanged@{on\_borrowsMoviesTable\_currentCellChanged}}
+\index{on\_borrowsMoviesTable\_currentCellChanged@{on\_borrowsMoviesTable\_currentCellChanged}!addBorrowDialog@{addBorrowDialog}}
+\doxysubsubsection{\texorpdfstring{on\_borrowsMoviesTable\_currentCellChanged}{on\_borrowsMoviesTable\_currentCellChanged}}
+{\footnotesize\ttfamily void add\+Borrow\+Dialog\+::on\+\_\+borrows\+Movies\+Table\+\_\+current\+Cell\+Changed (\begin{DoxyParamCaption}\item[{int}]{current\+Row }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+Funkcja do zaznaczenia całego rzędu w tabeli po kliknięciu na przynależącą do niego komórkę w tabeli filmów. 
+
+
+\begin{DoxyParams}{Parametry}
+{\em current\+Row} & numer wiersza, którego komórka została zaznaczona \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classadd_borrow_dialog_a14a8dc10994e4f1e3ee4e2b079e23337}\label{classadd_borrow_dialog_a14a8dc10994e4f1e3ee4e2b079e23337}} 
+\index{addBorrowDialog@{addBorrowDialog}!on\_buttonBox\_accepted@{on\_buttonBox\_accepted}}
+\index{on\_buttonBox\_accepted@{on\_buttonBox\_accepted}!addBorrowDialog@{addBorrowDialog}}
+\doxysubsubsection{\texorpdfstring{on\_buttonBox\_accepted}{on\_buttonBox\_accepted}}
+{\footnotesize\ttfamily void add\+Borrow\+Dialog\+::on\+\_\+button\+Box\+\_\+accepted (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+Funkcja wywoływana przy potwierdzeniu zmian dokonanych w oknie przez przycisk. 
+
+\mbox{\Hypertarget{classadd_borrow_dialog_a7a5a2f9584a777ec9ede785ff9776860}\label{classadd_borrow_dialog_a7a5a2f9584a777ec9ede785ff9776860}} 
+\index{addBorrowDialog@{addBorrowDialog}!on\_buttonBox\_rejected@{on\_buttonBox\_rejected}}
+\index{on\_buttonBox\_rejected@{on\_buttonBox\_rejected}!addBorrowDialog@{addBorrowDialog}}
+\doxysubsubsection{\texorpdfstring{on\_buttonBox\_rejected}{on\_buttonBox\_rejected}}
+{\footnotesize\ttfamily void add\+Borrow\+Dialog\+::on\+\_\+button\+Box\+\_\+rejected (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+Funkcja wywoływana przy anulowaniu okna przez przycisk. 
+
+\mbox{\Hypertarget{classadd_borrow_dialog_ad3f478e11be9ce8f91d81881bd7f9f14}\label{classadd_borrow_dialog_ad3f478e11be9ce8f91d81881bd7f9f14}} 
+\index{addBorrowDialog@{addBorrowDialog}!on\_searchClientButton\_clicked@{on\_searchClientButton\_clicked}}
+\index{on\_searchClientButton\_clicked@{on\_searchClientButton\_clicked}!addBorrowDialog@{addBorrowDialog}}
+\doxysubsubsection{\texorpdfstring{on\_searchClientButton\_clicked}{on\_searchClientButton\_clicked}}
+{\footnotesize\ttfamily void add\+Borrow\+Dialog\+::on\+\_\+search\+Client\+Button\+\_\+clicked (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+Funkcja obsługująca kliknięcie przycisku wyszukania przy tabeli klientów. 
+
+\mbox{\Hypertarget{classadd_borrow_dialog_afcd56e72bb42c5398fbab8d244009781}\label{classadd_borrow_dialog_afcd56e72bb42c5398fbab8d244009781}} 
+\index{addBorrowDialog@{addBorrowDialog}!on\_searchClientField\_returnPressed@{on\_searchClientField\_returnPressed}}
+\index{on\_searchClientField\_returnPressed@{on\_searchClientField\_returnPressed}!addBorrowDialog@{addBorrowDialog}}
+\doxysubsubsection{\texorpdfstring{on\_searchClientField\_returnPressed}{on\_searchClientField\_returnPressed}}
+{\footnotesize\ttfamily void add\+Borrow\+Dialog\+::on\+\_\+search\+Client\+Field\+\_\+return\+Pressed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+Funkcja wywołuje zdarzenie przycisku wyszukania przy tabeli klientów po wciśnięciu klawisza Enter. 
+
+\mbox{\Hypertarget{classadd_borrow_dialog_a5f4dfa9771fabfc54396435a475e5b99}\label{classadd_borrow_dialog_a5f4dfa9771fabfc54396435a475e5b99}} 
+\index{addBorrowDialog@{addBorrowDialog}!on\_searchMovieButton\_clicked@{on\_searchMovieButton\_clicked}}
+\index{on\_searchMovieButton\_clicked@{on\_searchMovieButton\_clicked}!addBorrowDialog@{addBorrowDialog}}
+\doxysubsubsection{\texorpdfstring{on\_searchMovieButton\_clicked}{on\_searchMovieButton\_clicked}}
+{\footnotesize\ttfamily void add\+Borrow\+Dialog\+::on\+\_\+search\+Movie\+Button\+\_\+clicked (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+Funkcja obsługująca kliknięcie przycisku wyszukania przy tabeli filmów. 
+
+\mbox{\Hypertarget{classadd_borrow_dialog_ab9367ed7185949fa24847394737058ce}\label{classadd_borrow_dialog_ab9367ed7185949fa24847394737058ce}} 
+\index{addBorrowDialog@{addBorrowDialog}!on\_searchMovieField\_returnPressed@{on\_searchMovieField\_returnPressed}}
+\index{on\_searchMovieField\_returnPressed@{on\_searchMovieField\_returnPressed}!addBorrowDialog@{addBorrowDialog}}
+\doxysubsubsection{\texorpdfstring{on\_searchMovieField\_returnPressed}{on\_searchMovieField\_returnPressed}}
+{\footnotesize\ttfamily void add\+Borrow\+Dialog\+::on\+\_\+search\+Movie\+Field\+\_\+return\+Pressed (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [slot]}}
+
+
+
+Funkcja wywołuje zdarzenie przycisku wyszukania przy tabeli filmów po wciśnięciu klawisza Enter. 
+
+\mbox{\Hypertarget{classadd_borrow_dialog_a942d3359ee7a101c86cf38863785d3e6}\label{classadd_borrow_dialog_a942d3359ee7a101c86cf38863785d3e6}} 
+\index{addBorrowDialog@{addBorrowDialog}!return\_date@{return\_date}}
+\index{return\_date@{return\_date}!addBorrowDialog@{addBorrowDialog}}
+\doxysubsubsection{\texorpdfstring{return\_date()}{return\_date()}}
+{\footnotesize\ttfamily QString add\+Borrow\+Dialog\+::return\+\_\+date (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Zmienna przechowująca date zwrotu. 
+
+\mbox{\Hypertarget{classadd_borrow_dialog_a5ef10241c9d0f609de8da7566956c68b}\label{classadd_borrow_dialog_a5ef10241c9d0f609de8da7566956c68b}} 
+\index{addBorrowDialog@{addBorrowDialog}!surname@{surname}}
+\index{surname@{surname}!addBorrowDialog@{addBorrowDialog}}
+\doxysubsubsection{\texorpdfstring{surname()}{surname()}}
+{\footnotesize\ttfamily QString add\+Borrow\+Dialog\+::surname (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Zmienna przechowująca nazwisko klienta. 
+
+\mbox{\Hypertarget{classadd_borrow_dialog_a190ebe79fc90a770018e424d76ceb8b2}\label{classadd_borrow_dialog_a190ebe79fc90a770018e424d76ceb8b2}} 
+\index{addBorrowDialog@{addBorrowDialog}!title@{title}}
+\index{title@{title}!addBorrowDialog@{addBorrowDialog}}
+\doxysubsubsection{\texorpdfstring{title()}{title()}}
+{\footnotesize\ttfamily QString add\+Borrow\+Dialog\+::title (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Zmienna przechowująca tytuł wypożyczanego filmu. 
+
+
+
+\doxysubsection{Dokumentacja atrybutów składowych}
+\mbox{\Hypertarget{classadd_borrow_dialog_aa25a9a4b9f0e0fed9894ed7d0e1bd010}\label{classadd_borrow_dialog_aa25a9a4b9f0e0fed9894ed7d0e1bd010}} 
+\index{addBorrowDialog@{addBorrowDialog}!clientID@{clientID}}
+\index{clientID@{clientID}!addBorrowDialog@{addBorrowDialog}}
+\doxysubsubsection{\texorpdfstring{clientID}{clientID}}
+{\footnotesize\ttfamily QString add\+Borrow\+Dialog\+::client\+ID\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+zmienna zawierająca ID zaznaczonego klienta 
+
+\mbox{\Hypertarget{classadd_borrow_dialog_aa7ed60409bca3356433cb7e531aa7ea7}\label{classadd_borrow_dialog_aa7ed60409bca3356433cb7e531aa7ea7}} 
+\index{addBorrowDialog@{addBorrowDialog}!clientRow@{clientRow}}
+\index{clientRow@{clientRow}!addBorrowDialog@{addBorrowDialog}}
+\doxysubsubsection{\texorpdfstring{clientRow}{clientRow}}
+{\footnotesize\ttfamily int add\+Borrow\+Dialog\+::client\+Row\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+zmienna zawierająca numer zaznaczonego wiersza tabeli klientów 
+
+\mbox{\Hypertarget{classadd_borrow_dialog_a20894b895f900222cbc1ca4fdcdd6ed6}\label{classadd_borrow_dialog_a20894b895f900222cbc1ca4fdcdd6ed6}} 
+\index{addBorrowDialog@{addBorrowDialog}!movieID@{movieID}}
+\index{movieID@{movieID}!addBorrowDialog@{addBorrowDialog}}
+\doxysubsubsection{\texorpdfstring{movieID}{movieID}}
+{\footnotesize\ttfamily QString add\+Borrow\+Dialog\+::movie\+ID\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+zmienna zawierająca ID zaznaczonego filmu 
+
+\mbox{\Hypertarget{classadd_borrow_dialog_aee88a04733a0252ff76656ea13d63917}\label{classadd_borrow_dialog_aee88a04733a0252ff76656ea13d63917}} 
+\index{addBorrowDialog@{addBorrowDialog}!movieRow@{movieRow}}
+\index{movieRow@{movieRow}!addBorrowDialog@{addBorrowDialog}}
+\doxysubsubsection{\texorpdfstring{movieRow}{movieRow}}
+{\footnotesize\ttfamily int add\+Borrow\+Dialog\+::movie\+Row\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+zmienna zawierająca numer zaznaczonego wiersza tabeli filmów 
+
+\mbox{\Hypertarget{classadd_borrow_dialog_a3c1964f7aa71c92d4a3e8ef05a24b73c}\label{classadd_borrow_dialog_a3c1964f7aa71c92d4a3e8ef05a24b73c}} 
+\index{addBorrowDialog@{addBorrowDialog}!moviesTableTemp@{moviesTableTemp}}
+\index{moviesTableTemp@{moviesTableTemp}!addBorrowDialog@{addBorrowDialog}}
+\doxysubsubsection{\texorpdfstring{moviesTableTemp}{moviesTableTemp}}
+{\footnotesize\ttfamily QTable\+Widget$\ast$ add\+Borrow\+Dialog\+::movies\+Table\+Temp\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+wskaźnik na tymczasową tabele filmów 
+
+\mbox{\Hypertarget{classadd_borrow_dialog_adabe07944fbd646ed3910c4b7c3aa8a4}\label{classadd_borrow_dialog_adabe07944fbd646ed3910c4b7c3aa8a4}} 
+\index{addBorrowDialog@{addBorrowDialog}!ui@{ui}}
+\index{ui@{ui}!addBorrowDialog@{addBorrowDialog}}
+\doxysubsubsection{\texorpdfstring{ui}{ui}}
+{\footnotesize\ttfamily Ui\+::add\+Borrow\+Dialog$\ast$ add\+Borrow\+Dialog\+::ui\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Wskaźnik na interfejs wewnątrz klasy. 
+
+
+
+Dokumentacja dla tej klasy została wygenerowana z plików\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+Kuba/\+Documents/\+Git\+Hub/\+Wypozyczalnia\+\_\+\+Filmow\+\_\+\+PC2\+\_\+\+QT/kod/\mbox{\hyperlink{addborrowdialog_8h}{addborrowdialog.\+h}}\item 
+C\+:/\+Users/\+Kuba/\+Documents/\+Git\+Hub/\+Wypozyczalnia\+\_\+\+Filmow\+\_\+\+PC2\+\_\+\+QT/kod/\mbox{\hyperlink{addborrowdialog_8cpp}{addborrowdialog.\+cpp}}\end{DoxyCompactItemize}
