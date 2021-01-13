@@ -49,7 +49,7 @@ MainWindow::MainWindow(QWidget *parent)
     int count = 0;
     for(int i = 0; i < ui->borrowsTable->rowCount(); i++){
         int cmp = ui->borrowsTable->item(i,DATA_ZWROTU)->text().compare(currentDateStr);
-        if(cmp < 0){
+        if(cmp < 0 && ui->borrowsTable->item(i,ZWROCONE)->text() == "Nie"){
             count ++;
         }
     }
@@ -547,17 +547,21 @@ void MainWindow::on_searchMovieField_returnPressed()
 void MainWindow::on_delBorrowButton_clicked()
 {
     QMessageBox msgBox;
+    msgBox.setWindowTitle("Błąd");
     QList<QTableWidgetItem *> items = ui->borrowsTable->selectedItems();
-    int currentRow = items[0]->row();
     if(items.isEmpty()){
-        msgBox.setWindowTitle("Błąd");
         msgBox.setText("Żadna z kolumn nie jest wybrana!");
         msgBox.exec();
-    }else if(ui->borrowsTable->item(currentRow, ZWROCONE)->text() == "Tak"){
-         msgBox.setWindowTitle("Błąd");
-         msgBox.setText("Film już jest zwrócony!");
-         msgBox.exec();
     }else{
+        int currentRow = items[0]->row();
+        if(ui->borrowsTable->item(currentRow, ZWROCONE)->text() == "Tak"){
+            msgBox.setText("Film już jest zwrócony!");
+            msgBox.exec();
+            return;
+        }
+        ui->borrowsTable->setSortingEnabled(false);
+        ui->clientsTable->setSortingEnabled(false);
+        ui->moviesTable->setSortingEnabled(false);
         int rowToRemove = ui->borrowsTable->row(items[0]);
         QDate borrowdate, returndate;
         borrowdate = QDate::fromString(ui->borrowsTable->item(rowToRemove, DATA_WYPOZYCZENIA)->text(), "dd.MM.yyyy");
@@ -567,19 +571,25 @@ void MainWindow::on_delBorrowButton_clicked()
 
         int datediff = borrowdate.daysTo(returndate);
         int datetonow = returndate.daysTo(QDate::currentDate());
+        int borrowToNow = borrowdate.daysTo(QDate::currentDate());
         int cena = (ui->borrowsTable->item(rowToRemove, 5)->text()).split(" ")[0].toInt();
         int naleznosc_podstawowa = datediff * cena;
         float naleznosc_kara = datetonow * this->penalty;
 
-        if(datetonow > 0) {
-            msgBox.setWindowTitle("Zwrot wypożyczenia");
+        msgBox.setWindowTitle("Zwrot wypożyczenia");
+
+        if(borrowToNow < datediff){
+            naleznosc_podstawowa = borrowToNow * cena;
+            msgBox.setText("Wypożyczenie oddane przed terminem! Należność do zapłaty: "+QString::number(naleznosc_podstawowa)+"zł.");
+        }else if(datetonow > 0) {
             msgBox.setText("Wypożyczenie oddane po terminie!\nKara zostanie doliczona do rachunku.\nNależność podstawowa: "+QString::number(naleznosc_podstawowa)+"zł.\nKara: " + QString::number(naleznosc_kara)+"zł.\nRazem do zapłaty: " + QString::number(naleznosc_kara+naleznosc_podstawowa)+"zł.");
-            msgBox.exec();
         }
         else {
            msgBox.setText("Należność do zapłaty: "+QString::number(naleznosc_podstawowa)+"zł.");
-           msgBox.exec();
+
         }
+
+        msgBox.exec();
 
         ui->borrowsTable->item(rowToRemove,ZWROCONE)->setText("Tak");
         ui->borrowsTable->item(rowToRemove,DATA_ZWROTU)->setText(QDate::currentDate().toString("dd.MM.yyyy"));
@@ -615,6 +625,9 @@ void MainWindow::on_delBorrowButton_clicked()
                 break;
             }
         }
+        ui->borrowsTable->setSortingEnabled(true);
+        ui->clientsTable->setSortingEnabled(true);
+        ui->moviesTable->setSortingEnabled(true);
    }
 }
 

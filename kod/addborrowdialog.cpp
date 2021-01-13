@@ -121,7 +121,7 @@ void addBorrowDialog::on_borrowsMoviesTable_currentCellChanged(int currentRow)
 {
     ui->chosenMovieLabel->setText(ui->borrowsMoviesTable->item(currentRow, 0)->text());
     movieRow = currentRow;
-    movieID = ui->borrowsClientsTable->item(currentRow, ID_FILMU)->text();
+    movieID = ui->borrowsMoviesTable->item(currentRow, ID_FILMU)->text();
 }
 
 void addBorrowDialog::on_borrowsClientsTable_currentCellChanged(int currentRow)
